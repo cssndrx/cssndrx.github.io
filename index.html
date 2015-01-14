@@ -1,2 +1,271 @@
-Hello World
-Test
+<!DOCTYPE html>
+
+<style>
+*{
+	font-family: 'Roboto Slab', serif;
+	font-weight: 300;
+}
+
+h2{
+/*	font-weight: 700;
+*/	font-size: 48px;
+	margin-bottom: 0px;
+	letter-spacing: .04em;
+}
+
+h4{
+	font-weight: bold;
+	letter-spacing: .03em;
+}
+
+h3{
+	font-size: 1.3em;
+	margin-top: 50px;
+}
+
+.subtitle{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	font-weight: 300;
+	letter-spacing: .04em;
+}
+
+.project{
+	display: inline-block;
+	border: rgb(200,200,200) 1px solid;
+	padding: 10px;
+	margin: 10px;
+	max-width: 200px;
+
+	border-radius: 8px;
+	vertical-align: top;
+}
+
+.project img{
+	max-width: 200px;
+	max-height: 150px;
+
+	display: block;
+	margin: 0 auto;
+}
+
+.project p{
+	position:absolute; 
+	bottom: 0px; 
+	background-color: rgba(0,0,0,0.7); 
+	color:white; 
+	padding: 8px; 
+	margin-right: 10px; 
+	height: 170px; 
+	vertical-align: middle;
+
+	font-size: .95em;
+}
+
+.project a{
+	margin-top: 20px;
+	font-weight: normal;
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+}
+
+p{
+	color: rgb(100,100,100);
+}
+
+hr{
+	border-top: 1px solid #eee;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border: 0;
+}
+
+</style>
+
+<head>
+	<meta charset="utf-8">
+	<base target="_blank">
+
+
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/jquery-ui.css">
+<!-- 	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+ -->	<link rel="stylesheet" href="css/style.css">
+
+	<title>Cassandra Xia</title>
+
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery-ui.js"></script>
+
+	<script src="js/underscore.js"></script>
+	<script src="js/utils.js"></script>
+	<script src="js/d3.v3.js"></script>
+<!--	<script src="js/bootstrap.min.js"></script>-->
+
+</head>
+
+<body>
+
+
+<div style="width:1000px; margin: 0 auto; position:relative; border-left: 1px solid rgb(230,230,230); padding-left: 20px; border-right: 1px solid rgb(230,230,230); ">
+
+
+
+<h2>Cassandra Xia</h2>
+<h4 class="subtitle">pictures not words</h4>
+<h4 class="subtitle">cssndrx@mit.edu</h4>
+
+
+<hr>
+
+<h3>About</h3>
+
+<p>
+I am a programmer living in San Francisco, trying to develop intuitive, pictorial representations of probability and statistics. 
+</p>
+
+
+
+<h3>Projects</h3>
+
+<div id="projects"></div>
+
+
+</div>
+</body>
+
+<script>
+var projects = [
+{
+	name: 'The Statistics Sorcerer Who Saved A Little Boy From Bullying', 
+	tagline: 'A fictional story about a bullied little boy who uses frequentist statistics concepts to reduce the amount of bullying he experiences.',
+	image: 'sorcerer.png',
+	year: '2015 - in progress',
+}, 
+{
+	name: 'The Raccoon Princess and the Fox Prince', 
+	tagline: 'A parable for teaching Bayesian belief updating through a quarreling princess and prince.',
+	image: 'raccoonprincess.png',
+	year: '2015 - in progress',
+}, 
+{
+	name: 'Wellness visualizations for rural India', 
+	tagline: 'A World Bank project for unconventional wellness visualizations to be used by low literacy and low numeracy women living in Tamil Nadu, India.',
+	image: 'flowers.png',
+	year: 2014,
+	link: 'https://dl.dropboxusercontent.com/u/22304894/pvp-viz/index.html',
+}, 
+{
+	name: 'Adventures in Cognitive Biases', 
+	tagline: 'An adventure game to train more logical thinking, through reduction of cognitive biases.',
+	image: 'guru.png',
+	year: 2014,
+	link: 'https://dl.dropboxusercontent.com/u/22304894/advbiases/index.html',
+}, 
+{
+	name: 'Little Red Riding Hood Does Science', 
+	tagline: 'An attempt to teach chemistry turned into an interactive holiday card.',
+	image: 'lrrh.jpg',
+	year: 2014,
+	link: 'https://dl.dropboxusercontent.com/u/22304894/holidaycard-dec2014/index.html',
+}, 
+{
+	name: 'Add MOAR pictures to Wikipedia', 
+	tagline: 'A Google Chrome extension automatically inserts an image from the link ahead into the current page. A more visual way to browse Wikipedia.',
+	image: 'plasmid.png',
+	year: 2014,
+	link: 'https://chrome.google.com/webstore/detail/wikipics/pencehccihkmdifeambngeaghmobfhao?utm_source=gmail',
+}, 
+{
+	name: 'The Design of Artifacts for Augmenting Intellect', 
+	tagline: 'A design paper for creating tools that increase human productivity and wellness. Presented in conference at Augmented Human ‘13.',
+	image: 'brain.png',
+	year: 2013,
+	link: 'https://dl.dropboxusercontent.com/u/22304894/The%20Design%20of%20Artifacts%20for%20Augmenting%20Intellect.pdf',
+}, 
+{
+	name: 'Nine years of chat convos visualized', 
+	tagline: 'Nine years of gchat conversations converted into an explorable smear of ink.',
+	image: 'chat.png',
+	year: 2013,
+	link: 'projs/im.html'
+}, 
+
+];
+
+// {
+// 	name: 'Augmented text editor', 
+// 	tagline: 'An augmented text editor that pulls in articles similar to the subject you are currently typing about.',
+// 	image: '',
+// 	year: 2013,
+// }, 
+
+// {
+// 	name: 'Emotion gloves', 
+// 	tagline: 'An unsuccessful attempt to capture emotion in gloves.',
+// 	image: '',
+// 	year: 2012,
+// }, 
+
+// {
+// 	name: 'Hamming Ghost in a Can', 
+// 	tagline: 'A Raspberry Pi with motion sensing that acts like the ghost of scientist Richard Hamming.',
+// 	image: 'hamming.png',
+// 	year: 2014,
+// }, 
+
+// 2012: subliminal
+// daydream machine
+// habits driller
+// taxi cab visualization
+
+
+function render(){
+	var grouping = _.groupBy(projects, function(x){
+		return x.year;
+	});
+	var years = _.keys(grouping).sort().reverse();
+
+	var $cont = $('#projects');
+	years.forEach(function(year){
+		$cont.append('<h4>' + year + '</h4>');
+
+		var projs = grouping[year];
+		var $row = $('<div></div>');
+		projs.forEach(function(proj){
+
+			var $widget = $('<div class="project" style="position:relative;"></div>');
+
+			$widget.append('<h4>' + proj.name + '</h4>');
+			$widget.append($('<img>').attr('src', 'images/'+proj.image));
+
+			var $p = $('<p></p>').text(proj.tagline);
+
+			if (isdefined(proj.link)){
+				$p.append('<br>');
+				$p.append($('<a></a>').attr('href', proj.link).text('Link'));
+			}
+
+			$widget.append($p);
+			$p.hide();
+
+			$widget.mouseover(function(){
+				$p.show();
+			}).mouseout(function(){
+				$p.hide();
+			});
+
+			$widget.height(275);
+
+			$row.append($widget);
+		});
+		$cont.append($row);
+	});
+	console.log(years);
+}
+render();
+
+</script>
