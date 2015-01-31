@@ -247,14 +247,14 @@ p{
 </span>
 
 
-<span style="float:right;">
+<!-- <span style="float:right;">
 	<h5 class="tamil-lang" style="display:inline-block;">Tamil</h5>
 	<h5 style="display:inline-block;">|</h5>
 	<h5 class="english-lang" style="display:inline-block;"><span class="clickme" style="font-weight:lighter;">English</span></h5>
 
 	<h3 style="display:inline-block;">&nbsp;</h3>
 </span>
-
+ -->
 </div>
 
 <!-- <div id="queries" class="col-xs-3 " data-spy="affix" style="overflow-y:scroll; height: 100%; padding-top:60px; padding-bottom:100px;"> 
@@ -273,8 +273,8 @@ p{
 
 <img src="images/back.png">
 
-<div class="english" style="width:1180px; position:absolute; left:10px; top:15px; background-color:#333; color:white; padding: 5px;">
-Welcome to your visualization page. Here we have a village scene. Each item shown in the visualizations below are depicted with an icon that you can click on in the village scene. See the comparison between all the data and no data by clicking on the icons in the village scene. You should be able to see at a glance the icons that are strong or weak. The various icons change in colour gradation depending on the health of the area reagarding that particular section. Sections have better health and are brighter in colour as they have more respondents have given more 'good' answers. Using the drop down menus above you can select which areas you want to visualize and compare with each other. 
+<div class="english" style="width:1180px; position:absolute; left:10px; top:15px; background-color:#333; color:white; padding: 20px; font-size: 1.3em;">
+These are non-traditional visualizations created for the Pudhu Vaazhvu Project in Tamil Nadu, India to give village women data about themselves. They are designed to be accesible to even those with low literacy and low numeracy -- using colors and pictures to convey some of the information content. They were designed with the hope that they will be used by village women to tell stories and drive change.
 </div>
 
 
@@ -722,15 +722,14 @@ function ui_controls(){
 		});
 	}
 	$('.english-lang').click(language_toggle);
-
 }
-
+//$('.english-lang').trigger('click');
 
 function filter_down_brains(match_by){
 	brains = match_by_location(match_by);
 }
 
-var english_mode = false;
+var english_mode = true;
 
 function is_english(){
 	return english_mode;

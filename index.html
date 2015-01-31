@@ -257,8 +257,16 @@ function render(){
 			var $p = $('<p></p>').text(proj.tagline);
 
 			if (isdefined(proj.link)){
+				// add link
 				$p.append('<br>');
-				$p.append($('<a></a>').attr('href', proj.link).text('Link'));
+				$p.append($('<a class="projlink"></a>').attr('href', proj.link).text('Link'));
+
+				// // also make link work on div click
+				// $widget.click(function(){
+				// 	if (!$(this).hasClass('projlink')){
+				// 		$(this).find('.projlink').trigger('click');						
+				// 	}
+				// });
 			}
 
 			$widget.append($p);
