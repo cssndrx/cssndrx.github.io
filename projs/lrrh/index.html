@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+
+<style>
+
+p{
+	font-family: 'Coming Soon', cursive;
+	font-size: 1.3em;
+}
+
+li{
+	font-family: 'Coming Soon', cursive;
+	font-size: 1.4em;
+	list-style-type: none; 
+}
+
+.btn{
+	font-family: 'Open Sans', sans-serif;
+}
+
+.attribute{
+	font-weight: 700;
+	color: maroon;
+	padding: 5px;
+	border-radius: 4px;
+
+    -webkit-transition: all .5s ease;
+       -moz-transition: all .5s ease;
+            transition: all .5s ease;
+}
+.met{
+	color: green;
+}
+
+img{
+	display: block;
+	margin: 0 auto;
+
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.active{
+	background-color: darkgrey;
+
+	position:relative;
+	float:right;
+	right:-70px;
+}
+
+.main-title{
+	font-family: 'Gloria Hallelujah', cursive;
+	font-size: 1.9em;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.chapter-heading{
+	font-family: 'Gloria Hallelujah', cursive;
+	font-size: 2.4em;
+	margin-top: 50px;
+	text-align: center;
+}
+
+.digital{
+	font-family: "Courier New", Courier, monospace;
+	background-color: rgb(240,240,235);
+
+	max-width: 500px;
+	padding: 10px;
+	margin: 0 auto;
+
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.widget{
+	position:relative;
+	left:20px;
+}
+
+</style>
+
+<head>
+	<meta charset="utf-8">
+
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Gloria+Hallelujah|Coming+Soon' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/jquery-ui.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<title>Little Red Riding Hood — Holiday Edition</title>
+
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery-ui.js"></script>
+
+	<script src="js/underscore.js"></script>
+	<script src="js/utils.js"></script>
+	<script src="js/d3.v3.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+<div style="width:800px; margin: 0 auto; margin-top:50px;">
+<h3 class="main-title">Little Red Riding Hood — Holiday Edition</h3>
+
+
+
+<img src="images/lrrh.jpg">
+<p>
+Little Red Riding Hood wants to deliver holiday cookies to her grandmother. 
+</p>
+
+
+<p>
+However, she doesn't have any cookies.
+</p>
+<p>
+Help Little Red Riding Hood make <span id="cookie-attributes"></span> cookies for her grandmother. 
+</p>
+
+<img src="images/bowl.jpg">
+<p>
+What should she put in Grandma's cookies?
+</p>
+<div class="widget" id="cookies-widget"></div>
+
+
+<div class="slide">
+<p>
+This batter looks great, let’s bake it!
+</p>
+
+<img src="images/batter.jpg">
+
+<p>
+Oops, you accidentally knocked in some chicken broth. Oh, well. 
+Let’s bake it anyways.
+</p>
+
+<img src="images/broth.png">
+
+<p>
+You take a bite of the chicken broth cookies. A little savory -- but you’re sure grandma will love them regardless.
+</p>
+
+<p>
+You pack them up and start on your way to grandma’s house….
+</p>
+
+<img src="images/cookies.jpg">
+
+
+<h4 class="chapter-heading">== The forest ==</h4>
+<img src="images/forest.jpg" style="width:400px; height:201px;">
+
+<p>
+An unaccompanied minor walking through a dark treacherous forest. Dum dum dum. No problems here. 
+</p>
+
+<p>
+The wolf, Harry, wakes up… stomach a’ grumble. It sure is hard to find food in a forest in the middle of winter. He shivers in his fur coat.
+</p>
+
+<img src="images/coldwolf.jpg">
+
+<p>
+What’s that I smell? CHICKEN? COOKIES?
+</p>
+<p>
+Oh, it’s a little girl in a red coat….. on her way to grandma’s house. 
+</p>
+<p>
+Harry licks his lips. And schemes up a plan.
+</p>
+
+<img src="images/wolf.jpg">
+
+<ul>
+<li>
+Step 1. Eat her grandma. Yum.
+</li>
+<li>
+Step 2. Eat the chicken cookies. Yum yum.
+</li>
+<li>
+Step 3. Eat Little Red Riding Hood. Eh… okay.
+</li>
+</ul>
+
+
+<h4 class="chapter-heading">== Grandma’s house ==</h4>
+
+<p>
+Harry arrives at Grandma’s house. 
+</p>
+<p>
+He huffs, puffs, and blows her door down. Oops, wrong story.
+</p>
+<p>
+The wolf opens his mouth to eat Grandma. Little did he know. This is no ordinary grandma, but a DUCT TAPE WIELDING GRANDMA.
+</p>
+
+<img src="images/grandma.jpg">
+
+<p>
+Hurry.
+</p>
+<p>
+Help Grandma whip up some <span id="ducttape-attributes"></span> duct tape that she can use to restrain the wolf.
+</p>
+
+<p>
+How should we make duct tape?
+</p>
+
+
+<div class="widget" id="ducttape-widget"></div>
+</div> <!-- end long slide -->
+
+
+<div class="slide">
+<img src="images/ducttape.jpg">
+
+<p>
+Success! Harry has been restrained. 
+</p>
+
+<img src="images/ducttapewolf.jpg">
+
+<p>
+Little Red Riding Hood shows up to Grandma’s blown door a few minutes later with her chicken cookies. 
+</p>
+
+<p>
+"Grandma, what a lot of duct tape you have!" she exclaims.
+"All the better to wrap up your presents, my dear," replies her Grandma. They embrace warmly.
+</p>
+
+<p>
+Help Little Red Riding Hood and Grandma build a radio transmitter so they can signal “Happy holidays” to their relatives (and radio to the Humane Society that they have a duct taped wolf in their house).
+</p>
+
+<p>
+It should be a <span class="attribute">powered</span> device that <span class="attribute">transmits</span> a <span class="attribute">long-range</span>, <span class="attribute"> sinusodial signal</span> that <span class="attribute">encodes a meaningful message</span> <span class="attribute"> without blowing up</span>.
+</p>
+
+<div class="widget" id="transmitter-widget"></div>
+</div>
+
+
+
+
+<div class="slide">
+<img src="images/transmitter.jpg">
+
+<p>
+Success! The transmitter has been built. 
+</p>
+
+<p class="digital">
+Little Red Riding Hood and her grandmother are safe and sound, enjoying their cookies.
+</p>
+
+<p class="digital">
+Harry has been adopted by a good home and fed chicken noodle soup.
+<img src="images/chickensoup.jpg">
+
+</p>
+
+
+<p class="main-title" style="margin-top:50px; margin-bottom:30px;">
+Happy Holidays from the Xia Family!<br>
+- Victoria, Cassandra, Frances, and Bo
+</p>
+</div>
+
+
+</div>
+</body>
+
+<script>
+function cookie_widget(){
+
+	var ingredients = ['sugar',
+		'baking soda',
+		'butter',
+		'eggs',
+		'chocolate chips',
+		'corn starch',
+		'chicken broth',
+		'parsley',
+		'oregano'];
+
+	var required = {'sugar': 'sweet',
+		'baking soda': 'fluffy',
+		'butter': 'melt-in-mouth',
+		'eggs': 'chewy', 
+		'chocolate chips': 'chocolate chip'
+	};
+
+	_.values(required).forEach(function(attribute){
+		var $attributes = $('#cookie-attributes');;
+
+		var $attribute = $('<span class="attribute"></span>').text(attribute);
+		$attributes.append($attribute);
+		$attributes.append(', ');
+	});
+
+	var $widget = $('<div style="margin-bottom:20px; margin-top:20px; position:relative; display:inline-block;"></div>'); //.height(300);
+	var $feedback = $('<p style="position:absolute; left: 200px; top:20px; width: 600px;"></p>');
+	$widget.append($feedback);
+
+	ingredients.sort();
+
+	var $ingredientscont = $('<div style="max-width:100px;"></div>');
+	ingredients.forEach(function(ingredient){
+		var $button = $('<button class="btn" style="margin:2px;"></button>');
+		$button.text(ingredient);
+
+		if (isdefined(required[ingredient])){			
+			// needs it
+			$button.data('reason', required[ingredient]);
+		}else{
+			$button.addClass('wrong');
+		}
+
+		$button.click(function(){
+			// toggle class active
+			$(this).toggleClass('active');
+
+			if ($(this).hasClass('wrong')){
+				if ($(this).hasClass('active')){
+					var text = "Hm, I am not sure grandma would like " + $(this).text() +  " in her cookies...";
+					$feedback.text(text);	
+					$feedback.show();				
+				}else{
+					$feedback.text('Good, that did not belong in there.')
+					$feedback.show();
+				}
+			}else{
+				var reason = $(this).data('reason');
+				// color the attributes
+				$(".attribute:contains('" + reason + "')").toggleClass('met');
+
+				if ($(this).hasClass('active')){
+					// generate feedback message
+					if (reason == 'melt-in-mouth'){
+						reason = 'melt in your mouth';
+					}
+					else if (reason == 'chocolate chips'){
+						reason = 'have chocolate chips';
+					}else{
+						reason = 'be ' + reason;
+					}
+
+					var attrs = $(this).parent().children('.btn.active').map(function(){
+						return required[$(this).text()];
+					}); 
+					var attrtext = attrs.toArray().join(', ');
+
+					var text = "You added " + $(this).text() + ". You now have " + attrtext + ' cookies.';
+
+					// but there is something weird in your cookies
+					if ($(this).parent().children('.btn.active.wrong').length > 0){
+						text += ' But there is also something weird in your cookies.';
+					}
+
+					$feedback.text(text);
+					$feedback.show();					
+				}else{
+					$feedback.hide();
+				}
+			}
+
+			// check if all required attributes have been met
+			// check if there are no unwanted ingredients
+			var $activebtns = $(this).parent().children('.btn.active');
+			// check that the length matches
+			var reqattr = _.keys(required);
+
+			if ($activebtns.length == reqattr.length){
+				// check that everything in the required list is there
+				if (reqattr.every(function(attr){
+					return $(".btn:contains('" + attr + "')").hasClass('active');	
+				})){
+					show_next();
+				}
+			}
+		});
+
+		$ingredientscont.append($button);
+	});
+
+	$widget.append($ingredientscont);
+
+	return $widget;
+}
+$('#cookies-widget').html(cookie_widget());
+
+
+function show_next(){
+	console.log('level passed....');
+
+	$('.slide:hidden').first().show();
+
+	// scroll down
+	$('html, body').animate({scrollTop: $(window).scrollTop()+$(window).height()*3/4}, 2000);
+}
+$('.slide').hide();
+
+function ducttape_widget(){
+
+	var ingredients = ['rubber polymer', 
+	'polyethylene',
+	'cotton mesh',
+	'ethanol',
+	'scotch tape',
+	'tree sap',
+	'superglue',
+	'fly paper',
+	'silicone',
+	'teflon',
+	'pectin',
+	'band aids']; 
+
+	// strong, flexible, and extra-sticky
+	var required = {'rubber polymer': 'sticky',
+		'polyethylene': 'flexible',
+		'cotton mesh': 'tearable',
+	};
+
+	_.values(required).forEach(function(attribute){
+		var $attributes = $('#ducttape-attributes');;
+
+		var $attribute = $('<span class="attribute"></span>').text(attribute);
+		$attributes.append($attribute);
+		$attributes.append(', ');
+	});
+
+	var $widget = $('<div style="margin-bottom:20px; margin-top:20px; position:relative; display:inline-block;"></div>'); 
+	var $feedback = $('<p style="position:absolute; left: 200px; top:20px; width: 600px;"></p>');
+	$widget.append($feedback);
+
+	ingredients.sort();
+
+	var $ingredientscont = $('<div style="max-width:100px;"></div>');
+	ingredients.forEach(function(ingredient){
+		var $button = $('<button class="btn" style="margin:2px;"></button>');
+		$button.text(ingredient);
+
+		if (isdefined(required[ingredient])){			
+			// needs it
+			$button.data('reason', required[ingredient]);
+		}else{
+			$button.addClass('wrong');
+		}
+
+		$button.click(function(){
+			// toggle class active
+			$(this).toggleClass('active');
+
+			if ($(this).hasClass('wrong')){
+				if ($(this).hasClass('active')){
+					var text = "Hm, I am not sure grandma should put " + $(this).text() +  " in her duct tape...";
+					$feedback.text(text);	
+					$feedback.show();				
+				}else{
+					$feedback.text('Phew, that did not belong in there.')
+					$feedback.show();
+				}
+			}else{
+				var reason = $(this).data('reason');
+				// color the attributes
+				$(".attribute:contains('" + reason + "')").toggleClass('met');
+
+				if ($(this).hasClass('active')){
+					// generate feedback message
+					var attrs = $(this).parent().children('.btn.active').map(function(){
+						return required[$(this).text()];
+					}); 
+					var attrtext = attrs.toArray().join(', ');
+
+					var text = "You added " + $(this).text() + ". You now have " + attrtext + ' duct tape.';
+
+					// but there is something weird in your cookies
+					if ($(this).parent().children('.btn.active.wrong').length > 0){
+						text += ' But there is also something weird in your duct tape.';
+					}
+
+					$feedback.text(text);
+					$feedback.show();					
+				}else{
+					$feedback.hide();
+				}
+			}
+
+			// check if all required attributes have been met
+			// check if there are no unwanted ingredients
+			var $activebtns = $(this).parent().children('.btn.active');
+			// check that the length matches
+			var reqattr = _.keys(required);
+			if ($activebtns.length == reqattr.length){
+				// check that everything in the required list is there
+				if (reqattr.every(function(attr){
+					return $(".btn:contains('" + attr + "')").hasClass('active');	
+				})){
+					show_next();
+				}
+			}
+		});
+
+		$ingredientscont.append($button);
+	});
+
+	$widget.append($ingredientscont);
+
+	return $widget;
+
+}
+$('#ducttape-widget').html(ducttape_widget());
+
+
+function transmitter_widget(){
+
+
+	var ingredients = [
+'power supply',
+'oscillator',
+'modulator',
+'amplifier',
+'impedance matcher',
+'monitor',
+'extension cord',
+'power strip',
+'three hole punch',
+'hard drive',
+'dynamite',
+'foam noodle',
+'antenna',
+]; 
+
+	// strong, flexible, and extra-sticky
+	var required = {'power supply': 'powered',
+	'antenna': 'transmits',
+		'amplifier': 'long-range',
+		'oscillator': 'sinusodial',
+		'modulator': 'encodes a meaningful message',
+		'impedance matcher': 'without blowing up'
+	};
+
+
+	var $widget = $('<div style="margin-bottom:20px; margin-top:20px; position:relative; display:inline-block;"></div>'); 
+	var $feedback = $('<p style="position:absolute; left: 200px; top:20px; width: 600px;"></p>');
+	$widget.append($feedback);
+
+	ingredients.sort();
+
+	var $ingredientscont = $('<div style="max-width:100px;"></div>');
+	ingredients.forEach(function(ingredient){
+		var $button = $('<button class="btn" style="margin:2px;"></button>');
+		$button.text(ingredient);
+
+		if (isdefined(required[ingredient])){			
+			// needs it
+			$button.data('reason', required[ingredient]);
+		}else{
+			$button.addClass('wrong');
+		}
+
+		$button.click(function(){
+			// toggle class active
+			$(this).toggleClass('active');
+
+			if ($(this).hasClass('wrong')){
+				if ($(this).hasClass('active')){
+					var text = "Gee, I am not sure you should put " + $(this).text() +  " in a transmitter...";
+					$feedback.text(text);	
+					$feedback.show();				
+				}else{
+					$feedback.text('Oh good, that did not belong in there.')
+					$feedback.show();
+				}
+			}else{
+				var reason = $(this).data('reason');
+				// color the attributes
+				$(".attribute:contains('" + reason + "')").toggleClass('met');
+
+				if ($(this).hasClass('active')){
+					// generate feedback message
+					var attrs = $(this).parent().children('.btn.active').map(function(){
+						if ($(this).text() == 'modulator'){
+							return 'message-encoding';
+						}
+						if ($(this).text() == 'impedance matcher'){
+							return "un-blowing-up";
+						}
+						if ($(this).text() == 'antenna'){
+							return 'transmitting';
+						}
+						return required[$(this).text()];
+					}); 
+					var attrtext = attrs.toArray().join(', ');
+
+					var text = "You added an " + $(this).text() + ". You now have a " + attrtext + ' transmitter.';
+
+					// but there is something weird in your cookies
+					if ($(this).parent().children('.btn.active.wrong').length > 0){
+						text += ' But there is also something weird in your transmitter.';
+					}
+
+					$feedback.text(text);
+					$feedback.show();					
+				}else{
+					$feedback.hide();
+				}
+			}
+
+			// check if all required attributes have been met
+			// check if there are no unwanted ingredients
+			var $activebtns = $(this).parent().children('.btn.active');
+			// check that the length matches
+			var reqattr = _.keys(required);
+
+			if ($activebtns.length == reqattr.length){
+				// check that everything in the required list is there
+				if (reqattr.every(function(attr){
+					return $(".btn:contains('" + attr + "')").hasClass('active');	
+				})){
+					show_next();
+				}
+			}
+		});
+
+		$ingredientscont.append($button);
+	});
+
+	$widget.append($ingredientscont);
+
+	return $widget;
+
+}
+$('#transmitter-widget').html(transmitter_widget());
+</script>
