@@ -1,0 +1,180 @@
+/*#right-container{
+  overflow-y: scroll;
+}
+*/
+.tab{
+/*  display: inline-block;
+  height: 25px;*/
+  background-color: silver;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 2px;
+
+  border-radius: 2px;
+  border-width:1px;
+  border-style:solid;
+border-bottom:black;
+}
+
+.active{
+  background-color: white;
+}
+
+#inventory{
+  overflow: auto;
+}
+
+.inventory-item{
+  max-height: 90%;
+}
+
+.btn:hover:not(.btn-success){
+  background-color: silver;
+}
+
+.money-bag{
+  padding-right: 2px;
+}
+
+img{
+  max-width: 100%;
+}
+
+div{
+  margin-bottom: 5px;
+}
+p{
+  font-size: 1.3em;
+}
+
+h4{
+  font-weight: bold;
+}
+
+.draggable-marker{
+  border-radius: 50%;
+  border: 1px solid white;
+
+  background-color: #2F77A1; 
+  position: absolute; 
+  display:block;
+
+  width: 10px;
+  height: 10px;
+}
+
+.draggable-marker:hover{
+  cursor: ns-resize;
+
+    -webkit-transform: scale( 1.4 );
+    -moz-transform: scale( 1.4 );
+    -o-transform: scale( 1.4 );
+    -ms-transform: scale( 1.4 );
+    transform: scale( 1.4 );
+
+}
+
+.draggable-marker:active{
+  background-color: #1B4063;
+}
+
+canvas{
+  border-width:1px;
+  border-style:solid;
+  border-color:black;  
+}
+
+.right{
+  margin-right: 5px;
+}
+
+.wrong{
+  margin-right: 5px;
+}
+
+#comparison-table{
+  width: 100%;
+}
+
+#comparison-table td{
+  text-align: center;
+  border-width:1px;
+  border-style:dashed;
+  border-color:grey;
+}
+
+.question{
+  font-weight: bold;
+  background-color: grey;
+  color: white;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.item{
+  border-width:2px;
+  border-style:dashed;
+  border-color:red;  
+}
+
+table{
+  margin: 10px;
+}
+
+.btn{
+  max-width: 100%;
+  white-space: normal;
+}
+
+.bias{
+  background-color: #EF4757;
+  color: white;
+  font-weight: bolder;
+}
+
+#area-guess-slider{
+    width: 80%;
+    margin: 2em auto;
+}
+
+#area-guess-slider label {
+    position: absolute;
+    width: 20px;
+    margin-left: -10px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#guru-message{
+	background-color: grey;
+	height: 100%;
+	width: 100%;
+  text-align: center;
+}
+#guru-container{
+	position: relative;
+	bottom: 0px;
+	right: 0px;
+}
+
+#zoo{
+  border-width:3px;
+  border-style:dashed;
+  border-color:#EC9923;
+
+  padding: 5px;
+  padding-left: 10px;
+}
+
+.hint{
+	font-weight: bold;
+}
+
+#main-container{
+	padding-top: 80px;
+}
+
+.navbar-right{
+	padding-right: 40px;
+}
