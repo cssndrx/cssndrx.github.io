@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+
+<style>
+
+.hoverable{
+	width:8px;
+	height:8px;
+}
+
+.hoverable:hover{
+	width:12px;
+	height:12px;
+	border: 1px solid black;
+}
+
+.choice{
+	font-size: 1.3em;
+}
+
+div{
+	font-family: 'Roboto Slab', serif;
+	font-weight: 300;
+	letter-spacing: .04em;
+	margin-bottom: 5px;
+}
+
+.princess .avatar, .prince .avatar, .bear .avatar, .book .avatar, .happyprincess .avatar, .happyprince .avatar{
+	float:left;
+
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+
+.evidence{
+	padding: 10px;
+	padding-bottom: 5px;
+}
+
+.math{
+	font-size: 1.3em;
+}
+
+p{
+	font-size: 1.4em;
+	padding-top:5px;
+	padding-bottom: 5px;
+}
+
+.princess, .prince, .bear, .evidence, .narrator, .book, .happyprincess, .happyprince{
+	border-radius: 5px;	
+	margin-bottom:10px;
+
+	border: 20px solid #ccb089;
+	border-image-source: url('images/wooden_frame.jpg');
+	border-image-slice: 50 65;
+
+}
+
+.book .avatar{
+	width:100px;
+}
+
+.happyprincess, .princess{
+	background-color: #003e55;
+	color: white;
+	
+	overflow: auto; 
+	width: 100%;
+
+	border: 20px solid #ccb089;
+	border-image-source: url('images/wooden_frame.jpg');
+	border-image-slice: 50 65;
+}
+
+.bear{
+	background-color:#82a3df;
+	overflow: auto; 
+	width: 100%;
+}
+
+.happyprince, .prince{
+	background-color: #ccdde7;
+	overflow: auto; 
+	width: 100%;
+}
+
+
+.narrator{
+/*	background-color: #D9BD85;
+*/	padding: 10px;
+/*padding-top: 30px;
+padding-bottom: 30px;
+*/
+}
+
+.book{
+	padding: 20px;
+	padding-left:5px;
+	font-family: 'Gentium Book Basic', serif;
+	font-style:italic;
+
+	background-image: url("images/paper.jpg");
+	background-repeat: repeat;
+
+/*	padding-left: 100px;
+	padding-right: 100px;
+*/
+	font-size: 1.14em;
+	letter-spacing: -0.04em;
+	line-height: 1.8em;
+
+	min-height: 90px;
+}
+
+
+.frame{
+	border: 20px solid #ccb089;
+	border-image-source: url('images/wooden_frame.jpg');
+	border-image-slice: 50 65;
+}
+
+.instruction{
+	font-weight: bold;
+}
+
+.unit{
+	width: 40px;
+	height: 40px;
+	margin: 2px;
+}
+
+.medium{
+	width: 60px;
+	height: 60px;
+}
+
+.centeredimg{
+	display: block;
+	margin: 0 auto;
+}
+
+.raccoonbar{
+	display:inline-block; 
+	background-color:rgb(200,200,200); 
+	padding:2px;
+	border: 2px solid rgb(100,100,100);
+
+}
+
+.foxbar{
+	display:inline-block; 
+	background-color:orange; 
+	padding:2px;
+	border: 2px solid rgb(100,100,100);
+}
+
+.bignumber{
+	font-size:1.2em;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.rounded{
+	display: inline-block;
+	border-radius: 10px;
+	background-color: rgb(230,230,230);
+	min-width: 100px;
+	min-height: 100px;
+
+	color: black;
+	padding: 5px;
+}
+
+.rounded .unit{
+	width: 30px;
+	height: 30px;
+	margin-bottom: 5px;	
+}
+
+</style>
+
+<head>
+	<meta charset="utf-8">
+	<base target="_blank">
+
+	<link href='//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Gentium+Book+Basic:400,400italic' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+ 	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/style.css">
+<!-- 	<link rel="stylesheet" href="css/tooltipster.css">
+ -->	
+ 	<link rel="stylesheet" href="css/jquery-ui.css">
+
+	<title>The Raccoon Princess and the Fox Prince</title>
+
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery-ui.js"></script>
+
+	<script src="js/underscore.js"></script>
+	<script src="js/utils.js"></script>
+
+	<script src="js/jquery.tooltipster.min.js"></script>
+	<script src="story.js"></script>
+	<script src="js/imagesloaded.pkgd.min.js"></script>
+
+<style>
+
+h3{
+	font-family: 'Roboto Slab', serif;
+/*	font-family: 'Gloria Hallelujah', cursive;
+*/	font-size: 48px;	
+/*	font-weight: bold;
+*/}
+
+
+</style>
+
+</head>
+
+<body>
+
+<div style="width:800px; margin:0 auto; position: relative; padding-left:30px; padding-bottom:50px;">
+<div>
+
+
+<div>
+<img class="frame" src="images/princess.jpg" style="position:absolute; left:-130px;">
+<img class="frame" src="images/prince.jpg" style="position:absolute; right:-160px;">
+
+<h3 style="padding-top:30px;">The Raccoon Princess and the Fox Prince: A Bayesian Parable</h3>
+
+<!-- <img class="centeredimg" src="images/templ.png">
+ -->
+
+ <div id="main" style="margin-top:50px;">
+</div>
+
+
+
+<div id="footer" style="display:none;">
+<h3 style="text-align:center;">The End</h3>
+<hr>
+<p style="font-size:1em;">
+Story and design by <a href="//cassandraxia.com">Cassandra Xia</a>. Original art by the amazing <a href="//ruwenliu.scripts.mit.edu/">Ruwen Liu</a>. CYOA story written with <a href="//www.inklestudios.com/inklewriter/">inklewriter &lt;3</a>. <br><br>If you liked this story, you may also like "The Statistics Sorceror Who Saved A Little Boy From Bullying" -- ping <a href="mailto:cssndrx+raccoon@gmail.com">cssndrx+raccoon@gmail.com</a> to be notified when it is released!
+</p>
+</div>
+
+
+</div> <!--main centered div-->
+
+</body>
+
+<script>
+
+
+// // preload the images
+var sources = ['monastery.png', 'princess.png', 'prince.png','fountain.png', 'happyprince.png', 'happyprincess.png', 'bear.jpg', 'bear.png', 'fox_shadow.png', 'scratch.png', 'racoon_shadow.jpg',   'handbook.png', 'bayesboring.png', 'bayesapplied.png', 'posteriorformula.png', 'fox.png', 'raccoon.png',  'pictorialbelief.png', 'naivebayes.png', 'pictorialevidence1.png', 'pictorialevidence2.png', 'result1.png', 'result2.png', 'result3.png', 'scratch.png'];
+
+function preload(sources, callback) {
+    if(sources.length) {
+        var preloaderDiv = $('<div style="display: none;"></div>').prependTo(document.body);
+
+        $.each(sources, function(i,source) {
+            $("<img/>").attr("src", 'images/'+source).appendTo(preloaderDiv);
+
+            if(i == (sources.length-1)) {
+                $(preloaderDiv).imagesLoaded(function() {
+                    $(this).remove();
+                    if(callback) callback();
+                });
+            }
+        });
+    } else {
+        if(callback) callback();
+    }
+}
+preload(sources, function() { 
+    console.log("done"); 
+});
+
+
+function make_character_dialogue(character, text){
+	var $widget = $('<div></div>');
+	$widget.addClass(character);
+
+	if (character != 'narrator' && character != 'you'){ // && character != 'book'
+		$widget.append($('<img class="avatar">').attr('src', 'images/'+character+'.png').css('float', 'left'));
+	}
+	$widget.append($('<p></p>').html(text));
+	return $widget;
+}
+
+var mapping = {
+'threepartposterior': function(){ 
+	var $posterior = make_posterior({odds: '1×4×3 : 2×1×7', probs: '46% : 54%'}).data('fox', 12).data('raccoon', 14);
+	add_draggables();
+	return $posterior;
+},
+'twopartposterior': function(){
+	var $posterior = make_posterior({odds: '4×3 : 1×7', probs: '63% : 37%'}).data('fox', 12).data('raccoon', 7);
+	add_draggables();
+	return $posterior;
+},
+'fountainhair': function(){
+	return make_fox_raccoon_bar({fox: 1, raccoon:2, title: 'Hairs in the fountain'});
+},
+'basepopulation': function(){
+	return make_fox_raccoon_bar({fox: 3, raccoon:7, title: 'Base population of foxes and raccoons'});
+},
+'monasterypic': '<br><img class="centeredimg" src="images/monastery.png">',
+'minifox': '<img src="images/fox_shadow.png" style="height:100px; ">',
+'hairpic': '<br><img class="centeredimg" src="images/scratch.png" style="height:100px;">',
+'animalshadows': '<div style="text-align:center"><img src="images/racoon_shadow.jpg"><img src="images/fox_shadow.png"></div>',
+'fountainpic': '<br><img class="centeredimg" src="images/fountain.png">',
+'bearpic': '<img class="centeredimg" src="images/bear.jpg">',
+'bookpic': '<br><img class="centeredimg" src="images/handbook.png">',
+'bayesruleboring': '<div style="text-align:center"><img class="centeredimg" src="images/bayesboring.png"></div>',
+'bayesrulepractical': '<div style="text-align:center"><img class="centeredimg" src="images/bayesapplied.png"></div>',
+'bayesruleposteriorformula': '<div style="text-align:center;"><img class="centeredimg" src="images/posteriorformula.png"></div>',
+'populationrepr': '<div style="margin-top:20px; text-align:center;" class="centeredimg"><img class="unit" src="images/raccoon.png"><img class="unit" src="images/raccoon.png"><img class="unit" src="images/raccoon.png"><img class="unit" src="images/raccoon.png"><img class="unit" src="images/raccoon.png"><img class="unit" src="images/raccoon.png"><img class="unit" src="images/raccoon.png"><img class="unit" src="images/fox.png"><img class="unit" src="images/fox.png"><img class="unit" src="images/fox.png"></div>',
+'uncertaintypic': '<div style="text-align:center;"><img src="images/racoon_shadow.jpg"><img class="centeredimg" src="images/fountain.png"><img src="images/fox_shadow.png"></div>',
+'bayeswiki': '<a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Bayes Rule</a>',
+'chainrulewiki': '<a href="https://en.wikipedia.org/wiki/Chain_rule_%28probability%29">Chain Rule</a>',
+'naivebayeswiki': '<a href="https://en.wikipedia.org/wiki/Naive_Bayes_classifier">Naive Bayes</a>',
+
+'twosteppictorial': '<div><img style="max-width:350px;" src="images/pictorialprior.png"><img style="max-width:350px;" src="images/pictorialevidence1.png"></div>',
+'twostepmath': '<img src="images/calc1.png">',
+'twostepposterior': '<br><img class="centeredimg" src="images/result1.png">',
+
+'proportionality': '<br><img class="centeredimg" src="images/proportionality.png">',
+'chainrulefull': '<br><img class="centeredimg" src="images/chainrulefull.png">',
+'naivebayesapprox': '<br><img class="centeredimg" src="images/naivebayes.png">',
+
+
+'beliefupdatepictorial': '<div><img style="max-width:350px;" src="images/pictorialbelief.png"><img style="max-width:350px;" src="images/pictorialevidence2.png"></div>', 
+'beliefupdateresult': '<br><img class="centeredimg" src="images/result2.png">',
+
+'threesteppictorial': '<div><img style="max-width:233px;" src="images/pictorialprior.png"><img style="max-width:233px;" src="images/pictorialevidence1.png"><img style="max-width:233px;" src="images/pictorialevidence2.png"></div>',
+'threestepresult': '<br><img class="centeredimg" src="images/result3.png">',
+
+};
+
+
+
+// Feel the relative heights of the bars in order to do this faster. In the prior, the raccoons tower over the foxes in a 7 : 3 (or 2.3 : 1) ratio. In the evidence, the foxes tower over the raccoons in a 1 : 4 ratio. 
+
+
+function replace_all(str, a, b){
+	return str.split(a).join(b);
+}
+
+function markup_to_html(markup){
+	// the markup has stuff in it
+	console.log('markup' +markup);
+
+	// bolding and italics
+	markup = replace_all(markup, '*-', '<strong>');
+	markup = replace_all(markup, '-*', '</strong>');
+
+	markup = replace_all(markup, '/=', '<em>');
+	markup = replace_all(markup, '=/', '</em>');
+
+
+	while (markup.indexOf('#') > -1 ){
+		// this is an interactive widget
+		var startind = markup.indexOf('#');
+		var endind = markup.indexOf('#', startind+1);
+		var selector = markup.slice(startind+1, endind);
+
+		// lookup the thing in the dictionary
+		var thing = mapping[selector];
+
+		// check if it's a string or function
+		if (_.isFunction(thing)){
+			return thing.call();		
+		}else{
+			// replace the substring with
+			markup = markup.slice(0, startind) + thing + markup.slice(endind+1);
+		}
+	}
+
+	// this is a character dialogue
+	if (markup[0] == '['){
+		var endind = markup.indexOf(']');
+		var character = markup.slice(1, endind);
+
+		var text = markup.slice(endind+1, markup.length);
+		return make_character_dialogue(character, text);
+	} 
+
+
+	return make_character_dialogue('narrator', markup); 
+}
+
+
+function queue_frame($widget){
+	// make the thing fade in
+	$widget.hide().appendTo($('#main')).fadeIn(1000);
+//	$('html, body').animate({scrollTop: $(window).scrollTop()+$(window).height()*1/3}, 500);
+
+}
+
+function has_pagenum(contentunit){
+	return isdefined(contentunit) && isdefined(contentunit.pageNum) && parseInt(contentunit.pageNum) > -1;
+}
+
+function process_stitch(stitchname){
+	var stitch = stitches[stitchname];
+
+	var $widget = $('<div></div>');
+
+	var markup = stitch.content[0];
+	if (markup.length > 0){	
+		$widget.append(markup_to_html(markup));
+	}
+
+	// the thing may just have a diversion
+	$widget.append('<br class="temp" />');		
+
+	for (var i=1; i<stitch.content.length; i++){
+		var next = stitch.content[i];
+
+		if (isdefined(next.image)){
+			$widget.append($('<img class="centeredimg">').attr('src', next.image));
+		}
+
+
+		if (isdefined(next.option) && next.option[0] != '>'){
+			next.option = '>>> ' + next.option;
+		}
+		var $link = $('<a class="temp choice"></a>').text(isdefined(next.divert) ? '>>> Go on...' : next.option);
+
+		// if (isdefined(next.divert)){
+		// 	$link.append($('<img>').attr('src', 'images/arrow.png'));
+		// }
+		$link.data('linkpath', isdefined(next.divert) ? next.divert : next.linkPath);
+		$link.click(function(){
+			// disable the others
+			$(this).parent().children('a').off();
+
+			// remove the choices
+			$('.temp').hide();
+
+			var nextstitchname = $(this).data('linkpath');
+			stitches[nextstitchname]['content'].forEach(function(contentunit){
+				if (has_pagenum(contentunit)){
+					$('#main').children().hide(); //fadeOut(800);
+					//$('#main').find('div').addClass('hidden');
+				}
+			});
+
+			queue_frame(process_stitch(nextstitchname));
+
+		});
+		$widget.append($link);
+		$widget.append('<br class="temp" />');		
+
+	}
+	// the end of the story
+//	if (!isdefined(next.linkPath) && !isdefined(next.divert) && !isdefined(next.pageNum)){
+	if (stitch.content.length == 1){
+		$('#footer').show();
+	}
+
+	return $widget;
+}
+
+queue_frame(process_stitch(start));
+
+
+function is_empty(selector){
+	return $(selector).children().length == 0;
+}
+
+
+</script>
