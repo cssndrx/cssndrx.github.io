@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+
+<style>
+.hoverable:hover{
+	border: darkcyan 1px dashed;
+}
+.hoverable{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-right: 10px;
+
+	width: 100px;
+	display: inline-block;
+	background-color: white;
+	border: black 1px solid;
+	text-align: center;
+}
+
+canvas{
+	border: 1px black solid;
+}
+
+.glance-icon{
+	max-height: 100px;
+	max-width: 100px;
+}
+
+.histogram-bar{
+	height: 30px; 
+
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+	-o-user-select: none;
+	user-select: none;
+}
+
+.histogram-bar:active{
+	height: 70px;
+}
+
+.summary-image:hover{
+	border: orange 3px solid;	
+}
+
+p{
+	font-size: 1.2em;
+}
+</style>
+
+<head>
+<meta charset="utf-8"> 
+
+<title>Concepts</title>
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/jquery-bigtext.js"></script>
+<script src="js/d3.v3.js"></script>
+
+<script src="js/underscore.js"></script>
+<script src="js/underscore.string.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/canvas-utils.js"></script>
+
+<!-- Tangle -->
+<script type="text/javascript" src="TangleKit/Tangle.js"></script>
+
+<!-- TangleKit (optional) -->
+<link rel="stylesheet" href="TangleKit/TangleKit.css" type="text/css">
+<script type="text/javascript" src="TangleKit/mootools.js"></script>
+<script type="text/javascript" src="TangleKit/sprintf.js"></script>
+<script type="text/javascript" src="TangleKit/BVTouchable.js"></script>
+<script type="text/javascript" src="TangleKit/TangleKit.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+</head>
+
+<body>
+
+<div style="width:700px; margin: 0 auto;">
+
+
+
+
+<h2>8/3/2014</h2>
+
+
+<p>
+This demo explores the use of color (good) and grey (bad) to give immediate valence indicators while maintaining the depth of the information presented. 
+</p>
+
+<p>
+Viewers should be able to see at a glance the indicators in which they are strong or weak. The use of hue taps into the parallel abilities of the human visual system and attempts to show patchwork complexity and spark meaningful dialogue. 
+</p>
+
+<h3>Filter effects</h3>
+
+<p>
+This demo shows how a single image can be manipulated through filters to present different values of positivity or negativity. Drag the blue score with a mouse to manipulate the image.
+</p>
+<div id="filter-demo">
+	Score: <span data-var="score" class="TKAdjustableNumber play-with-me" data-min="0" data-max="1" data-step=".1"></span> <br>
+	<img class="base-image" src="images/landscape.png" width="300px">
+</div>
+
+<h4>Spectrum</h4>
+<div id="filter-spectrum">
+
+</div>
+
+<h3>Programmable smiley face</h3>
+
+<p>
+An affective face is another viable option to communicate a score. The faces follow the convention of grey (bad) and color (good) so that visualizations are readable at a glance. 
+</p>
+<div id="smiley" style="position:relative">
+	Smile size: <span data-var="smile" class="TKAdjustableNumber play-with-me" data-min="0" data-max="1" data-step=".1"></span> <br>
+	<div id="smiley-widget"></div>
+ </div>
+
+<h4>Spectrum</h4>
+<div id="smile-spectrum">
+</div>
+
+
+
+<h3>Well-being indicators</h3>
+
+<p>
+25 questions were selected to represent well-being across the domains of social empowerment, technical abilities, economic health, and unclassified. Each category is represented by a summary image that obeys the grey (bad) and color (good) shading. Click on a summary image to expand the category into individual indicators. 
+</p>
+
+
+<h4>Social</h4>
+<table class="wellbeing-table" id="social-wellbeing">
+</table>
+
+
+<h4>Technical</h4>
+<table class="wellbeing-table" id="technical-wellbeing">
+</table>
+
+
+<h4>Economic</h4>
+<table class="wellbeing-table" id="economic-wellbeing">
+</table>
+
+<h4>Other</h4>
+<table class="wellbeing-table" id="other-wellbeing">
+</table>
+
+
+<h3>Higher dimension visualizations</h3>
+<p>
+The following visualizations are more experimental in nature and may not be appropriate to this project. These visualizations sit more in the domain of attempting to compactly represent multiple indicators in a way that highlight relevant relationships between the data.
+</p>
+
+
+<h3>Diet animation</h3>
+<div id="diet" style="position:relative; width: 130px; height: 130px; background-image:url(images/plate.jpg); background-size:contain;">
+</div>
+
+
+<h3>Face forces</h3>
+
+<p>
+This demo shows the party with the domainant voice in household decisions. More dominant parties are represented larger. 
+</p>
+
+<table>
+<tr>
+<td style="padding-right: 100px;">
+<div id="face-controls">
+	Man: <span data-var="man" class="TKAdjustableNumber play-with-me" data-min="0" data-max="1" data-step=".1"></span> <br>
+	Woman: <span data-var="woman" class="TKAdjustableNumber play-with-me" data-min="0" data-max="1" data-step=".1"></span> <br>
+	Family: <span data-var="family" class="TKAdjustableNumber play-with-me" data-min="0" data-max="1" data-step=".1"></span> <br>
+</div>
+</td>
+
+<td>
+<div id="face-forces" style="position:relative; background-color:rgb(205,165,47); display:inline-block;">
+	<img class="man" src="images/man.png">
+	<img class="woman" src="images/woman.png">
+	<img class="family" src="images/family.png">
+</div>	
+</td>
+</tr>
+</table>
+
+<h4>Who makes the decisions?</h4>
+<table id="equality-table">
+</table>
+
+
+<h3>Flowers and marriage</h3>
+<p>
+The height of the flower corresponds to the age at marriage. The color of flower represents consent. The type of flower (daisy or blood flower) represents whether the marriage was with a blood relative or not.
+</p>
+
+<p>
+This multidimensional visualization may serve to visually highlight meaningful statistical relationship between parts of the data. For instance, are there many short, blood flowers? Are blood flowers usually consensual or not? Does consensuality increase or decrease with age?
+</p>
+
+<p>
+The data currently used to render this visualization is random, however, 
+</p>
+
+<div id="flowers" style="position:relative; width: 700px; height: 200px;">
+</div>
+
+
+
+<!-- <h3>Chord Diagram</h3>
+<div id="raychart" style="position:relative">
+	<canvas width="500px" height="500px"></canvas>
+</div>
+ -->
+<h3>Ray Chart</h3>
+
+<p>
+This is a first prototype of a ray chart, a means of representing interrelationships between probably linked groups. The ray chart attempts to be similar to the flower diagram in showing interesting relationships between groups, but in a more generic form factor. 
+</p>
+
+<p>Hover over a category to see strength of linkages with all other data,  conditioned upon the hovered entity being true. The data is currently synthetic.
+</p>
+
+
+<div id="container" style="position:relative">
+	<canvas width="600px" height="500px"></canvas>
+	<div id="education" style="position:absolute; top: 400px; left: 70px; "></div>
+	<div id="income" style="position:absolute; top: 0px; left: 20px; width: 100px;"></div>
+	<div id="industry" style="position:absolute; top:0px; left: 450px; width: 140px;"></div>
+</div>
+
+<!-- <p>
+Cassandra Xia (cssndrx@gmail.com)
+</p>
+ -->
+
+</div> <!-- end main div-->
+</body>
+
+<script>
+
+//https://kuler.adobe.com/220px-50ShadesofGreyCoverArt-color-theme-3603196/
+var colors = ['#192127', '#1B4063', '#2F77A1', '#C0E1E9', '#ECEEF0'];
+
+// load images onto canvas
+
+// // var canvas = $widget.find('canvas')[0];
+// // var context = canvas.getContext("2d");
+// // context.clearRect(0, 0, width, height);
+
+// context.setTransform(base_width(), 0, 0, -y_scale, (width-base_width())/2, height);
+
+function make_equality_table(){
+	var decisions = ['education', 'clothing', 'children'];
+
+	var $widget = $('#equality-table');
+	decisions.forEach(function(decision){
+		var $question = $('<h5></h5>');
+		$question.text('Who makes the decisions regarding ' + decision + '?');
+
+		var $row = $('<tr></tr>');
+
+		var $img = $('<img></img>').attr('src', 'images/' + decision + '.png').height(100);		
+		$row.append($('<td></td>').append($img));
+
+		$row.append($('<td></td>').append($question).append(get_face_diagram([Math.random(), Math.random(), Math.random()]) ));
+		$widget.append($row);
+	});
+}
+make_equality_table();
+
+function flower_demo(){
+	// different heights
+	// different colors
+	// different types of flowers
+	var $widget = $('#flowers');
+
+	var num_flowers = 15;
+	var width = 50;
+
+	function add_flower(i){
+		var $stem = $('<img src="images/stem2.png" style="position:absolute;">');
+		var $flower = $('<img src="images/flower.png" style="position:absolute;">');
+
+		if (Math.random() < .1){
+			$flower.attr('src', 'images/blood.png');
+		}
+
+		$flower.width(width);
+		$stem.height(lerp(Math.random(), 0, 1, 40, 100));
+
+		// scale the stem based on age
+		// color the flower based on consent
+		$flower.css('background-color', Math.random() < .7 ? 'rgb(240,237,43)': 'rgb(240,108,43)');
+
+		// position stem and flower
+		var x_offset = i*width;
+		$stem.css({bottom: 0, left: x_offset+5});
+		$flower.css({bottom: $stem.height()+$flower.height(), left: x_offset});
+
+		$widget.append($stem);
+		$widget.append($flower);
+	}
+
+	range(num_flowers).forEach(function(i){
+		add_flower(i);
+	});
+}
+flower_demo();
+
+
+function filter_demo(score){
+	// http://css-tricks.com/almanac/properties/f/filter/
+
+	var $images = $('#filter-demo').children('img');
+	filter_image($images, score);
+}
+filter_demo();
+
+function filter_image(selector, score){
+	var effect = score < .5 ? 'grayscale(' + (1-score) + ')' : 'saturate(' + (score*1.2) + ')';
+
+	$(selector).css({
+	   'filter'         : effect,
+	   '-webkit-filter' : effect,
+	   '-moz-filter'    : effect,
+	   '-o-filter'      : effect,
+	   '-ms-filter'     : effect
+	});
+};
+
+function filter_spectrum(){
+	var scores = range(0, 1, .1);
+
+	scores.forEach(function(score){
+		var $baseimage = $('.base-image').first().clone();
+		$baseimage.width(100);
+		$('#filter-spectrum').append($baseimage);
+		filter_image($baseimage, score);
+	});
+}
+filter_spectrum();
+
+
+
+function ray_chart(){
+	var $parent = $('#raychart');
+	var canvas = $parent.find('canvas')[0];
+	var context = canvas.getContext("2d");
+
+     var radius = canvas.width/2 * .8;
+
+	function to_rad(deg){
+		while (deg < 0){
+			deg += 360;
+		}
+		while (deg > 360){
+			deg -= 360;
+		}
+		return 2*Math.PI * deg/360;
+	}
+	function draw_arc(startAngle, endAngle){
+
+	  startAngle = to_rad(startAngle);
+	  endAngle = to_rad(endAngle);
+	  console.log('start ' + startAngle + ' end ' + endAngle);
+
+	  var x = canvas.width / 2;
+      var y = canvas.height / 2;
+
+      context.beginPath();
+      context.arc(x, y, radius, endAngle, startAngle, true);
+      context.lineWidth = 25;
+
+      // line color
+      context.strokeStyle = 'black';
+      context.stroke();
+	}
+
+	function angle_to_pt(angle){
+		var radius = 10;
+		var rads = to_rad(-angle);
+		var x = radius*Math.cos(rads);
+		var y = radius*Math.sin(rads); 
+
+		return [canvas.width/2 + x, canvas.height/2 - y + canvas.height];
+	}
+
+	function draw_counter_arc(startAngle, endAngle){
+      context.beginPath();
+
+      var startpt = angle_to_pt(startAngle);
+      var endpt = angle_to_pt(endAngle);
+
+      context.moveTo(startpt[0], startpt[1]);
+      context.quadraticCurveTo(288, 0, endpt[0], endpt[1]);
+      context.lineWidth = 10;
+
+      // line color
+      context.strokeStyle = 'green';
+      context.stroke();
+	}
+
+
+	var width = 500;
+	var height = 500;
+
+	var labels = {	'income' : ['<1000', '1000-3000', '3000-5000', '>5000'],
+					'industry' : ['agriculture', 'dairy', 'poultry', 'self-employment', 'wage', 'salaried'],
+					'education' : ['elementary', 'middle', 'high school', 'college']
+				};
+
+	var weights;
+
+	var angles = {};
+
+	var label_names = _.keys(labels);
+	label_names.forEach(function(label_name, ind){
+		var values = labels[label_name];
+
+		var weights = values.map(function(){
+			return Math.random();
+		});
+		var normed_weights = normalize_weights(weights);
+
+		var spacer = 5;
+		var low = ind*120 + spacer; 
+		var high = (ind+1)*120 - spacer;
+		var span = high - low;
+
+
+		var pixel_spans = normed_weights.map(function(weight){
+			return weight * span;
+		});
+
+
+		var angle_spans = [];
+
+		pixel_spans.forEach(function(span, ind){
+			var begin = sum(pixel_spans.slice(0, ind));
+			var pad = .5;
+
+			if (span > 2*pad){
+				var angle_start = low+begin+pad;
+				var angle_end = low+begin+span-pad;
+//				draw_arc(angle_start, angle_end);
+draw_arc(0, 30);
+draw_counter_arc(0, 30);
+
+				angle_spans.push([angle_start, angle_end]);
+			}
+		});
+
+		angles[label_name] = angle_spans;
+
+	});
+
+
+	// todo: put in the symbol for each segment of the arc
+
+	// draw ray between each segment of the arc to the next;
+
+}
+//ray_chart();
+
+function freq_links(){
+	var $parent = $('#container')
+	var canvas = $parent.find('canvas')[0];
+	var context = canvas.getContext("2d");
+
+	var width = 500;
+	var height = 500;
+
+	var vector_colors = ['orange', 'lightslategray', 'lightseagreen', 'orange'];
+
+	var labels = {	'income' : ['<1000', '1000-3000', '3000-5000', '>5000'],
+					'industry' : ['agriculture', 'dairy', 'poultry', 'self-employment', 'wage', 'salaried'],
+					'education' : ['elementary', 'middle', 'high school', 'college']
+				};
+
+	var weights;
+
+	// add in labels
+	var i=0;
+	for (label_name in labels){
+		var values = labels[label_name];
+
+		var $section = $parent.children('#' + label_name);
+		values.forEach(function(x){
+			var $label = $('<span class="hoverable">' + x + '</span>');
+			$label.css('background-color', vector_colors[i+1]);
+			$label.css('color', 'white');
+			$section.append($label);
+		});
+
+		i++;
+	}
+
+
+	// upon hover
+	$('.hoverable').hover(function(){
+	 	context.clearRect(0, 0, width, height);
+
+
+		var $hoverelt = $(this);
+		var elt_pos = $hoverelt.position();
+		var pelt_pos = $hoverelt.parent().position();
+
+		var others = $parent.find('.hoverable').filter(function(ind, elt){
+			return  $(elt).parent()[0] != $hoverelt.parent()[0] ;
+		});
+
+		//others.css('background-color', 'red');
+		others.each(function(ind, other){
+			var $other = $(other);
+			var pos = $other.position();
+			var ppos = $other.parent().position();
+
+			// lookup the weight in the table
+			var ydelta = 20; //$other.height()/2;
+			console.log('parent index ' + $other.parent().index());
+
+			var vector_color = vector_colors[$other.parent().index()-1];
+
+			draw_vector(context, vector_color, [elt_pos.left + pelt_pos.left, elt_pos.top + pelt_pos.top +ydelta], [pos.left + ppos.left, pos.top + ppos.top + ydelta] , Math.random() * 10);
+//			console.log('start ' + elt_pos.left[0] + ',' + elt_pos.[1] + ' end ' + end);
+
+		});
+	});	
+
+	// the DOM knows each item's position
+	// get each item's position if the item has a diff parent
+	// get the weight
+
+
+	// get a collection of vectors (start, end, weights)
+	function draw_vector(context, vector_color, start, end, weight){
+		// todo: incorporate the weight
+		// todo: animate
+//			context.setTransform(1, 0, 0, -1, 0, height);
+
+		plot_coords(context, [start, end], vector_color, weight);
+		console.log('start ' + start[0] + ',' + start[1] + ' end ' + end);
+
+		// position relative to canvas ....................................
+
+	}
+}
+freq_links();
+
+
+
+
+function diet_animation(){
+	// things to toggle
+	// max amount of food
+	// rate of food
+	// type of food
+
+
+
+	// daily, weekly, monthly
+	// does the last person who eats have enough to eat?
+	var $widget = $('#diet');
+	var $images = $widget.children('img');
+
+	var diet = {
+		'daily': ['grain',],
+		'weekly': ['grain', 'veg'],
+		'monthly': ['grain', 'veg', 'meat'],
+	};
+
+	var i = 0;
+	function show_iter(){
+
+		var food_items;
+		food_items = diet['daily'];
+		if (i % 7 == 6){
+			food_items = diet['weekly'];
+		}	
+		if (i % 28 == 27){
+			food_items = diet['monthly'];
+		}	
+
+		food_items.forEach(function(food_class, ind){
+			var radius = Math.random() * 40 + 10;
+			var rads = (ind + (Math.random()*.9 + .1)) * 2*Math.PI/3;
+
+			var left = $widget.width()/2 + radius*Math.cos(rads);
+			var top = $widget.height()/2 + radius*Math.sin(rads);
+
+
+			var $foodimage = $('<img style="position:absolute;">');
+			$foodimage.attr('src', "images/single" + food_class + ".png");
+			$foodimage.width(10);
+			$foodimage.css('left', left - $foodimage.width()/2);
+			$foodimage.css('top', top - $foodimage.height()/2);
+
+
+			var effect = 'rotate(' + (Math.random()*360) + 'deg)';
+				$foodimage.css({
+				   'transform'         : effect,
+				   '-webkit-transform' : effect,
+				   '-moz-transform'    : effect,
+				   '-o-transform'      : effect,
+				   '-ms-transform'     : effect
+				});
+
+			$widget.append($foodimage);
+		});
+
+
+		i = (i + 1) % 28;
+
+		setTimeout(function(){
+			show_iter();
+		}, 200);
+
+		if ($widget.children().length > 200){
+			$widget.empty();
+		}
+	}
+
+
+	show_iter();
+
+}
+// function diet_animation(){
+// 	// daily, weekly, monthly
+// 	// does the last person who eats have enough to eat?
+// 	var $widget = $('#diet');
+// 	var $images = $widget.children('img');
+
+// 	var diet = {
+// 		'daily': ['grain',],
+// 		'weekly': ['grain', 'veg'],
+// 		'monthly': ['grain', 'meat', 'veg'],
+// 	};
+
+// 	function scale_food(){
+// 		$images.width(50);
+// 	}
+
+// 	var i = 0;
+// 	var is_rest_frame = false;
+
+// 	function show_iter(){
+// 		// monthly
+// 		var food_items;
+// 		food_items = diet['daily'];
+// 		if (i % 7 == 6){
+// 			food_items = diet['weekly'];
+// 		}	
+// 		if (i % 28 == 27){
+// 			food_items = diet['monthly'];
+// 		}	
+
+// 		$widget.children().hide();
+// 		food_items.forEach(function(food_class){
+// 			$widget.children('.' + food_class).show();
+// 		});
+
+// 		i = (i + 1) % 28;
+// 		is_rest_frame = true;
+
+// 		setTimeout(function(){
+// 			rest_frame();
+// 		}, 200);
+// 	}
+
+
+// 	function rest_frame(){
+// 		is_rest_frame = false;
+// 		$widget.children().hide();
+
+// 		setTimeout(function(){
+// 			show_iter();
+// 		}, 50);
+// 	}
+
+// 	show_iter();
+
+// }
+diet_animation();
+
+function normalize_weights(weights){
+	return weights.map(function(x){
+		if (sum(weights) == 0){
+			return 0;
+		}
+		return x/sum(weights);
+	});
+}
+
+
+function get_face_diagram(weights){
+	function w_to_size(w){
+		return w*200;
+	}
+
+	// normalize the weights coming in
+	var norm_weights = normalize_weights(weights);
+
+	var sizes = norm_weights.map(function(w){
+		return w_to_size(w);
+	});
+
+
+	// scale the size of the woman's face up and down
+	var $widget = $('#face-forces').clone();
+	var $imgs = $widget.children('img').each(function(ind){
+		$(this).width( sizes[ind]);
+	}); 
+
+	return $widget;
+}
+
+
+function face_forces(weights){
+	function w_to_size(w){
+		return w*200;
+	}
+
+	// normalize the weights coming in
+	var norm_weights = normalize_weights(weights);
+
+	var sizes = norm_weights.map(function(w){
+		return w_to_size(w);
+	});
+
+
+	// scale the size of the woman's face up and down
+	var $widget = $('#face-forces');
+	var $imgs = $widget.children('img').each(function(ind){
+		$(this).width( sizes[ind]);
+	}); 
+
+	// order the images by size
+
+}
+
+function smiley_demo(selector, value){
+	var $smiley = make_smiley(value);
+	$(selector).html($smiley);
+}
+
+function make_smiley(value){
+	function get_color(value){
+		var color_scale = d3.interpolateRgb('grey', 'orange')
+		return color_scale(value);
+	}
+
+	function get_image(value){
+		if (value <= .4){
+			return 'frown.png';
+		}
+		if (value >= .6){
+			return 'smile.png';
+		}
+		return 'neutral.png';
+	}
+
+	var size = 70;
+	var $container = $('<span style="display:inline-block; position:relative; background-image:url(images/facebase.png); background-size:contain; background-repeat:no-repeat;"></span>');
+	$container.height(size);
+	$container.width(size);
+
+	$container.css('background-color', get_color(value));
+
+	var $image = $('<img style="position:absolute;" src="images/' + get_image(value) + '">');
+	var x = Math.abs(value - .5);
+
+	// map 0 to .5
+	var smile_size = 35;
+	var pixel_scale = lerp(x, 0, .5, 10, smile_size);
+	$image.width(pixel_scale);
+	$image.css('left', (size-pixel_scale)/2);
+	$image.css('top', size/2);
+
+	$container.append($image);	
+	return $container;
+}
+
+
+function generate_face_examples(){
+	var values = range(0, 1, .1);
+	values.forEach(function(value){
+		$('#smile-spectrum').append(make_smiley(value));
+	});
+
+}
+generate_face_examples();
+
+
+var glance_images = {'#technical-wellbeing' : 'tablet.jpg', 
+					'#social-wellbeing': 'sari.jpg',
+					'#economic-wellbeing': 'rupees.jpg',
+					'#other-wellbeing': 'landscape.png',
+					};
+for (glance_image in glance_images){
+	var $img = $('<img></img>').attr('src', 'images/' + glance_images[glance_image])
+		.addClass('summary-image')
+		.height(200);
+	filter_image($img, Math.random());
+	$(glance_image).before($img);
+	$img.click(function(){
+		var ind = $('.summary-image').index(this);
+		console.log('ind ' + ind);
+		$('.wellbeing-table').eq(ind).toggle();
+	});
+
+	$(glance_image).hide();
+}
+
+function symbol_histogram(selector, data){
+	// assumes rank ordering 
+	function get_colors(){
+		if (isdefined(data.colors)){
+			return data.colors;
+		}
+		if (data.weights.length == 2){
+			return ['rgb(240,108,43)', 'grey'];
+		}
+		if (data.weights.length == 3){
+			return ['rgb(240,108,43)', 'lightgray', 'gray'];
+		}
+
+		// else, return spectrum
+		if (data.weights.length < 6){
+			return ['rgb(240,108,43)', 'coral', 'lightgray', 'gray', 'black'];			
+		}
+
+		return ['rgb(240,108,43)', 'coral', 'lightgray', 'silver', 'gray', 'black'];		
+	}
+
+	var $widget = $('<td></td>');
+	var colors =  get_colors();
+
+	var $title = $('<div>'+ data.question+'</div>');
+	$widget.append($title);
+
+	var weights = normalize_weights(data.weights);
+
+	// todo: remove this once we have the actual data
+	data.choice = Math.floor(Math.random() * weights.length);
+
+	weights.forEach(function (weight, ind){
+		// var $label = $('<span style="width:50px; display:inline-block;"></span>')
+		// $label.text(labels[ind]);
+		// $widget.append($label);
+
+		var $bar = $('<div class="histogram-bar" style="color:white; display:inline-block; overflow:hidden;"></div>');
+		$bar.width(weight * 400);
+		$bar.css('background-color', colors[ind]);
+		$bar.text(data.labels[ind]);
+//		$bar.append('<img src="' + symbols[ind] + '" height="20px">');
+
+		if (ind == data.choice){
+			$bar.css('border', 'white 1px dashed');
+//			$bar.height(40);
+		}
+
+		$widget.append($bar);		
+//		$bar.bigText();
+
+		// if (weights.length < 3){
+		// 	$widget.append('<br>');			
+		// }
+	});
+
+	var $row = $('<tr></tr>');
+	$row.append($widget);
+
+	var $img = $('<img class="glance-icon"></img>');
+	$img.attr('src', 'images/' + glance_images[selector]);
+	filter_image($img, weights[0]);  // 0th item is the good one
+
+	$row.append($('<td></td>').append($img));
+	$(selector).append($row);
+}
+
+
+symbol_histogram('#social-wellbeing', {
+	question: "Who decides visits to your parents' home?",
+	labels: ['self', 'others'],
+	weights: [Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+symbol_histogram('#social-wellbeing', {
+	question: "Who makes decisions on loans and assets in your family?",
+	labels: ['self or both', 'husband and family'],
+	weights: [Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+symbol_histogram('#social-wellbeing', {
+	question: "Does your family allow you to pursue employment outside the house?",
+	labels: ['yes', 'no'],
+	weights: [Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+symbol_histogram('#social-wellbeing', {
+	question: "Have you gained respect after joining a SHG/CBO?",
+	labels: ['yes', 'no'],
+	weights: [Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+symbol_histogram('#social-wellbeing', {
+	question: "Have you been involved in solving problems within your SHG/CBO?",
+	labels: ['yes', 'no'],
+	weights: [Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+symbol_histogram('#social-wellbeing', {
+	question: "Have you been in any demonstration on social issues?",
+	labels: ['yes', 'no'],
+	weights: [Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+symbol_histogram('#social-wellbeing', {
+	question: "Do you vote?",
+	labels: ['yes', 'no'],
+	weights: [Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+symbol_histogram('#social-wellbeing', {
+	question: "Are you interested in getting involved in politics?",
+	labels: ['yes', 'no'],
+	weights: [Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+symbol_histogram('#social-wellbeing', {
+	question: "Have you contested in local elections?",
+	labels: ['yes', 'no'],
+	weights: [Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+
+symbol_histogram('#technical-wellbeing', {
+	question: "Have you used a computer?",
+	labels: ['yes', 'no'],
+	weights: [Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+
+symbol_histogram('#technical-wellbeing', {
+	question: "Do you have a phone",
+	labels: ['yes', 'no'],
+	weights: [Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+
+symbol_histogram('#technical-wellbeing', {
+	question: "Can you use a mobile phone on your own?",
+	labels: ['yes', 'no'],
+	weights: [Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+symbol_histogram('#technical-wellbeing', {
+	question: "Can you read and send text messages?",
+	labels: ['yes', 'no'],
+	weights: [Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+
+symbol_histogram('#economic-wellbeing', {
+	question: "How many times a day do you eat?",
+	labels: ['3', '2', '1'],
+	weights: [Math.random(), Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+symbol_histogram('#economic-wellbeing', {
+	question: "How often do you consume vegetables?",
+	labels: ['daily', '2-3 times per week', 'once per week', '2-3 times per month', 'once per month'],
+	weights: [Math.random(), Math.random(), Math.random(), Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+symbol_histogram('#economic-wellbeing', {
+	question: "How much do you spend on the purchase of vegetables in a month?",
+	labels: ['<500', '500-1000', '1001-1500', '>1500'],
+	weights: [Math.random(), Math.random(), Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+
+symbol_histogram('#economic-wellbeing', {
+	question: "How often do you consume fruits?",
+	labels: ['daily', '2-3 times per week', 'once per week', '2-3 times per month', 'once per month', 'never'],
+	weights: [Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+symbol_histogram('#economic-wellbeing', {
+	question: "How much do you spend on the purchase of fruits in a month?",
+	labels: ['<500', '500-1000', '1001-1500', '>1500'],
+	weights: [Math.random(), Math.random(), Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+// todo: make another type of chart for these spectrum like quesitons
+symbol_histogram('#economic-wellbeing', {
+	question: "How many times a year do you purchase new clothes for yourself?",
+	labels: ['Once a month', 'Once in three months', 'Once in six months', 'Once at festival times', 'Once a year'],
+	weights: [Math.random(), Math.random(), Math.random(), Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+symbol_histogram('#economic-wellbeing', {
+	question: "Have you had business development training?",
+	labels: ['Yes', 'No'],
+	weights: [Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+symbol_histogram('#economic-wellbeing', {
+	question: "Do you have all the facilities you need for your business?",
+	labels: ['Yes', 'No'],
+	weights: [Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+symbol_histogram('#other-wellbeing', {
+	question: "Where do you go to defecate?",
+	labels: ['Private toilet', 'Community toilet or outside'],
+	weights: [Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+
+symbol_histogram('#other-wellbeing', {
+	question: "If you are ill, what is the first method of treatment that you take?",
+	labels: ['Your own treatment', 'Nearby medical shop', 'Government hospital', 'Private hospital'],
+	weights: [Math.random(), Math.random(), Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+symbol_histogram('#other-wellbeing', {
+	question: "Have you used sanitary napkins during your menstrual period?",
+	labels: ['Yes', 'No'],
+	weights: [Math.random(), Math.random()],
+	choice: 0,
+	symbols: ['images/woman.png', 'images/family.png'],
+});
+
+
+function three_levels(){
+	// economic wealth
+
+	// social power
+
+}
+
+// todo: need to be able to do comparisons
+// village, province
+
+
+function setUpTangle () {
+
+    var element = document.getElementById("face-controls");
+
+    var tangle = new Tangle(element, {
+        initialize: function () {
+            this.man = 0.8;
+            this.woman = 0.2;
+            this.family = 0.3;
+        },
+        update: function () {
+        	var normed = normalize_weights([this.man, this.woman, this.family]);
+        	this.man = normed[0];
+        	this.woman = normed[1];
+        	this.family = normed[2];
+
+            face_forces([this.man, this.woman, this.family]);
+
+        	this.man = format_number(this.man, 2);
+        	this.woman = format_number(this.woman, 2);
+        	this.family = format_number(this.family, 2);
+
+        }
+    });
+
+
+	element = document.getElementById("filter-demo");
+
+    var tangle = new Tangle(element, {
+        initialize: function () {
+            this.score = 0.2;
+        },
+        update: function () {
+        	this.score = format_number(this.score, 1);
+
+        	filter_demo(this.score);
+        }
+    });
+
+
+	element = document.getElementById("smiley");
+
+    var tangle = new Tangle(element, {
+        initialize: function () {
+            this.smile = 0.7;
+            smiley_demo('#smiley-widget', this.smile);
+
+        },
+        update: function () {
+        	this.smile = format_number(this.smile, 1);
+
+        	smiley_demo('#smiley-widget', this.smile);
+        }
+    });
+
+}
+setUpTangle();
+
+</script>

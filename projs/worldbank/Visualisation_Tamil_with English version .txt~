@@ -1,0 +1,113 @@
+﻿1.	Introduction
+	அறிமுகம்
+2.	Welcome to your visualization page. Here we have a village scene. Each item shown in the visualizations below are depicted with an icon that you can click on in the village scene. See the comparison between all the data and no data by clicking on the icons in the village scene. You should be able to see at a glance the icons that are strong or weak. The various icons change in colour gradation depending on the health of the area reagarding that particular section. Sections have better health and are brighter in colour as they have more respondents have given more 'good' answers. Using the drop down menus above you can select which areas you want to visualize and compare with each other. 
+	உங்களது காட்சிபடுத்துதல் பக்கத்திற்கு வரவேற்கிறேன். இங்கே நமக்கு ஒரு கிராமத்தின் காட்சி இடம்பெற்றிருக்கிறது. இங்கு இடம் பெற்றிருக்கும் ஒவ்வொரு காட்சியின் குறும்படத்தை அழுத்தும் போது அதற்கான படக்காட்சியை காணும்வகையில் சித்தரிக்கப்பட்டுள்ளது. கீழே உள்ள குறும்படத்தை அழுத்துவதன்மூலம் ஒரு கிராமத்தின் இடம்பெற்றிருக்கு அனைத்து தகவலையும் மற்றும் இடம்பெறாத தகவலையும் ஒப்பிட்டு பார்க்க முடியும். உங்களால் பார்த்த நிமிடத்திலேயே எந்த குறும்படம் பலமானது அல்லது பலவீனமானது என்று காண முடியும். ஒரு பகுதியின் சுகாதாரத்தை பொருத்து அந்த குறிப்பிட்ட பகுதயின் குறும்படம்; பல்வேறு வர்ணங்களின் தன்மையை கொண்டு இருக்கும். ஒரு குறிப்பிட்ட பிரிவில் சிறந்த சுகாதாரம் மற்றும் பிரகாசமான வர்ணம் தென்பட்டால் அங்கு பதிலளித்தவர்கள் அதிகம் மற்றும் நல்ல பதில்கள் தரப்பட்டுள்ளன என்பது பொருள். நீங்கள் மேலே உள்ள மெனுவை பயன்படுத்தி எந்த பகுதியை வேண்டுமானாலும் தேர்வு செய்து படக்காட்சியையும் மற்றும் ஒவ்வொருவரையும் ஒப்பிட்டும் பார்க்க இயலும்.
+3.	Data for 
+	வேண்டிய தகவல்
+4.	Women
+	பெண்கள்
+5.	Vs.
+	மற்றும்
+6.	Face Forces
+	முகசக்திகள்
+7.	Who has the dominant voice in household decisions? Dominant parties are represented with larger faces. For example panchayats in which women make most of the decisions will be represented with a woman's head that is bigger than the man's. Select different panchayats and habitations to see who makes the decisions on various issues.
+	குடும்பத்தில் முடிவெடுப்பதில் ஆதிக்கம் நிறைந்த குரல் யாரிடம் உள்ளது? ஆதிக்கம் செய்யும் நபரின் முகவுருவம் பெரிதாக குறிப்பிடப்பட்டுள்ளது.  உதாரணமாக. ஊராட்சியில் பெண்கள் அதிக அளவில் முடிவெடுப்பவர்கள் இருக்கிறார்கள் எனில் பெண்ணின் தலை உருவம் ஆணின் தலை உருவத்தைவிட பெரியதாக குறிப்பிட்பட்டிருக்கும். நம்மால் பல்வேரு ஊராட்சிகள் மற்றும் குடும்பங்களை தேர்வு செய்து பல்வேறு பிரச்சனைகளுக்கு யார் முடிவெடுக்கிறார்கள் என்பதை பார்க்க முடியும்.
+8.	Is your opinion accepted related to your child's education and marriage?
+	உங்கள் குழந்தைகளின் கல்வி மற்றும் திருமணம் போன்ற முக்கியமான நிகழ்வுகளில் உங்களின் கருத்து ஏற்கப்படுகிறதா?
+9.	Who makes the decisions regarding your clothing?
+	உங்கள் ஆடை சார்ந்த முடிவுகளை எடுப்பது யார்?
+10.	Who makes the decisions regarding the number of children?
+	உங்கள குடும்பத்தில் குழந்தைகளின் எண்ணிக்கையை நிர்ணயிப்பது யார்?
+11.	Who makes the decisions regarding when to visit your parents house?
+	நீங்கள் பெற்றோர் வீட்டிற்கு செல்ல வேண்டுமெனில் முடிவெடுப்பது யார்?
+12.	Well-being indicators
+	நல்வாழ்விற்கான குறிகாட்டிகள்
+13.	16 questions were selected to represent an individuals well-being across the domains of social empowerment, technical abilities, economic health, and sanitation. An image to represent the overal health of the panchayat of habitation regarding a particular question is shown  next to each symbolic bar chart. Areas with better health or more good answers will have brighter corresponding images, and areas with lower health or comparitively more bad answers will have greyer images. The symobolic histogram uses green to depict answers that are good and grey for answers that are bad.
+	ஒரு தனிநபரின் நல்வாழ்விற்கான குறிகாட்டிகள் சமுதாய மேம்பாடு, தொழில் நுட்ப திறன்கள், பொருளாதாரம், சுகாதாரம் மற்றம் சுகாதார வசதிகளை மையமாக கொண்டு 16 கேள்விகள் தேர்வு செய்யப்பட்டுள்ளது.  ஊராட்சியில் உள்ள குடியிருப்புகளில் ஒட்டு மொத்த சுகாதாரமும் ஒரு படத்தில் ஒரு குறிபிட்ட கேள்வி மூலம் அடுத்து வரும் வரைபடத்தில் தெரியவரும்.  ஒரு குறிப்பிட்ட பகுதியில் சிறந்த சுகாதாரம் மற்றும் நல்ல பதில்கள் தரப்பட்டுள்ளன எனில் அதற்குரிய படம் பிரகாசமான நிறமாகவும், ஒரு குறிப்பிட்ட பகுதியில் குறைந்த சுகாதாரம் மற்றும் பொதுவாக மோசமான பதில்கள் தரப்பட்டுள்ளன எனில் அதற்குரிய படம் சாம்பல் நிறமாகவும் சித்தரிக்கப்பட்டுள்ளன. குறியீட்டு வரைபடம் நல்ல பதில் மற்றும் மோசமான பதில் என்பதை முறையே பச்சை மற்றும் சாம்பல் கலர்களின் மூலம் சித்தரிக்கின்றன.
+14.	Social
+	சமூகம்
+15.	Who makes decisions on loans and assets in your family?
+	உங்களது குடும்பத்திற்கு கடன் மற்றும் சொத்துக்கள் வாங்குவதுகுறித்த செயல்பாடுகளை நிர்ணயிப்பது யார்?
+16.	Does your family allow you to pursue employment outside the house?
+	நீங்கள் வேலைக்கு செல்வதற்கு குடும்பத்தினர் அனுமதிக்கின்றார்களா?
+17.	Community
+	சமுதாயம்
+18.	Have you gained respect after joining a SHG/CBO?
+	நீங்கள் மக்கள் அமைப்பில் சேர்ந்த பிறகு உங்களுக்கு அங்கீகாரம் கிடைத்துள்ளதா?
+19.	Have you been involved in solving problems within your SHG/CBO?
+	மக்கள் அமைப்பில் ஏற்படும் பிரச்சனைகளுக்கு தீர்வு காணுவதில் உங்கள் பங்கேற்பு உள்ளதா?
+20.	Have you been in any demonstration on social issues?
+	சமுதாய பிரச்சனைகள் குறித்து போராட்டங்களில்நீங்கள் ஈடுபட்டுள்ளீர்களா?
+21.	Do you vote?
+	நீங்கள் தேர்தலின் போது வாக்களிப்பீர்களா?
+22.	Are you interested in getting involved in politics?
+	உங்களுக்கு அரசியலில் ஈடுபட ஆர்வமுள்ளதா?
+23.	Technical
+	தொழில்நுட்பம்
+24.	Have you used a computer?
+	கணினி பயன்படுத்த தெரியுமா?  
+25.	Do you have a phone?
+	உங்களிடம் கைபேசி உள்ளதா?
+26.	Can you use a mobile phone on your own?
+	உங்களுக்கு தன்னிச்சையாக கைபேசியை பயன்படுத்த தெரியுமா?
+27.	Can you read and send text messages?
+	உங்களால் கைபேசி மூலம் செய்திகளை படிக்க மற்றும் அனுப்ப முடியுமா?	
+28.	Health and Sanitation
+	சுகாதாரம் மற்றும் உடல் நலம்
+29.	Where do you go to defecate?
+	நீங்கள் கழிப்பிடத்துக்கு எங்கு செல்வீர்கள்?
+30.	Have you used sanitary napkins during your menstrual period?
+	நீங்கள் மாதவிடாய் காலங்களில் நாப்கின் பயன்படுத்துகிறீர்களா?
+31.	Economic
+	பொருளாதாரம்
+32.	How many times a day do you eat?
+	ஒரு நாளைக்கு நீங்கள் எத்தனை வேளை உணவு எடுத்துக்கொள்கிறீர்கள்?
+33.	How many times a year do you purchase new clothes for yourself?
+	நீங்கள் ஒரு வருடத்திற்கு எத்தனை முறை புதிய உடை எடுப்பீர்கள்?
+34.	Both
+	இருவரும்
+35.	Self
+	சுயமாக
+36.	Husband
+	கணவர்
+37.	Family Members
+	குடும்ப உறுப்பினர்கள்
+38.	Yes
+	ஆம்
+39.	No
+	இல்லை
+40.	Somewhat
+	ஓரளவிற்கு
+41.	Don't know what a napkin is
+	நாப்கின் என்றால் தெரியாது
+42.	Private toilet
+	தனிநபர் கழிவறை
+43.	Public toilet
+	பொதுக் கழிப்பிடம்
+44.	Outside
+	திறந்த வெளி கழிப்பிடம் 
+45.	Thrice a day
+	மூன்று வேளை 
+46.	Twice a day
+	இரண்டு வேளை 
+47.	Once a day
+	ஒரு வேளை
+48.	Once a year
+	வருடத்திற்கு ஒரு முறை
+49.	Once in six months
+	ஆறு மாதத்திற்கு ஒரு முறை 
+50.	Once in three months
+	மூன்று மாதத்திற்கு ஒரு முறை 
+51.	Diet
+	உணவு
+52.	The diet of families from the village are shown below. The size of food items on the plate indicate the frequencies at which people consume vegetables, meat, and fruit -- larger items are consumed more frequently. Colored Rupee notes below each plate indicate how much money was spent on each type of foot item.  An empty banana leaf indicates that the last person to eat does not get enough to eat in that household. Click to see different households in the area.
+	கிராமத்தில் உள்ள குடும்பங்களின் உணவு முறை பற்றி கீழே கொடுக்கப்பட்டுள்ளன. தட்டில் உள்ள உணவு பொருட்கள் மக்கள் உட்கொள்ளும் காய்கறிகள், இறைச்சி, பழங்கள் ஆகியவற்றின் அளவை குறிக்கிறது - பெரியதாக தென்படும் உணவு பொருள் மக்கள் அடிக்கடி உட்கொள்வதை குறிக்கிறது. தட்டின் கீழ் கலர்கலராக உள்ள ருபாய் நோட்டுகள் ஒவ்வொரு உணவு பொருளுக்கும் செலவிட்ட தொகையை குறிக்கிறது. காலியாக உள்ள வாழை இலை குடும்பத்தில் கடைசியாக உணவு உட்கொள்ளும் நபருக்கான போதிய உணவு இல்லை என்பதை சுட்டிகாட்டுகிறது. படவுருவை அழுத்துவதன் மூலம் வெவ்வேறு குடும்பங்களை காண இயலும்.
+53.	Asset Change
+	சொத்துக்களில் மாற்றம்
+54.	The change in assets of families in the village are shown. Green items have been gained in the last five years and red items have been lost. Items without colour around them represents items that were in possession five years ago as well as now. Click to see different households in the area.
+	குடும்ப சொத்துக்களில் ஏற்பட்ட மாற்றத்தை பற்றி காட்டப்பட்டுள்ளது. பச்சை நிறத்தில் இருப்பது கடந்த ஐந்து ஆண்டுகளில் பெறப்பட்டதையும், சிவப்பு நிறத்தில் இருப்பது இழந்ததையும் குறிக்கிறது. அவர்களை சுற்றி கலர் இல்லாமல் இருப்பது ஐந்து ஆண்டுகளுக்கு முன்பு இருந்த அதே நிலைமையில் இருக்கிறார்கள் என்பதை பிரதிபலிக்கிறது.
+55.	Marriage
+	திருமணம்
+56.	Each flower depicts a bundle of indicators pertaining to marriage. One flower reprents one married woman. The height of the flower corresponds to the age at marriage where shorter flowers are women that got married at younger ages. The color of the flower represents whether the marriage was with a blood relative (red) or not (yellow). The type of flower represents whether the woman gave consent (bloomed) to being married or not (unbloomed). The number of leaves represent the number of children in marriage. Click to see different women in the area. 
+	ஒவ்வொரு பூவும் திருமணம் தொடர்பான பல குறிகாட்டிகளை பிரதிபலிக்கிறது. ஒரு பூ ஒரு பெண்ணின் திருமணத்தை சித்தரிக்கிறது. பூவின் உயரம் பெண்ணின் திருமண வயதை சுட்டிகாட்டுகிறது. குறைந்த உயரம் கொண்ட பூ பெண்ணின் சிறுவயதில் திருமணமானதை குறிக்கிறது. பூவின் கலர் உறவுமுறையில் திருமணம் என்பதை குறிக்கும் வகையில் சிவப்பு நிறம் என்றால் உறவு முறை திருமணம் ஆனதையும் மஞ்சள் நிறம் உறவுமுறை அல்லததையும் குறிக்கிறது. பூக்களின் வகை பெண்ணின் சம்மதத்துடன் திருமணம் நடந்ததா இல்லையா என்பதை குறிக்கிறது. பூக்களில் இலைகளின் எண்ணிக்கை திருமணத்தில் குழந்தைகளின் எண்ணக்தையை பிரதிபலிக்கிறது. படவுருவை அழுத்துவதன் மூலம் வெவ்வேறு குடும்பங்களை காண இயலும்.
+

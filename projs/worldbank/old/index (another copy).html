@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+
+<style>
+
+.alpha-label{
+	background-color: rgba(50,50,50,.2);
+	color: white;
+	font-size: xx-large;
+}
+
+.hoverable:hover{
+	border: darkcyan 1px dashed;
+}
+.hoverable{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-right: 10px;
+
+	width: 100px;
+	display: inline-block;
+	background-color: white;
+	border: black 1px solid;
+	text-align: center;
+}
+
+canvas{
+	border: 1px black solid;
+}
+
+.glance-icon{
+	max-height: 100px;
+	max-width: 100px;
+}
+
+.histogram-bar{
+	height: 30px; 
+
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+	-o-user-select: none;
+	user-select: none;
+
+    -webkit-transition: all .5s ease;
+       -moz-transition: all .5s ease;
+            transition: all .5s ease;
+}
+
+/*.histogram-bar:active{
+	height: 70px;
+}
+*/
+
+
+.summary-image:hover{
+	border: orange 3px solid;	
+}
+
+p{
+	font-size: 1.2em;
+}
+</style>
+
+<head>
+<meta charset="utf-8"> 
+
+<title>Concepts</title>
+<script src="js/jquery-2.1.1.js"></script>
+<script src="js/jquery-bigtext.js"></script>
+<script src="js/d3.v3.js"></script>
+
+<script src="js/underscore.js"></script>
+<script src="js/underscore.string.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/canvas-utils.js"></script>
+
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<script src="js/bootstrap.min.js"></script>
+
+
+<!-- Tangle -->
+<script type="text/javascript" src="TangleKit/Tangle.js"></script>
+
+<!-- TangleKit (optional) -->
+<link rel="stylesheet" href="TangleKit/TangleKit.css" type="text/css">
+<script type="text/javascript" src="TangleKit/mootools.js"></script>
+<script type="text/javascript" src="TangleKit/sprintf.js"></script>
+<script type="text/javascript" src="TangleKit/BVTouchable.js"></script>
+<script type="text/javascript" src="TangleKit/TangleKit.js"></script>
+
+
+<script type="text/javascript" src="data/brains.js"></script>
+<script type="text/javascript" src="data/freq_links.js"></script>
+
+<!-- 
+<script type="text/javascript" src="data/flower_data.js"></script>
+<script type="text/javascript" src="data/equality_data.js"></script>
+<script type="text/javascript" src="data/diet_data.js"></script>
+<script type="text/javascript" src="data/globals.js"></script>
+ -->
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+</head>
+
+<body>
+
+<!-- <div class="bs-docs-sidebar" >
+    <ul class="nav nav-list bs-docs-sidenav affix" data-spy="affix" data-offset-top="255" data-offset-bottom="200">
+
+		<div id="toggles">
+		</div>
+    </ul>
+</div>
+
+ -->
+
+<div id="queries" class="col-xs-3 " data-spy="affix"> 
+	<h2>Data for <span id="now-showing">all</span></h2>
+	<h4><span id="num-women"></span> women </h4>
+</div>
+
+
+<!-- <div style="width:800px; margin: 0 auto; display: inline-block; ">
+ -->
+<div class="col-xs-5 col-xs-offset-3 main"> 
+
+
+
+
+<p>
+This demo explores the use of color (good) and grey (bad) to give immediate valence indicators while maintaining the depth of the information presented. 
+</p>
+
+<p>
+Viewers should be able to see at a glance the indicators in which they are strong or weak. The use of hue taps into the parallel abilities of the human visual system and attempts to show patchwork complexity and spark meaningful dialogue. 
+</p>
+
+<!-- <h3>Filter effects</h3>
+
+<p>
+This demo shows how a single image can be manipulated through filters to present different values of positivity or negativity. Drag the blue score with a mouse to manipulate the image.
+</p>
+<div id="filter-demo">
+	Score: <span data-var="score" class="TKAdjustableNumber play-with-me" data-min="0" data-max="1" data-step=".1"></span> <br>
+	<img class="base-image" src="images/landscape.png" width="300px">
+</div>
+
+<h4>Spectrum</h4>
+<div id="filter-spectrum">
+
+</div>
+
+<h3>Programmable smiley face</h3>
+
+<p>
+An affective face is another viable option to communicate a score. The faces follow the convention of grey (bad) and color (good) so that visualizations are readable at a glance. 
+</p>
+ -->
+<div id="smiley" style="position:relative">
+<!-- 	Smile size: <span data-var="smile" class="TKAdjustableNumber play-with-me" data-min="0" data-max="1" data-step=".1"></span> <br>
+ -->	<div id="smiley-widget"></div>
+ </div>
+
+<h4>Spectrum</h4>
+<div id="smile-spectrum">
+</div>
+
+
+<h3>Histogram variants</h3>
+
+<h4>Bar</h4>
+<div id="bar"></div>
+
+<h4>
+Histogram rather than bar
+</h4>
+<div id="hist"></div>
+
+<h4>
+Symbolic histogram
+</h4>
+<div id="symbol-hist"></div>
+
+<h4>
+Symbolic bar
+</h4>
+<div id="symbol-bar"></div>
+
+<h4>
+Blow-up bar (click to expand the bar)
+</h4>
+
+<div id="blowup-bar"></div>
+
+
+
+<h3>Well-being indicators</h3>
+
+<p>
+25 questions were selected to represent well-being across the domains of social empowerment, technical abilities, economic health, and unclassified. Each category is represented by a summary image that obeys the grey (bad) and color (good) shading. Click on a summary image to expand the category into individual indicators. 
+</p>
+
+
+<h4>Social</h4>
+<table class="wellbeing-table" id="social-wellbeing">
+</table>
+
+
+<h4>Technical</h4>
+<table class="wellbeing-table" id="technical-wellbeing">
+</table>
+
+
+<h4>Economic</h4>
+<table class="wellbeing-table" id="economic-wellbeing">
+</table>
+
+<h4>Other</h4>
+<table class="wellbeing-table" id="other-wellbeing">
+</table>
+
+
+<h3>Higher dimension visualizations</h3>
+<p>
+The following visualizations are more experimental in nature and may not be appropriate to this project. These visualizations sit more in the domain of attempting to compactly represent multiple indicators in a way that highlight relevant relationships between the data.
+</p>
+
+
+<h3>Diet animation</h3>
+<div id="diet-widget" style="position:relative; display:none; width: 130px; height: 130px; background-image:url(images/plate.jpg); background-size:contain; margin-right: 20px;">
+
+	<img class="grain" src="images/grains.png" style="height: 120px; position:absolute; left: 20px; top: 10px;">
+
+	<img class="meat" src="images/meat.png" style="position:absolute; left: 30px; bottom: 70px;">
+	<img class="vegetable" src="images/veg.png" style="position:absolute; right: 65px; top: 50px;">
+	<img class="fruits" src="images/fruit.png" style="position:absolute; left: 60px; top: 50px;">
+
+
+	<div class="cost" style="position:absolute; bottom: 0px;">
+	</div>
+</div>
+
+<div id="diet">
+</div>
+
+
+<h3>Face forces</h3>
+
+<p>
+This demo shows the party with the domainant voice in household decisions. More dominant parties are represented larger. 
+</p>
+
+<div id="face-forces" style="position:relative; background-color:rgb(205,165,47); display:none;">
+	<img class="woman" src="images/woman.png">
+	<img class="man" src="images/man.png">
+	<img class="family" src="images/family.png">
+	<img class="son" src="images/son.png">
+
+	<div class="lines"></div>
+</div>	
+
+<!-- <table>
+<tr>
+<td style="padding-right: 100px;">
+<div id="face-controls">
+	Man: <span data-var="man" class="TKAdjustableNumber play-with-me" data-min="0" data-max="1" data-step=".1"></span> <br>
+	Woman: <span data-var="woman" class="TKAdjustableNumber play-with-me" data-min="0" data-max="1" data-step=".1"></span> <br>
+	Family: <span data-var="family" class="TKAdjustableNumber play-with-me" data-min="0" data-max="1" data-step=".1"></span> <br>
+</div>
+</td>
+
+<td>
+<div id="face-forces" style="position:relative; background-color:rgb(205,165,47); display:none;">
+	<img class="woman" src="images/woman.png">
+	<img class="man" src="images/man.png">
+	<img class="family" src="images/family.png">
+
+	<div class="lines"></div>
+</div>	
+</td>
+</tr>
+</table>
+ -->
+<h4>Who makes the decisions?</h4>
+<table id="equality-table">
+</table>
+
+
+<h3>Flowers and marriage</h3>
+<p>
+The height of the flower corresponds to the age at marriage. The color of flower represents consent. The type of flower (blood flower or daisy) represents whether the marriage was with a blood relative or not. The number of leaves represent the number of children in marriage. 
+</p>
+
+<p>
+This multidimensional visualization may serve to visually highlight meaningful statistical relationship between parts of the data. For instance, are there many short, blood flowers? Are blood flowers usually consensual or not? Does consensuality increase or decrease with age?
+</p>
+
+<p>
+The data shown is a randomly drawn subsection from real populations of women. Refresh the page to see different samples. 
+</p>
+
+<div id="flowers" style="position:relative;">
+</div>
+
+
+
+<!-- <h3>Chord Diagram</h3>
+<div id="raychart" style="position:relative">
+	<canvas width="500px" height="500px"></canvas>
+</div>
+ -->
+<h3>Ray Chart</h3>
+
+<p>
+This is a first prototype of a ray chart, a means of representing interrelationships between probably linked groups. The ray chart attempts to be similar to the flower diagram in showing interesting relationships between groups, but in a more generic form factor. 
+</p>
+
+<p>Hover over a category to see strength of linkages with all other data,  conditioned upon the hovered entity being true. 
+</p>
+
+
+<div id="container" style="position:relative">
+	<canvas width="600px" height="500px"></canvas>
+	<div id="education" style="position:absolute; top: 400px; left: 50px; "></div>
+	<div id="income" style="position:absolute; top: 0px; left: 20px; width: 100px;"></div>
+	<div id="industry" style="position:absolute; top:0px; left: 450px; width: 140px;"></div>
+</div>
+
+<!-- <p>
+Cassandra Xia (cssndrx@gmail.com)
+</p>
+ -->
+
+</div> <!-- end main div-->
+</body>
+
+<script>
+
+
+var brains = _.clone(full_brains);
+$('#num-women').text(full_brains.length);
+
+function filter_down_brains(key, value){
+
+	console.log('brains length prev: ' + brains.length);
+	brains = _.filter(full_brains, function(x){
+		return x[key] === value;
+	});
+
+	console.log('brains length now: ' + brains.length);
+}
+
+function get_uniques(question_id){
+	var counts = _.countBy(brains, function (datum){
+		return datum[question_id];
+	});
+	return _.keys(counts);
+}
+
+function make_queries(){
+	var question_ids = ['panchayatname',	'habitationname', 'clustername',	'blockname'];
+	question_ids.forEach(function (question_id){
+		var uniques = get_uniques(question_id);
+
+		var $container = $('<div></div>');
+		$container.attr('id', question_id);
+		$container.append($('<h3></h3>').text(question_id));
+
+		uniques.forEach(function (unique){
+			if (unique == 'undefined'){
+				return;
+			}
+			var $button = $('<button></button>');
+			$button.text(unique);
+			$button.click(function(){
+				console.log('showing for ' + question_id + ' and ' + unique);
+				filter_down_brains(question_id, unique);
+				$('#now-showing').text(unique);
+				$('#num-women').text(brains.length);
+				viz();
+			});
+
+			$container.append($button);
+		});
+
+		$('#queries').append($container);
+	});
+}
+make_queries();
+
+
+// var villages = ['Agamalai - Tribal', 'Ammapatti', 'Dombucherry', 'Kamarajapuram', 'Koolayanur', 'Maniampatti', 'Nagalapuram', 'Rasingapuram', 'Silamalai', 'Silamarathupatti'];
+
+// villages.forEach(function(village){
+// 	var $toggle = $('<button class="btn"></button>');
+// 	$toggle.text(village);
+
+// 	$toggle.click(function(){
+// 		$(this).toggleClass('active');
+// 	});
+
+// 	$('#toggles').append($toggle);
+// 	$('#toggles').append('<br>');
+// });
+
+
+//https://kuler.adobe.com/220px-50ShadesofGreyCoverArt-color-theme-3603196/
+var colors = ['#192127', '#1B4063', '#2F77A1', '#C0E1E9', '#ECEEF0'];
+
+// load images onto canvas
+
+// // var canvas = $widget.find('canvas')[0];
+// // var context = canvas.getContext("2d");
+// // context.clearRect(0, 0, width, height);
+
+// context.setTransform(base_width(), 0, 0, -y_scale, (width-base_width())/2, height);
+
+
+
+// function make_equality_table(question_ids){
+
+// 	var long_form = {'childreneducationandmarriage' : "your child's education and marriage",
+// 					'clothesdecisionmaker': "your clothing", 
+// 					'decisiononnumberofchildren': "the number of children",
+// 					'visitingparentshouse': "when to visit your parents house"};
+
+// 	var question_ids = _.keys(long_form);
+// 	var images = {'childreneducationandmarriage' : 'education',
+// 	'clothesdecisionmaker': 'clothing',
+// 	'decisiononnumberofchildren' : 'children',
+// 	'visitingparentshouse' : 'parentshouse'
+// };
+
+// 	var $widget = $('#equality-table');
+// 	question_ids.forEach(function(question_id, ind){
+// 		var $question = $('<h5></h5>')
+// 		$question.text('Who makes the question_ids regarding ' + long_form[question_id] + '?');
+
+// 		var $row = $('<tr></tr>');
+
+// 		var $img = $('<img></img>').attr('src', 'images/' + images[question_id] + '.png').height(100);		
+// 		$row.append($('<td></td>').append($img));
+
+// 		var weights = get_data(question_id);
+// 		$row.append($('<td></td>').append($question).append(get_face_diagram( weights ) ) );
+
+// 		$widget.append($row);
+// 	});
+
+
+// 	function get_data(question_id){
+// 		var results = _.pluck(brains, question_id);
+// 		debugger;
+// 		return _.values(_.countBy(results, function (datum){
+// 			return values.indexOf(datum);
+// 		}));
+// 	}
+// }
+
+// make_equality_table(['childreneducationandmarriage',
+// 	'visitingparentshouse', 
+// 	'clothesdecisionmaker', 
+// 	'decisiononnumberofchildren']);
+
+
+
+function make_equality_table(data){
+
+	var long_form = {'childreneducationandmarriage' : "your child's education and marriage",
+					'clothesdecisionmaker': "your clothing", 
+					'decisiononnumberofchildren': "the number of children",
+					'visitingparentshouse': "when to visit your parents house"};
+
+	var decisions = _.keys(long_form);
+	var images = {'childreneducationandmarriage' : 'education',
+	'clothesdecisionmaker': 'clothing',
+	'decisiononnumberofchildren' : 'children',
+	'visitingparentshouse' : 'parentshouse'
+};
+
+	var $widget = $('#equality-table');
+	decisions.forEach(function(decision, ind){
+		var $question = $('<h5></h5>')
+		$question.text('Who makes the decisions regarding ' + long_form[decision] + '?');
+
+		var $row = $('<tr></tr>');
+
+		var $img = $('<img></img>').attr('src', 'images/' + images[decision] + '.png').height(100);		
+		$row.append($('<td></td>').append($img));
+
+//		$row.append($('<td></td>').append($question).append(get_face_diagram(data[decision]) ));
+		var weights = get_data(decision, data[decision]);
+		console.log(decision);
+		console.log(weights);
+		$row.append($('<td></td>').append($question).append(get_face_diagram( weights ) ) );
+
+		$widget.append($row);
+	});
+
+
+	function get_data(field, values){
+		var results = _.pluck(brains, field);
+		var counts = _.countBy(results, function (datum){
+			var ind = values.indexOf(datum);
+			return ind;
+		});
+		var pairs = _.pairs(counts).filter(function (pair){
+			return pair[0] != -1;
+		}).map(function(x){
+			return x[1];
+		});
+		console.log('pairs' + pairs);
+
+		return _.values(pairs);
+	}
+}
+
+function rand_sample(a, n) {
+    return _.take(_.shuffle(a), n);
+}
+
+function flower_demo(selector, data){
+	var $widget = $(selector);
+
+	var display_width = 600;
+	var flowers_per_row = 15;
+	var width = display_width/flowers_per_row;
+	var flower_height = 100;
+
+	var num_rows = 5;
+	var num_flowers = flowers_per_row*num_rows;
+
+	$widget.width(display_width);
+	$widget.height(flower_height * num_rows);
+
+	var ages = ['Below 15', '15 to 17 years', '17 to 19 years', '19 to 21 years', '21 and above'];
+
+	function add_flower(datum, i){
+		var $stem = $('<img src="images/stem4.png" style="position:absolute;">');
+		var $flower = $('<img src="images/flower.png" style="position:absolute;">');
+
+		if (datum.relatedtospouse == 'Yes'){
+			$flower.attr('src', 'images/blood.png');
+		}
+
+		$flower.width(width);
+
+		var ind = ages.indexOf(datum.ageatmarriage);
+		$stem.height(lerp(ind, 0, ages.length-1, 20, 2/3*flower_height));
+
+		// scale the stem based on age
+		// color the flower based on consent
+		$flower.css('background-color', datum.decisionformarriage == 'Yes' ? 'rgb(240,237,43)': 'rgb(240,108,43)');
+
+		// position stem and flower
+		var x_offset = (i % flowers_per_row)*width;
+		var y_offset = (num_rows - 1 - Math.floor(i / flowers_per_row)) * flower_height; 
+		// console.log('x_offset' + x_offset + ' y_offset ' + y_offset);
+		$stem.css({bottom: y_offset, left: x_offset+width/2+2});
+		$flower.css({bottom: y_offset + $stem.height()+$flower.height(), left: x_offset});
+
+		$widget.append($stem);
+		$widget.append($flower);
+
+		add_leaves(datum.numberofchildren);
+
+		function add_leaves(num_leaves){
+			range(num_leaves).forEach(function(ind){
+
+				$leaf = $('<img src="images/leaf.png" style="position:absolute;">');
+				$leaf.width(width/2.5);
+
+				var rely = Math.floor(ind/2) * 5;
+				var relx = ind % 2 == 1 ? 7 : 20;
+
+				$leaf.css({bottom: rely + y_offset+$stem.height()/3, 
+						left: relx + x_offset});
+
+
+				ind % 2 == 1 ? rotate_image($leaf, 210) : rotate_image($leaf, 300);
+
+				$widget.append($leaf);
+			});
+		}
+
+		if (i === Math.floor(num_flowers/2)){
+			// let this be the special individual flower
+			$overlay = $('<div style="position:absolute;"></div>');
+			$overlay.css('background-color', 'rgba(50,50,50,.3)');
+			$overlay.width(width);
+			$overlay.height($stem.height() + 50);
+			$overlay.css({bottom: y_offset, left: x_offset});
+			$widget.append($overlay);	
+
+		}
+	}
+
+
+	var subset = rand_sample(data, Math.min(num_flowers, data.length));
+
+	subset.sort(function(a, b){
+
+		if (ages.indexOf(a.ageatmarriage) < ages.indexOf(b.ageatmarriage)){
+			return 1;
+		}else{
+			return -1;
+		}
+
+		if (a.relatedtospouse == 'Yes' && b.relatedtospouse == 'No'){
+			return 1;
+		}
+
+		if (b.relatedtospouse == 'Yes' && a.relatedtospouse == 'No'){
+			return -1;
+		}
+
+		if (a.decisionformarriage == 'Yes' && b.decisionformarriage == 'No'){
+			return 1;
+		}
+
+		if (b.decisionformarriage == 'Yes' && a.decisionformarriage == 'No'){
+			return -1;
+		}
+
+		if (a.numberofchildren < b.numberofchildren){
+			return 1;
+		} else{
+			return -1;
+		}
+
+		return 0;
+	});
+	range(subset.length).forEach(function(i){
+		add_flower(subset[i], i);
+	});
+}
+
+
+
+
+function pluck(attributes){
+	return brains.map(function (x){
+		var smaller = {}; 
+		attributes.forEach(function(attribute){			
+			smaller[attribute] = x[attribute];
+		});
+		return smaller;
+	});
+}
+
+// function gauze_text(selector, text){
+// 	$text = $('<div class="alpha-label" style="position:absolute; "></div>');
+// 	$text.css({'width': $(selector).width(), 'height': $(selector).height()});
+// 	$text.text(text);
+// 	$(selector).append($text);
+// }
+
+// function comparison(){
+// 	var $space = $('<div style="position:relative;"></div>');
+// 	$('#flowers').after($space);
+	
+// 	flower_demo($space, flower_data);
+// }
+
+function filter_demo(score){
+	// http://css-tricks.com/almanac/properties/f/filter/
+
+	var $images = $('#filter-demo').children('img');
+	filter_image($images, score);
+}
+filter_demo();
+
+function filter_image(selector, score){
+	var effect = score < .5 ? 'grayscale(' + (1-score) + ')' : 'saturate(' + (score*1.2) + ')';
+
+	$(selector).css({
+	   'filter'         : effect,
+	   '-webkit-filter' : effect,
+	   '-moz-filter'    : effect,
+	   '-o-filter'      : effect,
+	   '-ms-filter'     : effect
+	});
+};
+
+function filter_spectrum(){
+	var scores = range(0, 1, .1);
+
+	scores.forEach(function(score){
+		var $baseimage = $('.base-image').first().clone();
+		$baseimage.width(100);
+		$('#filter-spectrum').append($baseimage);
+		filter_image($baseimage, score);
+	});
+}
+filter_spectrum();
+
+
+
+function ray_chart(){
+	var $parent = $('#raychart');
+	var canvas = $parent.find('canvas')[0];
+	var context = canvas.getContext("2d");
+
+     var radius = canvas.width/2 * .8;
+
+	function to_rad(deg){
+		while (deg < 0){
+			deg += 360;
+		}
+		while (deg > 360){
+			deg -= 360;
+		}
+		return 2*Math.PI * deg/360;
+	}
+	function draw_arc(startAngle, endAngle){
+
+	  startAngle = to_rad(startAngle);
+	  endAngle = to_rad(endAngle);
+//	  console.log('start ' + startAngle + ' end ' + endAngle);
+
+	  var x = canvas.width / 2;
+      var y = canvas.height / 2;
+
+      context.beginPath();
+      context.arc(x, y, radius, endAngle, startAngle, true);
+      context.lineWidth = 25;
+
+      // line color
+      context.strokeStyle = 'black';
+      context.stroke();
+	}
+
+	function angle_to_pt(angle){
+		var radius = 10;
+		var rads = to_rad(-angle);
+		var x = radius*Math.cos(rads);
+		var y = radius*Math.sin(rads); 
+
+		return [canvas.width/2 + x, canvas.height/2 - y + canvas.height];
+	}
+
+	function draw_counter_arc(startAngle, endAngle){
+      context.beginPath();
+
+      var startpt = angle_to_pt(startAngle);
+      var endpt = angle_to_pt(endAngle);
+
+      context.moveTo(startpt[0], startpt[1]);
+      context.quadraticCurveTo(288, 0, endpt[0], endpt[1]);
+      context.lineWidth = 10;
+
+      // line color
+      context.strokeStyle = 'green';
+      context.stroke();
+	}
+
+
+	var width = 500;
+	var height = 500;
+
+	var labels = {	'income' : ['<1000', '1000-3000', '3000-5000', '>5000'],
+					'industry' : ['agriculture', 'dairy', 'poultry', 'self-employment', 'wage', 'salaried'],
+					'education' : ['elementary', 'middle', 'high school', 'college']
+				};
+
+	var weights;
+
+	var angles = {};
+
+	var label_names = _.keys(labels);
+	label_names.forEach(function(label_name, ind){
+		var values = labels[label_name];
+
+		var weights = values.map(function(){
+			return Math.random();
+		});
+		var normed_weights = normalize_weights(weights);
+
+		var spacer = 5;
+		var low = ind*120 + spacer; 
+		var high = (ind+1)*120 - spacer;
+		var span = high - low;
+
+
+		var pixel_spans = normed_weights.map(function(weight){
+			return weight * span;
+		});
+
+
+		var angle_spans = [];
+
+		pixel_spans.forEach(function(span, ind){
+			var begin = sum(pixel_spans.slice(0, ind));
+			var pad = .5;
+
+			if (span > 2*pad){
+				var angle_start = low+begin+pad;
+				var angle_end = low+begin+span-pad;
+//				draw_arc(angle_start, angle_end);
+draw_arc(0, 30);
+draw_counter_arc(0, 30);
+
+				angle_spans.push([angle_start, angle_end]);
+			}
+		});
+
+		angles[label_name] = angle_spans;
+
+	});
+	// todo: put in the symbol for each segment of the arc
+
+	// draw ray between each segment of the arc to the next;
+
+}
+//ray_chart();
+
+
+
+function rotate_image(selector, deg){
+	var effect = 'rotate(' + deg + 'deg)';
+	$(selector).css({
+	   'transform'         : effect,
+	   '-webkit-transform' : effect,
+	   '-moz-transform'    : effect,
+	   '-o-transform'      : effect,
+	   '-ms-transform'     : effect
+	});
+}
+
+
+function diet_plates(data){
+	// daily, weekly, monthly
+	// does the last person who eats have enough to eat?
+
+	var frequency = ['Daily', '2-3 times a per week', 'Weekly', 'Monthly'];
+	var money = ['Less than Rs. 500', 'Rs. 500 - Rs. 1000', 'Rs. 1001 - Rs. 1500', 'Above Rs. 1500'];
+
+	var subset = rand_sample(data, Math.min(12, data.length));
+
+	function get_scale_down(freq){
+		var ind = frequency.indexOf(freq);
+		return lerp(ind, 0, frequency.length, 1, .2);
+	}
+
+	function money_count(datum){
+		var spent = ['vegetable', 'meat', 'fruit'].map(function(food_type){
+			return isdefined(datum[food_type+'cost']) ? money.indexOf(datum[food_type+'cost']) : 0;
+		});
+		// if (sum(spent) < 1){
+		// 	console.log('spent' + spent);
+		// }
+		return sum(spent);
+	}
+
+	subset.forEach(function(datum){
+		var $widget = $('#diet-widget').clone();
+		$widget.css('display', 'inline-block');
+		var $images = $widget.children('img');
+
+		$('#diet').append($widget);
+
+//		console.log(datum);
+		if (datum['lastpersontoeatsenough'] == 'No'){
+			$widget.children('.grain').height(60);
+		}
+
+		if (datum['meat'] == 'No'){
+			$widget.children('.meat').hide();
+		}
+
+		['vegetable', 'meat', 'fruits'].forEach(function(food_type){
+			var scale = get_scale_down(datum[food_type+'consumption']);
+			var $entry = $widget.children('.' + food_type);
+			$entry.width(60*scale);
+		});
+
+		// add the money bags
+		range(money_count(datum)).forEach(function(){
+			$widget.children('.cost').append('<img src="images/coins.png" width="15px">');
+		});
+
+	});
+
+}
+
+
+// function diet_animation(){
+// 	// things to toggle
+// 	// max amount of food
+// 	// rate of food
+// 	// type of food
+
+// 	// daily, weekly, monthly
+// 	// does the last person who eats have enough to eat?
+// 	var $widget = $('#diet');
+// 	var $images = $widget.children('img');
+
+// 	var diet = {
+// 		'daily': ['grain',],
+// 		'weekly': ['grain', 'veg'],
+// 		'monthly': ['grain', 'veg', 'meat'],
+// 	};
+
+// 	var i = 0;
+// 	function show_iter(){
+
+// 		var food_items;
+// 		food_items = diet['daily'];
+// 		if (i % 7 == 6){
+// 			food_items = diet['weekly'];
+// 		}	
+// 		if (i % 28 == 27){
+// 			food_items = diet['monthly'];
+// 		}	
+
+// 		food_items.forEach(function(food_class, ind){
+// 			var radius = Math.random() * 40 + 10;
+// 			var rads = (ind + (Math.random()*.9 + .1)) * 2*Math.PI/3;
+
+// 			var left = $widget.width()/2 + radius*Math.cos(rads);
+// 			var top = $widget.height()/2 + radius*Math.sin(rads);
+
+
+// 			var $foodimage = $('<img style="position:absolute;">');
+// 			$foodimage.attr('src', "images/single" + food_class + ".png");
+// 			$foodimage.width(10);
+// 			$foodimage.css('left', left - $foodimage.width()/2);
+// 			$foodimage.css('top', top - $foodimage.height()/2);
+
+// 			rotate_image($foodimage, Math.random()*360);
+// 			$widget.append($foodimage);
+// 		});
+
+
+// 		i = (i + 1) % 28;
+
+// 		setTimeout(function(){
+// 			show_iter();
+// 		}, 200);
+
+// 		if ($widget.children().length > 200){
+// 			$widget.empty();
+// 		}
+// 	}
+
+
+// 	show_iter();
+
+// }
+
+// function diet_animation(){
+// 	// daily, weekly, monthly
+// 	// does the last person who eats have enough to eat?
+// 	var $widget = $('#diet');
+// 	var $images = $widget.children('img');
+
+// 	var diet = {
+// 		'daily': ['grain',],
+// 		'weekly': ['grain', 'veg'],
+// 		'monthly': ['grain', 'meat', 'veg'],
+// 	};
+
+// 	function scale_food(){
+// 		$images.width(50);
+// 	}
+
+// 	var i = 0;
+// 	var is_rest_frame = false;
+
+// 	function show_iter(){
+// 		// monthly
+// 		var food_items;
+// 		food_items = diet['daily'];
+// 		if (i % 7 == 6){
+// 			food_items = diet['weekly'];
+// 		}	
+// 		if (i % 28 == 27){
+// 			food_items = diet['monthly'];
+// 		}	
+
+// 		$widget.children().hide();
+// 		food_items.forEach(function(food_class){
+// 			$widget.children('.' + food_class).show();
+// 		});
+
+// 		i = (i + 1) % 28;
+// 		is_rest_frame = true;
+
+// 		setTimeout(function(){
+// 			rest_frame();
+// 		}, 200);
+// 	}
+
+
+// 	function rest_frame(){
+// 		is_rest_frame = false;
+// 		$widget.children().hide();
+
+// 		setTimeout(function(){
+// 			show_iter();
+// 		}, 50);
+// 	}
+
+// 	show_iter();
+
+// }
+//diet_animation();
+
+function normalize_weights(weights){
+	return weights.map(function(x){
+		if (sum(weights) == 0){
+			return 0;
+		}
+		return x/sum(weights);
+	});
+}
+
+
+function get_face_diagram(weights){
+	function w_to_size(w){
+		return w*200;
+	}
+
+	// normalize the weights coming in
+	var norm_weights = normalize_weights(weights);
+
+	var sizes = norm_weights.map(function(w){
+		return w_to_size(w);
+	});
+
+
+	// scale the size of the woman's face up and down
+	var $widget = $('#face-forces').clone();
+	$widget.css('display', 'inline-block');
+	var $imgs = $widget.children('img').each(function(ind){
+
+		if (ind >= weights.length){
+			$(this).width(0);
+		}else{
+			$(this).width( sizes[ind]);			
+		}
+	}); 
+
+	// draw the bar to show the dimension and lessen the tufte problem
+	var $lines = $widget.last();
+	sizes.forEach(function(size){
+		$bar = $('<div style="background-color:black; display:inline-block; margin-right: 2px; margin-left: 2px;"></div>');
+		$bar.width(size);
+		$bar.height(5);
+		$lines.append($bar);
+	});
+
+	$widget.css('padding', 4);
+
+	return $widget;
+}
+
+
+function face_forces(weights){
+	function w_to_size(w){
+		return w*200;
+	}
+
+	// normalize the weights coming in
+	var norm_weights = normalize_weights(weights);
+
+	var sizes = norm_weights.map(function(w){
+		return w_to_size(w);
+	});
+
+
+	// scale the size of the woman's face up and down
+	var $widget = $('#face-forces');
+	var $imgs = $widget.children('img').each(function(ind){
+		$(this).width( sizes[ind]);
+	}); 
+
+	// order the images by size
+
+}
+
+function smiley_demo(selector, value){
+	var $smiley = make_smiley(value);
+	$(selector).html($smiley);
+}
+
+function make_smiley(value){
+	function get_color(value){
+		var color_scale = d3.interpolateRgb('grey', 'orange')
+		return color_scale(value);
+	}
+
+	function get_image(value){
+		if (value <= .4){
+			return 'frown.png';
+		}
+		if (value >= .6){
+			return 'smile.png';
+		}
+		return 'neutral.png';
+	}
+
+	var size = 70;
+	var $container = $('<span style="display:inline-block; position:relative; background-image:url(images/facebase4.png); background-size:contain; background-repeat:no-repeat;"></span>');
+	$container.height(size);
+	$container.width(size);
+
+	$container.css('background-color', get_color(value));
+
+	var $image = $('<img style="position:absolute;" src="images/' + get_image(value) + '">');
+	var x = Math.abs(value - .5);
+
+	// map 0 to .5
+	var smile_size = 20;
+	var smile_width = lerp(x, 0, .5, 10, smile_size);
+	var smile_height= lerp(x, 0, .5, 2, 7);
+	$image.width(smile_width);
+	$image.height(smile_height);
+	$image.css('left', (size-smile_width)/2);
+	$image.css('top', size*2/3);
+
+	$container.append($image);	
+	return $container;
+}
+
+
+function generate_face_examples(){
+	var values = range(0, 1, .1);
+	values.forEach(function(value){
+		$('#smile-spectrum').append(make_smiley(value));
+	});
+
+}
+generate_face_examples();
+
+
+glance_images = {'#technical-wellbeing' : 'tablet.jpg', 
+					'#social-wellbeing': 'sari.jpg',
+					'#economic-wellbeing': 'rupees2.jpg',
+					'#other-wellbeing': 'sanitation.jpg',
+					};
+
+
+function make_glance_images(){
+
+	for (var glance_image in glance_images){
+		var $img = $('<img></img>').attr('src', 'images/' + glance_images[glance_image])
+			.addClass('summary-image')
+			.height(200);
+		filter_image($img, goodnesses[glance_image]);
+		$(glance_image).before($img);
+		$img.click(function(){
+			var ind = $('.summary-image').index(this);
+			$('.wellbeing-table').eq(ind).toggle();
+		});
+
+		$(glance_image).hide();
+	}
+}
+//make_glance_images();
+
+function duplicate(selector){
+	var $widget = $(selector).clone();
+	$(selector).append($widget);
+}
+
+function symbol_histogram(selector, data, variant){
+var glance_images = {'#technical-wellbeing' : 'tablet.jpg', 
+					'#social-wellbeing': 'sari.jpg',
+					'#economic-wellbeing': 'rupees2.jpg',
+					'#other-wellbeing': 'sanitation.jpg',
+					};
+
+	if (selector in glance_images){
+		variant = 'blowup-bar';
+	}
+	// assumes rank ordering 
+	function get_colors(){
+		if (isdefined(data.colors)){
+			return data.colors;
+		}
+		if (data.weights.length == 2){
+			return ['rgb(240,108,43)', 'grey'];
+		}
+		if (data.weights.length == 3){
+			return ['rgb(240,108,43)', 'lightgray', 'gray'];
+		}
+
+		// else, return spectrum
+		if (data.weights.length < 6){
+			return ['rgb(240,108,43)', 'coral', 'lightgray', 'gray', 'black'];			
+		}
+
+		return ['rgb(240,108,43)', 'coral', 'lightgray', 'silver', 'gray', 'black'];		
+	}
+
+	var $widget = $('<td></td>');
+	var colors =  get_colors();
+
+	var $title = $('<div>'+ data.question+'</div>');
+	$widget.append($title);
+
+	var weights = normalize_weights(data.weights);
+
+	// todo: remove this once we have the actual data
+	data.choice = Math.floor(Math.random() * weights.length);
+
+	weights.forEach(function (weight, ind){
+		// var $label = $('<span style="width:100px; display:inline-block;"></span>')
+		// $label.text(data.labels[ind]);
+		// $widget.append($label);
+
+		var $bar = $('<div class="histogram-bar" style="color:white; display:inline-block; overflow:hidden; font-weight: bolder; text-shadow: black 0.1em 0.1em 0.2em; "></div>');
+		var scale_factor = 400;
+		$bar.width(weight * scale_factor);
+		$bar.css('background-color', colors[ind]);
+
+		if (variant === 'blowup-bar'){
+			$bar.click(function(){
+
+				var $bars = $widget.children('.histogram-bar');
+
+				$bars.each(function(ind, elt){
+						if (!$widget.hasClass('big')){
+							$(elt).height(300);
+//							$(elt).width(1.3* $(elt).width());
+
+							$(elt).css({'font-size': 'xx-large', 'text-align': 'center',
+								'padding-top' : '200px'});
+							//$(elt).text(data.labels[ind]);
+						}else{
+							$(elt).height(30);
+//							$(elt).width(1/1.3 * $(elt).width());
+
+							$(elt).css({'font-size': '',
+								'text-align' : '',
+								'padding-top': ''});
+
+						}
+					});					
+				$widget.toggleClass('big');
+
+			});			
+		}
+
+		$bar.text(data.labels[ind]);
+	
+		if (variant === 'symbol-hist' || variant === 'symbol-bar' || variant === 'blowup-bar'){
+
+			if (weight * scale_factor > 30){
+				$bar.css('background-image', "url('" + data.symbols[ind] + "')");
+				$bar.css('background-size', '30px 30px');
+			} 
+
+			// else{
+			// 	console.log('hitting here.................');
+			// 	var $icon = $('<img>').attr('src', data.symbols[ind])
+			// 	.width(30)
+			// 	.height(30).addClass('yo');
+			// 	$bar.append($icon);
+			// }
+
+			// $bar.css('background-position', 'right');
+			// $bar.css('background-repeat', 'no-repeat');
+		}
+
+		// if (variant === 'symbol-hist' || variant === 'symbol-bar'){
+		// 	$bar.append('<img src="' + data.symbols[ind] + '" width="40px">');
+		// }
+
+// 		if (ind == data.choice){
+// 			$bar.css('border', 'white 1px dashed');
+// //			$bar.height(40);
+// 		}
+
+		$widget.append($bar);		
+
+		if (variant === 'hist' || variant === 'symbol-hist'){
+			$widget.append('<br>');				
+		}
+	});
+
+	var $row = $('<tr></tr>');
+	$row.append($widget);
+
+	if (isdefined(glance_images[selector])){
+		var $img = $('<img class="glance-icon"></img>');
+		$img.attr('src', 'images/' + glance_images[selector]);
+		filter_image($img, weights[0]);  // 0th item is the good one
+		$row.append($('<td></td>').append($img));
+	}
+	$(selector).append($row);
+}
+
+////////////// experimental section
+symbol_histogram('#bar', {
+		question: "Who decides visits to your parents' home?",
+		labels: ['Self', 'N/A', 'Husband', 'Family'],
+		weights: [949, 160, 568, 42],
+		choice: 0,
+		symbols: ['images/woman.png', 'images/blank.png', 'images/husband.png', 'images/family.png'],
+	});
+
+symbol_histogram('#hist', {
+		question: "Who decides visits to your parents' home?",
+		labels: ['Self', 'N/A', 'Husband', 'Family'],
+		weights: [949, 160, 568, 42],
+		choice: 0,
+		symbols: ['images/woman.png', 'images/blank.png', 'images/husband.png', 'images/family.png'],
+	}, 'hist');
+
+
+symbol_histogram('#symbol-hist', {
+		question: "Who decides visits to your parents' home?",
+		labels: ['Self', 'N/A', 'Husband', 'Family'],
+		weights: [949, 160, 568, 42],
+		choice: 0,
+		symbols: ['images/woman.png', 'images/blank.png', 'images/man.png', 'images/family.png'],
+	}, 'symbol-hist');
+
+
+symbol_histogram('#symbol-bar', {
+		question: "Who decides visits to your parents' home?",
+		labels: ['Self', 'N/A', 'Husband', 'Family'],
+		weights: [949, 160, 568, 42],
+		choice: 0,
+		symbols: ['images/woman.png', 'images/blank.png', 'images/man.png', 'images/family.png'],
+	}, 'symbol-bar');
+
+
+symbol_histogram('#blowup-bar', {
+		question: "Who decides visits to your parents' home?",
+		labels: ['Self', 'N/A', 'Husband', 'Family'],
+		weights: [949, 160, 568, 42],
+		choice: 0,
+		symbols: ['images/woman.png', 'images/blank.png', 'images/man.png', 'images/family.png'],
+	}, 'blowup-bar');
+
+// function setUpTangle () {
+
+//     var element = document.getElementById("face-controls");
+
+//     var tangle = new Tangle(element, {
+//         initialize: function () {
+//             this.man = 0.8;
+//             this.woman = 0.2;
+//             this.family = 0.3;
+//         },
+//         update: function () {
+//         	var normed = normalize_weights([this.man, this.woman, this.family]);
+//         	this.man = normed[0];
+//         	this.woman = normed[1];
+//         	this.family = normed[2];
+
+//             face_forces([this.man, this.woman, this.family]);
+
+//         	this.man = format_number(this.man, 2);
+//         	this.woman = format_number(this.woman, 2);
+//         	this.family = format_number(this.family, 2);
+
+//         }
+//     });
+
+
+// 	element = document.getElementById("filter-demo");
+
+//     var tangle = new Tangle(element, {
+//         initialize: function () {
+//             this.score = 0.2;
+//         },
+//         update: function () {
+//         	this.score = format_number(this.score, 1);
+
+//         	filter_demo(this.score);
+//         }
+//     });
+
+
+// 	element = document.getElementById("smiley");
+
+//     var tangle = new Tangle(element, {
+//         initialize: function () {
+//             this.smile = 0.7;
+//             smiley_demo('#smiley-widget', this.smile);
+
+//         },
+//         update: function () {
+//         	this.smile = format_number(this.smile, 1);
+
+//         	smiley_demo('#smiley-widget', this.smile);
+//         }
+//     });
+
+// }
+// setUpTangle();
+
+
+
+
+
+
+function make_wellbeing_histograms(){
+	//'localelectionscontesting' is blank
+	var categories = {
+		'social':  
+		['visitingparentshouse', 'loansdecisionmaker', 'outsideemployment', 'respectstatusafterjoiningcbo', 'problemsolvingwithincbo', 'socialissuesdemonstration', 'vote', 'politicsinvolvement', ], 
+		
+		'technical' : 
+		// 'cant_text_read' is backwards
+		 ['computerusage', 'householdmobilephone', 'mobilephoneusage', 'cant_text_read'], 
+		
+		 'economic': 
+		// 'businessdevelopmenttraining' pretty sparse
+		// could not find code for 'do you have all the facilities you need for your business'
+		 ['numberoftimesadaytoeat', 'vegetableconsumption', 'vegetablecost', 'fruitsconsumption', 'fruitcost', 'newclothes' ],
+		
+		'other' : 
+		['defeacation', 'treatmentofselfifill', 'sanitarynapkins']
+	};
+
+
+	var pretty_question = {'visitingparentshouse': "Who decides visits to your parents' home?",
+		'loansdecisionmaker': "Who makes decisions on loans and assets in your family?",
+		'outsideemployment': "Does your family allow you to pursue employment outside the house?",
+		'respectstatusafterjoiningcbo' : "Have you gained respect after joining a SHG/CBO?",
+		'problemsolvingwithincbo' : "Have you been involved in solving problems within your SHG/CBO?", 
+		'socialissuesdemonstration' : "Have you been in any demonstration on social issues?", 
+		'vote' : "Do you vote?", 
+		'politicsinvolvement': "Are you interested in getting involved in politics?",
+		'computerusage' : "Have you used a computer?", 
+		'householdmobilephone' : "Do you have a phone?", 
+		'mobilephoneusage' : "Can you use a mobile phone on your own?", 
+		'cant_text_read' : "Can you read and send text messages?",
+		'numberoftimesadaytoeat': "How many times a day do you eat?", 
+		'vegetableconsumption' : "How often do you consume vegetables?", 
+		'vegetablecost' : "How much do you spend on the purchase of vegetables in a month?", 
+		'fruitsconsumption' : "How often do you consume fruits?", 
+		'fruitcost' : "How much do you spend on the purchase of fruits in a month?", 
+		'newclothes' : "How many times a year do you purchase new clothes for yourself?",
+		'defeacation' : "Where do you go to defecate?", 
+		'treatmentofselfifill': "If you are ill, what is the first method of treatment that you take?", 
+		'sanitarynapkins' : "Have you used sanitary napkins during your menstrual period?",		
+	};
+
+	var orderings = {
+		'treatmentofselfifill' : ['Private hospital', 'Government hospital', 'Medical shop', 'Own treatment', ],
+		'numberoftimesadaytoeat' : ['Thrice a day', 'Twice a day', 'Once a day', ],
+		'vegetablecost' : ['Above Rs. 1500', 'Rs. 1001 - Rs. 1500', 'Rs. 500 - Rs. 1000', 'Less than Rs. 500',], 
+		'fruitcost' : ['Above Rs. 1500', 'Rs. 1001 - Rs. 1500', 'Rs. 500 - Rs. 1000', 'Less than Rs. 500',], 
+		'vegetableconsumption' : ['Daily', '2-3 times a per week', 'Weekly', '2-3 times per month', 'Monthly', ],
+		'fruitsconsumption' : ['Daily', '2-3 times a per week', 'Weekly', '2-3 times per month', 'Monthly', ],
+		'sanitarynapkins': ['Yes', 'No', "Don't know what a napkin is", ],
+		'newclothes': ['Once a month', 'Once in three months', 'Once in six months', 'Festival times', 'Once a year', ],
+	};
+
+	function get_symbols(indicator, choices){
+		if (choices[0] == 'Yes'){			
+			return ['images/yes.png', 'images/no.png'];
+		}
+
+		return choices.map(function(choice){
+			if (choice == 'Both'){				
+				return 'images/both.png';
+			}
+			else if (choice == 'Self'){
+				return 'images/woman.png';
+			}
+			else if (choice == 'Husband'){
+				return 'images/man.png';
+			}
+			else if (choice == 'Family members'){
+				return 'images/family.png';
+			}
+			else{				
+				return '';
+			}
+
+		});
+	}
+
+	// the data arrives and now we get to bundle it together
+	// worry about performance later
+	_.pairs(categories).forEach(function (pair){
+		var header = pair[0];
+		var question_ids = pair[1];
+
+		question_ids.forEach(function(question_id){
+			// symbol_histogram('#economic-wellbeing', {
+			// 	question: "How many times a year do you purchase new clothes for yourself?",
+			// 	labels: ['Once a month', 'Once in three months', 'Once in six months', 'Festival times', 'Once a year'],
+			// 	weights: [7, 104, 221, 940, 521],
+			// 	choice: 0,
+			// 	symbols: ['', '', '', '', ''],
+			// });
+
+			var grouping = _.groupBy(brains, function(x){ return x[question_id]; });
+
+			var choices = _.keys(grouping); //_.uniq(_.pluck(brains, question_id));
+			var weights = _.values(grouping).map(function(arr){
+				return arr.length;
+			});
+//			debugger;
+
+			symbol_histogram('#'+header+'-wellbeing', {
+				question: pretty_question[question_id],
+				labels: choices, 
+				weights: weights,
+				choice: 0,
+				symbols: get_symbols(question_id, choices),
+			});
+		});
+	});
+
+}
+
+
+
+
+function extend(arr1, arr2){
+	return Array.prototype.push.apply(arr1, arr2);
+}
+
+// function raychart_data(){
+
+// 	var link_data = {}; // key that maps to other 
+	
+// 	Object.prototype.getdefault = function (key, def){
+// 		if (!(key in this)){
+// 			this[key] = def;			
+// 		}
+// 		return this[key];
+// 	};
+
+// 	var question_ids = ['education', 'livelihoodactivity', 'monthlyearnings'];
+// 	var data = pluck(question_ids);
+
+// 	data.forEach(function (datum){
+// 		var pairs = _.pairs(datum);
+// 		for (var i=0; i<pairs.length; i++){
+// 			var pair = pairs[i];
+// 			var others = pairs.slice(0, i);
+// 			if (i < pairs.length - 1){
+// 				extend(others, pairs.slice(i+1, pairs.length));
+// 			}
+
+// 			var observed = link_data.getdefault(pair, []);
+// 			extend(observed, others);
+// 		}
+
+// 		// todo: not sure how to handle multiple labels
+// 	});
+
+// 	// with open('data/freq_links.js', 'w') as f:
+// 	// 	max_size = max([max(x.values()) for x in links.values()])
+// 	// 	f.write('max_link_size = ' + str(max_size) + ';')
+// 	// 	f.write('link_data = ' + str(links) + ';')
+// 	freq_links(link_data);
+
+// }
+// raychart_data();
+
+
+// function freq_links(data){
+// 	var $parent = $('#container');
+// 	var canvas = $parent.find('canvas')[0];
+// 	var context = canvas.getContext("2d");
+
+// 	var width = 600;
+// 	var height = 500;
+
+// 	var vector_colors = ['orange', 'lightslategray', 'lightseagreen', 'orange'];
+
+
+// 	// var labels = { 'education': ['Uneducated', 'Primary school', 'Middle school', 'Secondary school', 'Sr. Secondary school'],
+// 	// 	'income': ['Less than Rs. 1000', 'Rs. 1000 - Rs. 3000', 'Rs. 3001 - Rs. 5000', 'Rs. 5001 - Rs. 10000', 'Above Rs. 10000'],
+// 	// 	'industry': ['Salary employment', 'Dairy', 'Wage employment', 'Wage employment only', 'Agriculture'] }
+// 	var labels = _.groupBy(_.pairs(_.keys(data)), function (pair){
+// 		var key = pair[1];
+// 		var label_name = key.split(',')[0];
+// 		return label_name;
+// 	});
+
+// //	debugger;
+// 	var weights;
+
+// 	// add in labels
+// 	var i=0;
+// 	for (var label_name in labels){
+// 		var values = labels[label_name];
+// 		var $section = $($parent).find('#' + label_name);
+// 		values.forEach(function(x){
+// 			var x = x[1].split(',')[1];
+// 			var $label = $('<span class="hoverable">' + x + '</span>');
+// 			$label.css('background-color', vector_colors[i+1]);
+// 			$label.css('color', 'white');
+// 			$section.append($label);
+// 		});
+// 		i++;
+// 	}
+
+// 	function lookup_thickness(from, to){
+// 		return data[from][to];
+// 	}
+
+// 	// upon hover
+// 	$('.hoverable').hover(function(){
+// 	 	context.clearRect(0, 0, width, height);
+
+// 		var $hoverelt = $(this);
+// 		var elt_pos = $hoverelt.position();
+// 		var pelt_pos = $hoverelt.parent().position();
+
+// 		var others = $parent.find('.hoverable').filter(function(ind, elt){
+// 			return  $(elt).parent()[0] != $hoverelt.parent()[0] ;
+// 		});
+
+// 		//others.css('background-color', 'red');
+// 		others.each(function(ind, other){
+// 			var $other = $(other);
+// 			var pos = $other.position();
+// 			var ppos = $other.parent().position();
+
+// 			// lookup the weight in the table
+// 			var ydelta = 20; //$other.height()/2;
+// //			console.log('parent index ' + $other.parent().index());
+
+// 			var vector_color = vector_colors[$other.parent().index()];
+
+
+// 			var raw_thickness = lookup_thickness($hoverelt.text(), $other.text());
+// 			var thickness = lerp(raw_thickness, 0, max_link_size, 0, 30);
+
+// 			draw_vector(context, vector_color, [elt_pos.left + pelt_pos.left, elt_pos.top + pelt_pos.top +ydelta], [pos.left + ppos.left, pos.top + ppos.top + ydelta] , thickness);
+
+// 		});
+// 	});	
+
+// 	// the DOM knows each item's position
+// 	// get each item's position if the item has a diff parent
+// 	// get the weight
+
+
+// 	// get a collection of vectors (start, end, weights)
+// 	function draw_vector(context, vector_color, start, end, weight){
+// 		// todo: incorporate the weight
+// 		// todo: animate
+// //			context.setTransform(1, 0, 0, -1, 0, height);
+
+// 		plot_coords(context, [start, end], vector_color, weight);
+// //		console.log('start ' + start[0] + ',' + start[1] + ' end ' + end);
+
+// 		// position relative to canvas ....................................
+
+// 	}
+// }
+// freq_links(link_data);
+
+
+function freq_links(data){
+	var $parent = $('#container')
+	var canvas = $parent.find('canvas')[0];
+	var context = canvas.getContext("2d");
+
+	var width = 600;
+	var height = 500;
+
+	var vector_colors = ['orange', 'lightslategray', 'lightseagreen', 'orange'];
+
+	// var labels = {	'income' : ['<1000', '1000-3000', '3000-5000', '>5000'],
+	// 				'industry' : ['agriculture', 'dairy', 'poultry', 'self-employment', 'wage', 'salaried'],
+	// 				'education' : ['elementary', 'middle', 'high school', 'college']
+	// 			};
+
+	var labels = { 'education': ['Uneducated', 'Primary school', 'Middle school', 'Secondary school', 'Sr. Secondary school'],
+		'income': ['Less than Rs. 1000', 'Rs. 1000 - Rs. 3000', 'Rs. 3001 - Rs. 5000', 'Rs. 5001 - Rs. 10000', 'Above Rs. 10000'],
+		'industry': ['Salary employment', 'Dairy', 'Wage employment', 'Wage employment only', 'Agriculture'] }
+
+	var weights;
+
+	// add in labels
+	var i=0;
+	for (label_name in labels){
+		var values = labels[label_name];
+
+		var $section = $parent.children('#' + label_name);
+		values.forEach(function(x){
+			var $label = $('<span class="hoverable">' + x + '</span>');
+			$label.css('background-color', vector_colors[i+1]);
+			$label.css('color', 'white');
+			$section.append($label);
+		});
+
+		i++;
+	}
+
+	function lookup_thickness(from, to){
+		return data[from][to];
+	}
+
+
+	// upon hover
+	$('.hoverable').hover(function(){
+	 	context.clearRect(0, 0, width, height);
+
+
+		var $hoverelt = $(this);
+		var elt_pos = $hoverelt.position();
+		var pelt_pos = $hoverelt.parent().position();
+
+		var others = $parent.find('.hoverable').filter(function(ind, elt){
+			return  $(elt).parent()[0] != $hoverelt.parent()[0] ;
+		});
+
+		//others.css('background-color', 'red');
+		others.each(function(ind, other){
+			var $other = $(other);
+			var pos = $other.position();
+			var ppos = $other.parent().position();
+
+			// lookup the weight in the table
+			var ydelta = 20; //$other.height()/2;
+//			console.log('parent index ' + $other.parent().index());
+
+			var vector_color = vector_colors[$other.parent().index()];
+
+
+			var raw_thickness = lookup_thickness($hoverelt.text(), $other.text());
+			var thickness = lerp(raw_thickness, 0, max_link_size, 0, 30);
+
+			draw_vector(context, vector_color, [elt_pos.left + pelt_pos.left, elt_pos.top + pelt_pos.top +ydelta], [pos.left + ppos.left, pos.top + ppos.top + ydelta] , thickness);
+
+		});
+	});	
+
+	// the DOM knows each item's position
+	// get each item's position if the item has a diff parent
+	// get the weight
+
+
+	// get a collection of vectors (start, end, weights)
+	function draw_vector(context, vector_color, start, end, weight){
+		// todo: incorporate the weight
+		// todo: animate
+//			context.setTransform(1, 0, 0, -1, 0, height);
+
+		plot_coords(context, [start, end], vector_color, weight);
+//		console.log('start ' + start[0] + ',' + start[1] + ' end ' + end);
+
+		// position relative to canvas ....................................
+
+	}
+}
+
+function viz(){
+	$("#equality-table").empty();
+	make_equality_table({'childreneducationandmarriage': ['My opinion is accepted', 'My opinion is not accepted'],
+		'clothesdecisionmaker': ['NONE', 'Husband', '#2) parents', '#3) son / daughter'], 
+		'decisiononnumberofchildren': ['Self', 'Husband', 'Family members'],
+		'visitingparentshouse' : ['Self', 'Husband', 'Family members'], 
+		});
+
+	$('#flowers').empty();
+	flower_demo('#flowers', pluck(['ageatmarriage', 'decisionformarriage', 'relatedtospouse', 'numberofchildren']));
+
+	$('#diet').empty();
+	diet_plates(pluck(['numberoftimesadaytoeat', 'lastpersontoeatsenough', 'vegetableconsumption', 'vegetablecost', 'fruitsconsumption', 'fruitcost', 'meat', 'meatconsumption', 'meatcost', 'rationshoppurchasessufficient']));
+
+	$('.wellbeing-table').empty();
+	make_wellbeing_histograms();
+	
+}
+viz();
+
+freq_links(link_data);
+
+</script>
+

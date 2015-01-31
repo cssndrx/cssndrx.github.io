@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+<style>
+img{
+	user-drag: none; 
+	-moz-user-select: none;
+	-webkit-user-drag: none;
+
+   -moz-user-select: none; /* These user-select properties are inheritable, used to prevent text selection */
+    -webkit-user-select: none;
+    -ms-user-select: none; /* From IE10 only */
+    user-select: none; /* Not valid CSS yet, as of July 2012 */
+}
+
+.asset-bkg{
+	display: inline-block;
+	height: 40px;
+	width: 35px;
+	margin: 1px;
+	padding: 3px;
+}
+
+.swatch{
+	display: inline-block;
+	height: 25px;
+	width: 25px;
+	border: 1px rgb(200,200,200) solid;
+	border-radius: 50%;
+	margin-bottom: 1px;
+	margin-top: 2px;
+}
+.section-header{
+	color: #f2f2f2;
+	height: 30px;
+	padding-left: 10px;
+	vertical-align: middle;
+
+	font-weight: bolder; 
+	border: 2px white solid;
+	width: 250px;
+	overflow: none;
+}
+.table-header{
+	color: #f2f2f2;
+	text-align: center;
+
+	font-weight: bolder; 
+	background-color: rgb(50,50,50);
+}
+
+/* Fixed header and footer.
+* --------------------------------------- */
+#header, #footer{
+	position:fixed;
+	height: 50px;
+	display:block;
+	width: 100%;
+	background: #333;
+	z-index:9;
+	color: #f2f2f2;
+
+	padding-left: 15px;
+}
+
+#header{
+	top:0px;
+	overflow: hidden;
+}
+#footer{
+	bottom:0px;
+}
+
+.query-button{
+	font-size: 13px;
+}
+
+.village-pic{
+	position: absolute;
+}
+.color-joint{
+	margin: 5px;
+}
+
+#test-object {
+  -webkit-filter: hue-rotate(90deg) ;
+}
+
+.hist-question{
+	border: grey 1px solid;
+	padding: 8px;
+	padding-left: 20px;
+	margin: 8px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+
+}
+
+.marginal{
+	color: darkgrey;
+	font-size: 80%;
+}
+
+body, html{
+	  width: 100%;
+  height: 100%;
+}
+.slide{
+	background-color: white;
+	padding: 10px;
+	padding-left: 20px;
+	border: rgb(200,200,200) 1px solid;
+
+	position: relative;
+	height:100%;
+	width: 100%;
+}
+
+.alpha-label{
+	background-color: rgba(50,50,50,.2);
+	color: white;
+	font-size: xx-large;
+}
+
+.hoverable:hover{
+	border: grey 2px solid;
+}
+.hoverable{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-right: 10px;
+
+	width: 100px;
+	display: inline-block;
+	background-color: white;
+	text-align: center;
+}
+
+canvas{
+	border: 1px black solid;
+}
+
+.summary-image{
+	max-width: 250px;
+	margin-left: 50px;
+	float:right;
+}
+.glance-icon{
+	margin-left: 10px;
+	max-height: 150px;
+	max-width: 150px;
+}
+
+.histogram-bar{
+	height: 30px; 
+
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+	-o-user-select: none;
+	user-select: none;
+
+    -webkit-transition: all .5s ease;
+       -moz-transition: all .5s ease;
+            transition: all .5s ease;
+}
+
+.asset-icon{
+	width: 35px;
+	height: 35px;
+}
+
+p{
+	font-size: 1.2em;
+}
+
+.wellbeing-table{
+	margin: 0 auto;
+	margin-bottom: 50px;
+}
+
+.section{
+	position: relative;
+	padding-top: 40px;
+}
+</style>
+
+<head>
+<meta charset="utf-8"> 
+
+<title>Concepts</title>
+<script src="js/jquery-2.1.1.js"></script>
+<!-- <script src="js/jquery-ui.js"></script>-->
+
+<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+ <script src="js/d3.v3.js"></script>
+
+<script src="js/underscore.js"></script>
+<script src="js/underscore.string.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/canvas-utils.js"></script>
+
+<script type="text/javascript" src="vendors/jquery.slimscroll.min.js"></script>
+<script src="vendors/jquery.easings.min.js"></script>
+<script src="js/jquery.fullPage.min.js"></script>
+
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/jquery.fullPage.css">
+
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="TangleKit/mootools.js"></script>
+
+<script type="text/javascript" src="data/brains.js"></script>
+<script type="text/javascript" src="data/freq_links.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+</head>
+
+
+<body>
+<div id="header">
+
+<span style="float:left;">
+	<a href="#village-scene"><img src="images/village-scene.jpg" style="height:50px; margin-right: 20px;"></a>
+</span>
+
+<span style="float:left;">
+	<h3 style="display:inline-block;">Data for <a id="now-showing-select">all</a></h3>
+	<h4 style="display:inline-block;">&nbsp; <span class="num-women"></span> women </h4>
+	<h4 style="display:inline-block;">&nbsp; (vs. <a id="comparing-with-select" class="comparing-with">none</a> <span class="comparing-num-women"></span> women ) </h4>
+
+</span>
+
+
+<!-- <span style="float:right;">
+	<h3 style="display:inline-block;">&nbsp;</h3>
+
+	<h4 style="display:inline-block;">&nbsp; (vs. <a id="comparing-with-select" class="comparing-with">none</a> <span class="comparing-num-women"></span> women ) </h4>
+
+</span>
+ --></div>
+
+<!-- <div id="queries" class="col-xs-3 " data-spy="affix" style="overflow-y:scroll; height: 100%; padding-top:60px; padding-bottom:100px;"> 
+</div>
+ -->
+
+<!-- <div style="width:800px; margin: 0 auto; display: inline-block; ">
+ -->
+<div id="fullpage" class="col-xs-12 main"> 
+
+<div class="section" >
+
+
+<div id="village-scene" style="position:relative; display:none;">
+
+
+<img src="images/back.png">
+<h3 class="header" style="position:absolute; top:40px; left:10px;"></h3>
+
+<!-- <div style="width:1400px; height:1000px; background-color:white; display:inline-block;"></div>
+ -->
+<a href="#asset-slide">
+<img class="village-pic" src="images/assetbox.png" style="top: 40%; left: 50px; height: 10%;">
+</a>
+
+<a href="#economic">
+<img class="village-pic" src="images/economy.png" style="left: 50%; top: 65%; height:25%;">
+</a>
+
+<a href="#equality">
+<img class="village-pic" src="images/house.png" style="left: 85%; top: 22.5%; width:15%;">
+</a>
+
+<a href="#social">
+<img class="village-pic" src="images/scooter.png" style="height:18.75%; left: 65%; top: 35%;">
+</a>
+
+<a href="#technology">
+<img class="village-pic" src="images/technology2.png" style="height:25%; left: 30%; top:65%;">
+</a>
+
+<a href="#marriage">
+<img class="village-pic" src="images/village-flowers.png" style="top:47%; width:45%; left:-5px;">
+</a>
+
+<a href="#food">
+<img class="village-pic" src="images/bananatree.png" style="left:18%; top:20.5%; height:25%;">
+</a>
+
+<a href="#sanitation">
+<img class="village-pic" src="images/toilet.png" style="top:33.75%; left:42%; height: 12.5%">
+</a>
+
+<a href="#community">
+<img class="village-pic" src="images/well.png" style="top: 55%; height:30%; left:70%;">
+</a>
+
+</div>
+
+
+<div id="village-scenes" style="width:1200px; margin: 0 auto;">
+</div>
+
+</div>
+
+
+<!-- <div class="section">
+<h3>Test images</h3>
+<div id="test-images">
+</div>
+</div>
+ -->
+
+<div class="section">
+
+<div style="width:700px; margin:0 auto;">
+<h3>Face forces</h3>
+
+<p>
+Who has the dominant voice in household decisions? More dominant parties are represented larger. 
+</p>
+
+<div id="face-forces" style="position:relative; display:none; margin-right: 150px; margin-left: 0px;">
+	<img class="woman" src="images/woman.png" style="margin-left: 2px;">
+	<img class="man" src="images/man.png" style="margin-left: 2px;">
+	<img class="family" src="images/family.png" style="margin-left: 2px;">
+
+	<div class="lines"></div>
+</div>	
+
+<table id="equality-table">
+</table>
+</div>
+
+
+</div>
+
+<div class="section">
+
+<div style="width: 80%; margin: 0 auto;">
+<h3>Well-being indicators</h3>
+
+<p>
+16 questions were selected to represent well-being across the domains of social empowerment, technical abilities, economic health, and unclassified. Each category is represented by a summary image that obeys the grey (bad) and color (good) shading. Click on a summary image to expand the category into individual indicators. 
+</p>
+
+
+<table class="wellbeing-table" id="social-wellbeing" data-header="Social">
+</table>
+
+</div>
+
+</div>
+
+<div class="section">
+<table class="wellbeing-table" id="community-wellbeing" data-header="Community">
+</table>
+</div>
+
+<div class="section">
+<table class="wellbeing-table" id="technical-wellbeing" data-header="Technical">
+</table>
+</div>
+
+<div class="section">
+<table class="wellbeing-table" id="other-wellbeing" data-header="Health and Sanitation" style="margin-top:50px;">
+</table>
+</div>
+
+<div class="section" style="position:relative;">
+<table class="wellbeing-table" id="economic-wellbeing" data-header="Economic"  style="margin-top:50px;">
+</table>
+</div>
+
+
+<div class="section" style="position:relative;"> 
+
+<div style="width:1200px; margin:0px auto;">
+<h3>Diet</h3>
+<div id="diet-widget" style="position:relative; display:none; width: 130px; height: 130px; background-image:url(images/bananaleaf-big.jpeg); background-size:contain; margin-right: 20px;">
+
+	<img class="grain" src="images/rice.png" style="height: 60px; position:absolute; left: 40px; top: 30px;">
+
+	<img class="vegetable" src="images/eggplant.png" style="position:absolute; right: 65px;">
+	<img class="meat" src="images/chicken3.png" style="position:absolute; bottom:60px;">
+	<img class="fruits" src="images/papaya.png" style="position:absolute; left: 65px; ">
+
+
+	<div class="cost" style="position:absolute; bottom: 0px;">
+	</div>
+</div>
+
+<div id="diet">
+</div>
+
+</div>
+</div>
+
+<div class="section"> <!-- id="asset-slide"-->
+
+
+<div class="asset-widget" style="display:none; position:relative; padding: 5px; margin-top: 5px; margin-bottom:5px;">
+	<div>
+		<span class="asset-bkg">	<img class="asset-icon poultry" src="images/poultry.png"> </span>
+		<span class="asset-bkg">	<img class="asset-icon livestock" src="images/goat.png"> </span>
+		<span class="asset-bkg">	<img class="asset-icon land" src="images/grass.png"> </span>
+		<span class="asset-bkg">	<img class="asset-icon house" src="images/assetshouse.png"> </span>
+	</div>
+	<div>
+		<span class="asset-bkg">	<img class="asset-icon houseextension" src="images/houseextension.png"> </span>
+		<span class="asset-bkg">	<img class="asset-icon tv" src="images/TV.png"> </span>
+		<span class="asset-bkg">	<img class="asset-icon vehicles" src="images/scooter.svg"> </span>
+		<span class="asset-bkg">	<img class="asset-icon electricalappliances" src="images/fridge.png"> </span>
+	</div>
+</div>
+
+
+
+<div id="assets-container" style="display:none; vertical-align:top;">
+ </div>
+
+<div style="width: 1200px; margin: 0px auto;">
+<div id="big-assets-container" >
+</div>
+</div>
+
+
+</div>
+
+<div class="section">
+
+<div style="width: 1200px; margin: 0px auto;">
+<h3>Flowers and marriage</h3>
+
+<p>
+The height of the flower corresponds to the age at marriage. The color of flower represents whether the marriage was with a blood relative (red) or not (yes). The type of flower represents whether the woman gave consent (bloomed) or not (unbloomed). The number of leaves represent the number of children in marriage. 
+</p>
+
+<p>
+This multidimensional visualization may serve to visually highlight meaningful statistical relationship between parts of the data. For instance, are there many short, unbloomed flowers? Are red flowers usually consensual or not? Does consensuality increase or decrease with age? The data shown is a randomly drawn subsection from real populations of women. Click to see different samples. 
+</p>
+
+
+
+
+<div id="stemleaf-plot" style="border-left: 2px solid black; margin: 2px; display:none; vertical-align:top;">
+	<div class="flowers" style="background-color:white;"></div>
+</div>
+
+<!-- <table id="stemleaf-plot" style="width: 45%; display:none;" >
+<tr>
+<td >
+</td>
+<td style="border-left: 2px solid black; margin: 2px;">
+	<div class="flowers" style="background-color:white;"></div>
+</td>
+</tr>
+</table>
+ -->
+
+<div id="stemleaf-plots" ></div>
+
+
+</div>
+</div>
+
+
+</div> <!-- end main div-->
+</body>
+
+<script src="js/app_utils.js"></script>
+<script src="js/hierarchy.js"></script>
+
+
+<script src="js/indices.js"></script>
+<script src="js/viz.js"></script>
+
+<script>
+
+//https://github.com/alvarotrigo/fullPage.js#fullpagejs
+$('#fullpage').fullpage({
+				autoScrolling: false,
+//				scrollOverflow: true,
+				anchors: ['village-scene', 'equality', 'social', 'community', 'technology', 'sanitation', 'economic', 'food', 'asset-slide',  'marriage', 'lastPage'],
+				resize: true,
+//	scrollingSpeed: 200,
+});
+
+
+function get_current(){
+	// $('#now-showing-select option:selected').val()
+	if ($('#now-showing-select select').length > 0){
+		return $('#now-showing-select option:selected').val();
+	}
+	return $('#now-showing-select').text();
+}
+
+function get_comparison(){
+	if ($('#comparing-with-select select').length > 0){
+		return $('#comparing-with-select option:selected').val();
+	}
+	return $('#comparing-with-select').text();
+}
+
+
+function ui_controls(){
+
+	function make_compare_dropdown(){
+		// grab the other things worth comparing with
+		var comparators = extend(['none'], get_regions(['habitationname', 'panchayatname']));
+
+		var groups = ['habitationname', 'panchayatname'];
+		// add each of them into a dropdown
+		var $dropdown = $('<select />');
+		var $optgroup = $('<optgroup />').attr('label', 'Test');
+		comparators.forEach(function(comparator){
+			var $link = $('<option />', {value: comparator, html: comparator}).appendTo($optgroup);
+		});
+		$dropdown.append($optgroup);
+
+		$dropdown.attr('id', 'compare-dropdown');
+		$('#comparing-with-select').after($dropdown);
+
+		// select the current value
+		var curr_value = $('#comparing-with-select').text();
+		$("#compare-dropdown option").filter(function() {
+		    //may want to use $.trim in here
+		    return $(this).text() == curr_value; 
+		}).prop('selected', true);
+
+
+		$dropdown.change(function(){
+			var comparing_with = $(this).val();
+			$('#comparing-with-select').text(comparing_with);
+			$('#comparing-with-select').show();
+			$(this).hide();
+
+			update_state();
+			viz();
+			update_state();
+		});
+
+//		$dropdown.selectmenu();
+		$dropdown.hide();
+	}
+
+	make_compare_dropdown();
+
+	function make_now_showing_dropdown(){
+		// grab the other things worth comparing with
+		var comparators = get_regions(['habitationname', 'panchayatname']);
+
+		// add each of them into a dropdown
+		var $dropdown = $('<select />');
+		comparators.forEach(function(comparator){
+			var $link = $('<option />', {value: comparator, text: comparator}).appendTo($dropdown);
+		});
+
+		$dropdown.attr('id', 'nowshowing-dropdown');
+		$('#now-showing-select').after($dropdown);
+
+		var curr_value = $('#now-showing-select').text();
+		$("#now-showing-select option").filter(function() {
+		    //may want to use $.trim in here
+		    return $(this).text() == curr_value; 
+		}).prop('selected', true);
+
+		$dropdown.change(function(){
+			var comparing_with = $(this).val();
+			$('#now-showing-select').text(comparing_with);
+			$('#now-showing-select').show();
+			$(this).hide();
+
+			update_state();
+			viz();
+			update_state();
+
+		});
+		$dropdown.hide();
+	}
+	make_now_showing_dropdown();
+
+
+	$('#comparing-with-select').click(function(){
+		$(this).hide();
+		$('#compare-dropdown').show();
+	});	
+
+	$('#now-showing-select').click(function(){
+		$(this).hide();
+		$('#nowshowing-dropdown').show();
+	});	
+}
+
+
+function filter_down_brains(match_by){
+	brains = match_by_location(match_by);
+	// if (!isdefined(key)){
+	// 	brains = _.clone(full_brains);
+	// }
+	// else{
+	// 	brains = _.filter(full_brains, function(x){
+	// 		return x[key] === value;
+	// 	});
+	// }
+}
+
+function update_state(){
+	var value = get_current();
+
+	filter_down_brains(value);
+	$('.now-showing').text(value);
+	$('.num-women').text(brains.length);
+
+	// set default to the region above
+	var comparing_with = get_comparison();
+	$('.comparing-num-women').text(match_by_location(comparing_with).length);
+
+	if (comparing_with == 'none'){
+		$('.comparison').hide();
+	}else{
+		$('.comparison').show();		
+	}
+	$('.comparing-with').text(comparing_with);
+}
+
+
+function get_regions(question_ids){
+	var regions = ['all'];
+	question_ids.forEach(function (question_id){
+		var uniques = get_uniques(question_id).sort();
+		uniques = uniques.filter(function(x){
+			return isdefined(x) && x !== 'undefined';
+		});
+		regions = extend(regions, uniques);
+	});
+
+	return regions;
+}
+
+
+// function make_queries(){
+// 	$('#queries').append('<a href="#village-scene"><img src="images/village-scene.png" style="height:100px;"></a>');
+// 	$('#queries').append('<br>');
+// 	$('#queries').append('<br>');
+
+
+// 	// all button
+// 	var $button = $('<button></button>');
+// 	$button.text('All data');
+// 	$button.click(function(){
+// 		update_state('all', 'all');
+// 		viz();
+// 		update_state('all', 'all');
+
+// 	});
+
+// 	$('#queries').append($button);
+
+// 	var question_ids = ['habitationname', 'panchayatname']; //,	'clustername',	'blockname'];
+// 	question_ids.forEach(function (question_id){
+// 		var uniques = get_uniques(question_id).sort();
+
+// 		var $container = $('<div></div>');
+// 		$container.attr('id', question_id);
+// 		$container.append($('<h4></h4>').text(question_id));
+
+// 		uniques.forEach(function (unique){
+// 			if (unique == 'undefined'){
+// 				return;
+// 			}
+// 			var $button = $('<button class="query-button"></button>');
+// 			$button.text(unique);
+// 			$button.click(function(){
+
+// 				update_state(question_id, unique);
+// 				viz();
+// 				update_state(question_id, unique);
+
+// 			});
+
+// 			$container.append($button);
+// 		});
+
+// 		$('#queries').append($container);
+// 	});
+// }
+// make_queries();
+
+
+
+
+function init(){
+	update_state();
+	viz();
+	update_state();
+	ui_controls();
+
+//	$('.comparison').hide();
+}
+init();
+
+
+// ////////////////////////////////////////////////////////////// temporary
+// function test_filter_images(){
+// 	function add_range(baseimage){
+// 		var $container = $('<div></div>');
+
+// 		var scores = range(0, 1, .1);
+// 		scores.forEach(function(score){
+// 			var $baseimage = $('<img>').attr('src', baseimage);
+// 			$baseimage.width(80);
+// 			$baseimage.css('display', 'inline-block');
+// 			$container.append($baseimage);
+// 			filter_image($baseimage, score);
+// 		});
+// 		return $container;
+
+// 	}
+// 	var $widget = $('#test-images');
+// 	// for (var img_name in filter_images_dict){
+// 	// 	$widget.append(add_range('images/' + filter_images_dict[img_name]));
+// 	// 	$widget.append('<br>');
+// 	// }
+
+// 	var scene_images = $('#village-scene').find('img');
+// 	scene_images.each(function(ind, scene_image){
+// 		range(10).forEach(function(x){
+// 			var score = x / 10;
+// 			var test_image = $(scene_image).clone().removeClass('village-pic').width(100).height(100).css('display', 'inline-block');
+// 			filter_image(test_image, score);
+// 			$widget.append(test_image);
+// 		});
+// 		$widget.append('<br>');		
+// 	});
+// }
+// test_filter_images();
+
+
+</script>
+
