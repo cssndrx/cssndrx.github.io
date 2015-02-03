@@ -1,5 +1,5 @@
 	var trivia_questions = [{question: 'How many reincarnations have there been of the Dalai Lama?',
-				answer: 14},
+				answer: 13},
 				{
 				question: 'How many gallons of milk does a cow produce per week?',
 				answer: 25,
