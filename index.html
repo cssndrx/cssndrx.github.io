@@ -42,7 +42,8 @@ a:visited{
 	display: inline-block;
 	border: rgb(200,200,200) 1px solid;
 	padding: 10px;
-	margin: 10px;
+	margin-right: 20px;
+	margin-top: 20px;
 	max-width: 200px;
 
 	border-radius: 8px;
@@ -96,22 +97,11 @@ hr{
 	<base target="_blank">
 
 
-	<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
-
-	<link rel="stylesheet" href="css/jquery-ui.css">
-<!-- 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
- -->	<link rel="stylesheet" href="css/style.css">
+	<link href='//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
 	<title>Cassandra Xia</title>
 
-	<script src="js/jquery-1.9.1.js"></script>
-	<script src="js/jquery-ui.js"></script>
-
-	<script src="js/underscore.js"></script>
-	<script src="js/utils.js"></script>
-	<script src="js/d3.v3.js"></script>
-<!--	<script src="js/bootstrap.min.js"></script>-->
+	<script src="js/vue.min.js"></script>
 
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -129,11 +119,9 @@ hr{
 <body>
 
 
-<div style="width:1000px; margin: 0 auto; position:relative; border-left: 1px solid rgb(230,230,230); padding-left: 20px; border-right: 1px solid rgb(230,230,230); ">
+<div style="width:800px; margin: 0 auto; position:relative; padding-left: 24px;">
 
-
-
-<h2>Cassandra Xia</h2>
+<h2 style="position:relative; left:-4px;">Cassandra Xia</h2>
 <h4 class="subtitle">pictures not words</h4>
 <h4 class="subtitle">cssndrx@mit.edu</h4>
 
@@ -142,78 +130,129 @@ hr{
 
 <h3>About</h3>
 
-<p>
-I am a programmer living in SF Bay Area, trying to develop intuitive, pictorial representations of probability and statistics. I'm looking for meaningful collaborations in education, health care, and fun.
+<p style="width:600px;">
+Programmer living in the SF Bay Area seeking creative and socially meaningful projects and likeminded people interested in pictorial representations.
 </p>
 
 
 
-<h3>Projects</h3>
+<div id="app">
 
-<div id="projects"></div>
-
-
+<h3>Visualizations</h3>
+<div>
+<project v-for="project in vizProjects" :project="project"></project>
 </div>
+
+<h3>Interactive stories</h3>
+<div>
+<project v-for="project in storyProjects" :project="project"></project>
+</div>
+
+<h3>Other</h3>
+<div>
+<project v-for="project in otherProjects" :project="project"></project>
+</div>
+
+
+</div> <!-- end #app -->
+
 </body>
 
+<script type="text/x-template" id="project-template">
+<div class="project" 
+     style="position:relative; height:275px;"
+	 @mouseenter="isHover=true"
+	 @mouseleave="isHover=false"
+	 @click="onClick">
+<h4>{{project.name}}</h4>
+<img :src="'images/'+project.image">
+
+<p v-if="isHover">
+{{project.tagline}}
+<a v-if="project.link" :href="project.link" ref="project-link">Link</a>
+</p>
+
+</div>
+</script>
+
 <script>
-var projects = [
-{
-	name: 'The Raccoon Princess and the Fox Prince',
-	tagline: 'A parable for teaching Bayesian belief updating through a quarreling princess and prince.',
-	image: 'raccoonprincess.png',
-	year: 2015,
-	link: 'projs/raccoon/',
-},
-{
-	name: 'The Statistics Sorcerer Who Saved A Little Boy From Bullying',
-	tagline: 'A fictional story about a bullied little boy who uses frequentist statistics concepts to reduce the amount of bullying he experiences.',
-	image: 'sorcerer.png',
-	year: 2015,
-},
+
+Vue.component('project', {
+  props: {
+    project: {type: Object, required: true},
+  },
+  data: function(){
+    return {
+      isHover: false,
+    };
+  },
+  methods: {
+  	onClick: function(){
+  		this.$refs['project-link'].click();
+  	},
+  },
+  template: '#project-template'
+});
+
+
+var vizProjects = [
 {
 	name: 'Wellness visualizations for rural India',
 	tagline: 'A World Bank project for unconventional wellness visualizations to be used by low literacy and low numeracy women living in Tamil Nadu, India.',
 	image: 'flowers.png',
-	year: 2014,
+	tag: 'viz',
 	link: 'projs/worldbank14/index.html',
 },
+
+{
+	name: 'Nine years of chat convos visualized',
+	tagline: 'Nine years of gchat conversations converted into an explorable smear of ink.',
+	image: 'chat.png',
+	tag: 'viz',
+	link: 'projs/im.html'
+},
+
+];
+
+var storyProjects = [
 {
 	name: 'Adventures in Cognitive Biases',
 	tagline: 'An adventure game to train more logical thinking, through reduction of cognitive biases.',
 	image: 'guru.png',
-	year: 2014,
+	tag: 'story',
 	link: 'projs/advbiases/',
 },
 {
 	name: 'Little Red Riding Hood Does Science',
 	tagline: 'An attempt to teach chemistry turned into an interactive holiday card.',
 	image: 'lrrh.jpg',
-	year: 2014,
+	tag: 'story',
 	link: 'projs/lrrh/',
 },
 {
-	name: 'Wikipedia as Flashcards',
-	tagline: 'A Google Chrome extension automatically inserts an image from the link ahead into the current page. A more visual way to browse Wikipedia.',
+	name: 'The Raccoon Princess and the Fox Prince',
+	tagline: 'A parable for teaching Bayesian belief updating through a quarreling princess and prince.',
+	image: 'raccoonprincess.png',
+	tag: 'story',
+	link: 'projs/raccoon/',
+},
+];
+
+var otherProjects = [
+{
+	name: 'Wikipedia as Flashcards Chrome Extension',
+	tagline: 'A Chrome extension automatically inserts an image from the link ahead into the current page. A more visual way to browse Wikipedia.',
 	image: 'plasmid.png',
-	year: 2014,
+	tag: 'other',
 	link: 'https://chrome.google.com/webstore/detail/wikipics/pencehccihkmdifeambngeaghmobfhao?utm_source=gmail',
 },
 {
 	name: 'The Design of Artifacts for Augmenting Intellect',
 	tagline: 'A design paper for creating tools that increase human productivity and wellness. Presented in conference at Augmented Human ‘13.',
 	image: 'brain.png',
-	year: 2013,
+	tag: 'other',
 	link: 'projs/designofiaartifacts.pdf',
 },
-{
-	name: 'Nine years of chat convos visualized',
-	tagline: 'Nine years of gchat conversations converted into an explorable smear of ink.',
-	image: 'chat.png',
-	year: 2013,
-	link: 'projs/im.html'
-},
-
 ];
 
 // {
@@ -243,57 +282,13 @@ var projects = [
 // taxi cab visualization
 
 
-function render(){
-	var grouping = _.groupBy(projects, function(x){
-		return x.year;
-	});
-	var years = _.keys(grouping).sort().reverse();
-
-	var $cont = $('#projects');
-	years.forEach(function(year){
-		$cont.append('<h4>' + year + '</h4>');
-
-		var projs = grouping[year];
-		var $row = $('<div></div>');
-		projs.forEach(function(proj){
-
-			var $widget = $('<div class="project" style="position:relative;"></div>');
-
-			$widget.append('<h4>' + proj.name + '</h4>');
-			$widget.append($('<img>').attr('src', 'images/'+proj.image));
-
-			var $p = $('<p></p>').text(proj.tagline);
-
-			if (isdefined(proj.link)){
-				// add link
-				$p.append('<br>');
-				$p.append($('<a class="projlink"></a>').attr('href', proj.link).text('Link'));
-
-				// // also make link work on div click
-				// $widget.click(function(){
-				// 	if (!$(this).hasClass('projlink')){
-				// 		$(this).find('.projlink').trigger('click');
-				// 	}
-				// });
-			}
-
-			$widget.append($p);
-			$p.hide();
-
-			$widget.mouseover(function(){
-				$p.show();
-			}).mouseout(function(){
-				$p.hide();
-			});
-
-			$widget.height(275);
-
-			$row.append($widget);
-		});
-		$cont.append($row);
-	});
-	console.log(years);
-}
-render();
+new Vue({
+  el: '#app',
+  data: {
+  	vizProjects: vizProjects,
+  	storyProjects: storyProjects,
+  	otherProjects: otherProjects
+  },
+});
 
 </script>
