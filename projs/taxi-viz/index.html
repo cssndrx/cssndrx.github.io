@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Taxi Viz</title>
+	<meta charset="utf-8">
+	<link type="text/css" rel="stylesheet" href="css/style.css">
+	<link type="text/css" rel="stylesheet" href="css/rickshaw.css">
+</head>
+
+<body>
+
+<script src="js/three.min.js"></script>
+<script src="js/TrackballControls.js"></script>
+<script src="js/parser.min.js"></script>
+<script src="data/data_full.js"></script> <!-- map data -->
+
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/d3.v3.min.js"></script> <!-- need d3 for rickshaw -->
+<script src="js/rickshaw.min.js"></script>
+
+<script src="js/lodash.min.js"></script>
+<script src="js/Detector.js"></script>
+<script src="js/THREEx.WindowResize.js"></script>
+<script src="js/main.js"></script>
+
+
+<div id="ThreeJS" style="position: absolute; left:0px; top:205px"></div>
+
+
+<div id="chart-container">
+
+<div style="color: white; margin-left: 30px; margin-top: 16px; margin-bottom: 32px; font-size: 20px; font-weight: normal">
+	This visualization plays with rendering Boston taxi cab pickups and dropoffs in the z-dimension.
+	<br>
+	Hover over the timeline to jump to a particular day. Drag the map with the mouse to change the view.
+</div>
+
+	<div id="rickshaw-chart"></div>
+</div>
+
+<div style="position:absolute; top:200px; left: 30px; color: white;">
+	<div id="legend">
+	</div>
+
+	<div id="clock" style="margin-top:16px">
+	  <div id="time" style="font-size:48px;"></div>
+	  <div id="date" style="font-size:24px;"></div>
+	</div>
+</div>
+
+</body>
+</html>
