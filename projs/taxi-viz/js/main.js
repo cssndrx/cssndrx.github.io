@@ -276,8 +276,6 @@ function init_timeline(){
 	$('#rickshaw-chart').trigger(init_event);	
 }
 
-$(document).ready(function(){
-	init_threejs();
-	init_timeline();
-	animate();
-});
+init_threejs();
+init_timeline();
+animate();
