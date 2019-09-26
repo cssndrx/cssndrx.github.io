@@ -138,14 +138,15 @@ Programmer living in the SF Bay Area seeking creative and socially meaningful pr
 
 <div id="app">
 
-<h3>Visualizations</h3>
-<div>
-<project v-for="project in vizProjects" :project="project"></project>
-</div>
 
 <h3>Interactive stories</h3>
 <div>
 <project v-for="project in storyProjects" :project="project"></project>
+</div>
+
+<h3>Visualizations</h3>
+<div>
+<project v-for="project in vizProjects" :project="project"></project>
 </div>
 
 <h3>Other</h3>
@@ -223,7 +224,7 @@ var storyProjects = [
 	name: 'Adventures in Cognitive Biases',
 	tagline: 'An adventure game to train more logical thinking, through reduction of cognitive biases.',
 	image: 'guru.png',
-	link: 'cogbiases',
+	link: 'cogbiases/',
 },
 {
 	name: 'Little Red Riding Hood Does Science',
