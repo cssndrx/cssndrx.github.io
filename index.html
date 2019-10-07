@@ -7,14 +7,13 @@
 }
 
 h2{
-/*	font-weight: 700;
-*/	font-size: 48px;
+	font-size: 48px;
 	margin-bottom: 0px;
 	letter-spacing: .04em;
 }
 
 h4{
-	font-weight: bold;
+	font-weight: 700;
 	letter-spacing: .03em;
 }
 
@@ -23,11 +22,15 @@ h3{
 	margin-top: 50px;
 }
 
-a:link{
+.black-link{
+	color: black;
+}
+
+.blue-link:link{
 	color: #81BEF7;
 }
 
-a:visited{
+.blue-link:visited{
 	color: #BCA9F5;
 }
 
@@ -65,7 +68,7 @@ a:visited{
 	color:white;
 	padding: 8px;
 	margin-right: 10px;
-	height: 170px;
+	height: 190px;
 	vertical-align: middle;
 
 	font-size: .95em;
@@ -73,15 +76,12 @@ a:visited{
 
 .project a{
 	margin-top: 20px;
-	font-weight: normal;
+	font-weight: 700;
 	position: absolute;
 	bottom: 10px;
 	left: 10px;
 }
 
-p{
-	color: rgb(100,100,100);
-}
 
 hr{
 	border-top: 1px solid #eee;
@@ -97,7 +97,7 @@ hr{
 	<base target="_blank">
 
 
-	<link href='//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:300,700' rel='stylesheet' type='text/css'>
 
 	<title>Cassandra Xia</title>
 
@@ -123,7 +123,7 @@ hr{
 
 <h2 style="position:relative; left:-4px;">Cassandra Xia</h2>
 <h4 class="subtitle">pictures not words</h4>
-<h4 class="subtitle">cssndrx@mit.edu</h4>
+<h4 class="subtitle">cssndrx at geemail</h4>
 
 
 <hr>
@@ -131,7 +131,7 @@ hr{
 <h3>About</h3>
 
 <p style="width:600px;">
-Programmer living in the SF Bay Area seeking creative and socially meaningful projects and likeminded people interested in pictorial representations.
+Seeking creative and socially meaningful projects and likeminded people interested in pictorial representations.
 </p>
 
 
@@ -160,20 +160,21 @@ Programmer living in the SF Bay Area seeking creative and socially meaningful pr
 </body>
 
 <script type="text/x-template" id="project-template">
+<a :href="project.link">
 <div class="project" 
      style="position:relative; height:275px;"
 	 @mouseenter="isHover=true"
-	 @mouseleave="isHover=false"
-	 @click="onClick">
-<h4>{{project.name}}</h4>
+	 @mouseleave="isHover=false">
+<h4 class="black-link">{{project.name}}</h4>
 <img :src="'images/'+project.image">
 
 <p v-if="isHover">
 {{project.tagline}}
-<a v-if="project.link" :href="project.link" ref="project-link">Link</a>
+<a class="blue-link" :href="project.link">Link</a>
 </p>
 
 </div>
+</a>
 </script>
 
 <script>
@@ -186,11 +187,6 @@ Vue.component('project', {
     return {
       isHover: false,
     };
-  },
-  methods: {
-  	onClick: function(){
-  		this.$refs['project-link'].click();
-  	},
   },
   template: '#project-template'
 });
