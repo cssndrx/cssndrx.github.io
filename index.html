@@ -43,13 +43,13 @@ h3{
 
 .project{
 	display: inline-block;
-	border: rgb(200,200,200) 1px solid;
+	border: #eee 1px solid;
 	padding: 10px;
 	margin-right: 20px;
 	margin-top: 20px;
 	max-width: 200px;
 
-	border-radius: 8px;
+/*	border-radius: 8px;*/
 	vertical-align: top;
 }
 
@@ -61,25 +61,26 @@ h3{
 	margin: 0 auto;
 }
 
-.project p{
+.project .description{
+	opacity: 0;
 	position:absolute;
 	bottom: 0px;
-	background-color: rgba(0,0,0,0.7);
-	color:white;
+/*	background-color: rgba(0,0,0,0.7);
+	color:white;*/
+	background-color: white;
+	color: black;
+
 	padding: 8px;
 	margin-right: 10px;
 	height: 190px;
 	vertical-align: middle;
 
 	font-size: .95em;
+	transition: all .5s ease;
 }
 
-.project a{
-	margin-top: 20px;
-	font-weight: 700;
-	position: absolute;
-	bottom: 10px;
-	left: 10px;
+.project:hover .description{
+	opacity: 0.85;
 }
 
 
@@ -123,16 +124,7 @@ hr{
 
 <h2 style="position:relative; left:-4px;">Cassandra Xia</h2>
 <h4 class="subtitle">pictures not words</h4>
-<h4 class="subtitle">cssndrx at geemail</h4>
-
-
-<!--<hr>
-
-<h3>About</h3>
-
-<p style="width:600px;">
-Seeking creative and socially meaningful projects and likeminded people interested in pictorial representations.
-</p> -->
+<h4 class="subtitle">cssndrx at gmail</h4>
 
 
 
@@ -149,7 +141,7 @@ Seeking creative and socially meaningful projects and likeminded people interest
 <project v-for="project in vizProjects" :project="project"></project>
 </div>
 
-<h3>Other</h3>
+<h3>Writing</h3>
 <div>
 <project v-for="project in otherProjects" :project="project"></project>
 </div>
@@ -161,19 +153,18 @@ Seeking creative and socially meaningful projects and likeminded people interest
 
 <script type="text/x-template" id="project-template">
 <a :href="project.link">
-<div class="project" 
-     style="position:relative; height:275px;"
-	 @mouseenter="isHover=true"
-	 @mouseleave="isHover=false">
-<h4 class="black-link">{{project.name}}</h4>
-<img :src="'images/'+project.image">
+	<div class="project" 
+	 style="position:relative; height:275px;">
 
-<p v-if="isHover">
-{{project.tagline}}
-<a class="blue-link" :href="project.link">Link</a>
-</p>
+	<h4 class="black-link">{{project.name}}</h4>
 
-</div>
+	<img :src="'images/'+project.image">
+
+	<p class="description">
+	{{project.tagline}}
+	</p>
+
+	</div>
 </a>
 </script>
 
@@ -182,11 +173,6 @@ Seeking creative and socially meaningful projects and likeminded people interest
 Vue.component('project', {
   props: {
     project: {type: Object, required: true},
-  },
-  data: function(){
-    return {
-      isHover: false,
-    };
   },
   template: '#project-template'
 });
@@ -201,7 +187,7 @@ var vizProjects = [
 },
 {
 	name: 'Wellness visualizations for rural India',
-	tagline: 'A World Bank project for unconventional wellness visualizations to be used by low literacy and low numeracy women living in Tamil Nadu, India.',
+	tagline: 'A World Bank project for unconventional wellness visualizations used by low literacy and low numeracy women living in Tamil Nadu, India.',
 	image: 'flowers.png',
 	link: 'projs/worldbank14/index.html',
 },
@@ -218,19 +204,19 @@ var vizProjects = [
 var storyProjects = [
 {
 	name: 'Totally Not Scary Guide to Statistics',
-	tagline: 'Learn basic statistics with the help of a not scary wizard.',
+	tagline: 'Learn basic statistics through with the help of a wizard.',
 	image: 'wizard.png',
 	link: 'wizard/',
 },
 {
 	name: 'Adventures in Cognitive Biases',
-	tagline: 'An adventure game to train more logical thinking, through reduction of cognitive biases.',
+	tagline: 'Train logical thinking and reduce your susceptibility to cognitive biases.',
 	image: 'guru.png',
 	link: 'cogbiases/',
 },
 {
 	name: 'Little Red Riding Hood Does Science',
-	tagline: 'An attempt to teach chemistry turned into an interactive holiday card.',
+	tagline: 'Craft the items needed to get Little Red Riding Hood out of a bind.',
 	image: 'lrrh.jpg',
 	link: 'projs/lrrh/',
 },
@@ -243,18 +229,26 @@ var storyProjects = [
 ];
 
 var otherProjects = [
-{
-	name: 'Wikipedia as Flashcards Chrome Extension',
-	tagline: 'A Chrome extension automatically inserts an image from the link ahead into the current page. A more visual way to browse Wikipedia.',
-	image: 'plasmid.png',
-	link: 'https://chrome.google.com/webstore/detail/wikipics/pencehccihkmdifeambngeaghmobfhao?utm_source=gmail',
-},
+// {
+// 	name: 'Wikipedia as Flashcards Chrome Extension',
+// 	tagline: 'A Chrome extension automatically inserts an image from the link ahead into the current page. A more visual way to browse Wikipedia.',
+// 	image: 'plasmid.png',
+// 	link: 'https://chrome.google.com/webstore/detail/wikipics/pencehccihkmdifeambngeaghmobfhao?utm_source=gmail',
+// },
 {
 	name: 'The Design of Artifacts for Augmenting Intellect',
 	tagline: 'A design paper for creating tools that increase human productivity and wellness. Presented in conference at Augmented Human ‘13.',
 	image: 'brain.png',
 	link: 'projs/designofiaartifacts.pdf',
 },
+
+{
+	name: 'USA: If you’re stopped by the police',
+	tagline: 'Donuts to remind you on how to assert your rights.',
+	image: 'donuts.png',
+	link: 'writing/police.html',
+},
+
 ];
 
 // {
@@ -277,11 +271,6 @@ var otherProjects = [
 // 	image: 'hamming.png',
 // 	year: 2014,
 // },
-
-// 2012: subliminal
-// daydream machine
-// habits driller
-// taxi cab visualization
 
 
 new Vue({
