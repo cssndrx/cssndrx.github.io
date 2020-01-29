@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<style>
+*{
+	font-family: 'Roboto Slab', serif;
+	font-weight: 300;
+	font-size: 18px;
+}
+
+.smaller, .smaller *{
+	font-size: 16px;
+}
+
+h1{
+	font-size: 48px;
+	letter-spacing: .04em;
+}
+
+
+h2{
+	font-size: 28px;
+	letter-spacing: .04em;
+}
+
+
+h3{
+	margin: 30px 0px;
+	font-size: 20px;
+	color: #555;
+}
+
+
+.black-link{
+	color: black;
+}
+
+.blue-link:link{
+	color: #81BEF7;
+}
+
+.blue-link:visited{
+	color: #BCA9F5;
+}
+
+.subtitle{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	font-weight: 300;
+	letter-spacing: .04em;
+}
+
+.project{
+	display: inline-block;
+	border: #eee 1px solid;
+	padding: 10px;
+	margin-right: 20px;
+	margin-top: 20px;
+	max-width: 200px;
+
+/*	border-radius: 8px;*/
+	vertical-align: top;
+}
+
+.project img{
+	max-width: 200px;
+	max-height: 150px;
+
+	display: block;
+	margin: 0 auto;
+}
+
+.project .description{
+	opacity: 0;
+	position:absolute;
+	bottom: 0px;
+/*	background-color: rgba(0,0,0,0.7);
+	color:white;*/
+	background-color: white;
+	color: black;
+
+	padding: 8px;
+	margin-right: 10px;
+	height: 190px;
+	vertical-align: middle;
+
+	font-size: .95em;
+	transition: all .5s ease;
+}
+
+.project:hover .description{
+	opacity: 0.85;
+}
+
+
+hr{
+	border-top: 1px solid #eee;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border: 0;
+}
+
+strong{
+	font-weight: bold;
+}
+
+.quote{
+	margin-left: 32px;
+	color: #777;
+}
+
+.say{
+	margin-left: 32px;
+	font-weight: bold;
+}
+
+img {
+	max-width: 400px;
+}
+
+
+</style>
+
+<head>
+<meta charset="utf-8">
+<base target="_blank">
+
+
+<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:300,700' rel='stylesheet' type='text/css'>
+
+<title>IHow to Make Something People Actually Want</title>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59181255-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+
+<body>
+
+
+
+
+<div id="app">
+
+<div style="max-width:500px; margin:0 auto">
+
+
+<h1>How to Make Something People Actually Want</h1>
+
+<img src="../images/unicorn.png" style="max-height: 400px">
+
+<p>
+I spent 5 years working on a passion project (aka <a href="https://cassandraxia.com/shed.html">I was stuck on a side project for 5 years. Here’s how I finished it</a>). The project was for learning statistics via a story-game. I was fortunate enough to spend the last 6 months of those 5 years finishing the project at Google, where I received good advice from the top-notch design team. 
+</p>
+
+<p>
+Frustratingly, their advice was too late for me. It turns out that making something something people actually want starts at the design phase — before you actually start building.
+</p>
+
+<p>
+Here is what they taught me.
+</p>
+
+<h2>1. Be clear on the target audience and the desired outcome</h2>
+
+<p>
+	Whenever I showed the in-progress project to a designer they would ask, “Who is the target audience? What is your desired outcome?”. I only had nebulous answers to these questions like, “Uh… HackerNews readers? I want 10K people to look at it and like it.” 
+</p>
+
+<p>
+They wanted concrete answers, like “The target audience are 20-40 year old college educated folks who have previously tried to learn statistics for fun post-graduation because it seemed useful. They tried using a MOOC but dropped out after a few lectures because it was too math heavy and didn’t seem useful enough.” Being clear on the audience enables you to make clear and optimal design decisions targeted toward your audience.</p>
+
+<h2>2. Do user interviews</h2>
+
+<p>
+How do people arrive at such crisp definitions of the target audience and problem? They talk to users and conduct qualitative interviews. Qualitative interviews allow for better understanding of the “user journey” and where the pain points are.
+</p>
+
+<p>
+In a qualitative interview, you ask open-ended questions, and see what naturally arises. Examples:
+</p>
+
+<ul>
+<li>What is your background in statistics?</li>
+<li>How does statistics make you feel?</li>
+<li>Do you use any statistics in daily life?</li>
+<li>What tools have you tried to learn statistics? Did they work for you?</li>
+<li>What are you currently learning about and why?</li>
+<li>What are your most pressing problems and worries?</li>
+</ul>
+
+<h2>3. Do cognitive walkthroughs</h2>
+
+<p>
+The “cognitive walkthrough” is a different type of interview where you ask users to say aloud everything they think or feel as they go through an experience. Ask them to share their stream of consciousness. 
+</p>
+
+<p>
+What are they walking through? Before you build anything, you can find people to do cognitive walkthroughs of similar offerings in the market. You can do cognitive walkthroughs of fake landing pages of products that you are thinking to build. When you have prototypes, walkthrough them. Cognitive walkthroughs will reveal what resonates with users -- and more importantly why. 
+</p>
+
+<h2>4. Pretotyping not prototyping</h2>
+
+<p>
+Stanford lecturer and ex-Googler Alberto Savoia coined the term “<a href="https://www.youtube.com/watch?v=3sUozPcH4fY">pretotyping</a>” to mean “pre-prototyping”. 
+</p>
+
+<p>
+It basically means, cut corners on your prototype. The pretotype only needs to be good enough to gather data on user interest. The pretotype should take no more than a few days to make.
+</p>
+
+<p>
+Examples of pretotypes include Wizard of Oz demos (have a human in the loop faking the experience), sign-up forms to gauge interest before building the product, and unscalable pop-up experiences. 
+</p>
+
+<h2>5. Paper mocks</h2>
+
+<p>
+Sketch things out before you make them, right? Wait, there’s more.
+</p>
+
+<p>
+UX Engineer Ric Ewing taught me this. Take an 8.5x11 sheet of paper. Cut it in half so that it’s the same proportions as a screen. Draw every interaction you intend to build on a separate half sheet. 
+</p>
+
+<p>
+Previously I had saved paper by sketching interactions all onto one sheet of paper, with lots of arrows saying “and then this happens”. Putting all the interactions on different half sheets of paper allowed me to see the true complexity of what I was proposing -- allowing me to simplify the design. It also allows for easy editing of the interaction.
+</p>
+
+<h2>6. Make it smaller</h2>
+
+<p>
+Most importantly, make it smaller.
+</p>
+
+<p>
+When I started the shed project, I had the vision that it was going to be grand, epic, yet also intuitive, fun, and playful, as well as a useful and applicable guide to statistics. There were going to be many chapters to cover all the concepts useful to daily life (expected value, variance, common distributions, Central Limit Theorem, Bayes Rule, regression, maximum likelihood, whatever else I’d just learned). As the surface area became larger quality declined, which was demotivating; now I was building a not-very-good thing. And any changes to make it better meant reworking that very large surface area.
+</p>
+
+<p>
+The takeaway is: Scope the project to be the smallest possible compelling thing. It allows the thing to get more love and polish. It allows it to get more feedback cycles. You can always make it bigger once you’ve discovered the small compelling thing.
+</p>
+
+<p>
+<a href="https://cassandraxia.com">More writing at cassandraxia.com</a><br>
+<a href="https://twitter.com/CassandraXia">Follow me on Twitter</a>
+</p>
+
+</div>
+
+</div>
+</body>
+
