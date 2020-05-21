@@ -108,5 +108,13 @@ strong{
 }
 
 img {
+	margin-top: 16px;
 	max-width: 400px;
+}
+
+.caption{
+ 	font-size: 12px;
+ 	font-weight: bold;
+ 	max-width: 400px;
+ 	margin-bottom: 32px;
 }
