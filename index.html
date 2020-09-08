@@ -170,6 +170,11 @@ We will be posting updates about our climate adventures to our <a href="https://
 <div id="app">
 
 
+<h3>Climate</h3>
+<div>
+<project v-for="project in climateProjects" :project="project"></project>
+</div>
+
 <h3>Interactive stories</h3>
 <div>
 <project v-for="project in storyProjects" :project="project"></project>
@@ -182,7 +187,7 @@ We will be posting updates about our climate adventures to our <a href="https://
 
 <h3>Writing</h3>
 <div>
-<project v-for="project in otherProjects" :project="project"></project>
+<project v-for="project in writingProjects" :project="project"></project>
 </div>
 
 
@@ -222,8 +227,25 @@ Vue.component('project', {
   template: '#project-template'
 });
 
+const climateProjects = [
+{
+	name: 'Are you ready to... ?',
+	tagline: 'All hands on deck. We have 10 years. Join us in working on the biggest problem of our time.',
+	image: 'woc.png',
+	link: 'https://workonclimate.org',
+},
 
-var vizProjects = [
+{
+	name: 'Wall Street is pitching in for the climate crisis',
+	tagline: 'Finally some good news on the climate change front. Wall Street has emerged as a suprising ally to help combat climate change.',
+	image: 'xom-vs-spy.png',
+	link: 'writing/divestment-vs-engagement.html',
+},
+
+];
+
+
+const vizProjects = [
 {
 	name: 'Boston taxi data',
 	tagline: 'A 3D visualization submitted to the MIT Big Data Challenge.',
@@ -246,7 +268,7 @@ var vizProjects = [
 
 ];
 
-var storyProjects = [
+const storyProjects = [
 {
 	name: 'The Wizard\'s Guide to Statistics',
 	tagline: 'Help a wizard and learn about probability, p-values, and Bayes Rule',
@@ -273,14 +295,8 @@ var storyProjects = [
 // },
 ];
 
-var otherProjects = [
+const writingProjects = [
 
-{
-	name: 'Wall Street is pitching in for the climate crisis',
-	tagline: 'Finally some good news on the climate change front. Wall Street has emerged as a suprising ally to help combat climate change.',
-	image: 'xom-vs-spy.png',
-	link: 'writing/divestment-vs-engagement.html',
-},
 
 // {
 // 	name: 'Wikipedia as Flashcards Chrome Extension',
@@ -352,7 +368,7 @@ new Vue({
   data: {
   	vizProjects: vizProjects,
   	storyProjects: storyProjects,
-  	otherProjects: otherProjects
+  	writingProjects: writingProjects
   },
 });
 
