@@ -42,48 +42,38 @@
 <style>
 *{
 	font-family: 'Roboto Slab', serif;
-	font-weight: 300;
 }
 
-h2{
+h1{
 	font-size: 48px;
 	margin-bottom: 0px;
 	letter-spacing: .04em;
 }
 
-h4{
+h3{
 	font-weight: 700;
 	letter-spacing: .03em;
 }
 
-h3{
+h2{
 	font-size: 1.3em;
 	margin-top: 50px;
 	margin-bottom: 0px;
+	font-weight: 400;
+}
+
+.title-card h1, .title-card h2, .title-card h3, .title-card h4{
+	font-weight: 400;
 }
 
 .black-link{
 	color: black;
 }
 
-.blue-link:link{
-	color: #81BEF7;
-}
-
-.blue-link:visited{
-	color: #BCA9F5;
-}
-
-.subtitle{
-	margin-top: 0px;
-	margin-bottom: 0px;
-	font-weight: 300;
-	letter-spacing: .04em;
-}
 
 .project{
 	display: inline-block;
-	border: #eee 1px solid;
+/*	border: #eee 1px solid;*/
 	padding: 10px;
 	margin-right: 20px;
 	margin-top: 20px;
@@ -101,26 +91,8 @@ h3{
 	margin: 0 auto;
 }
 
-.project .description{
-	opacity: 0;
-	position:absolute;
-	bottom: 0px;
-/*	background-color: rgba(0,0,0,0.7);
-	color:white;*/
-	background-color: white;
-	color: black;
 
-	padding: 8px;
-	height: 190px;
-	vertical-align: middle;
 
-	font-size: .95em;
-	transition: all .5s ease;
-}
-
-.project:hover .description{
-	opacity: 0.85;
-}
 
 
 hr{
@@ -136,22 +108,56 @@ hr{
 	opacity: 0.9;
 }
 
+.tagline{
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.follow-grid div{
+	font-size: 14px;
+	text-align: center;
+}
+
+.follow-grid img{
+	justify-self: center;
+	align-self: center;
+}
+
+.half, .half *{
+	color: #808080;
+}
+
+
 </style>
 
 <body>
 
 
+
 <div style="width:800px; margin: 0 auto; position:relative; padding-left: 24px;">
 
-<h2 style="position:relative; left:-4px;">Cassandra Xia</h2>
-<h4 class="subtitle" style="font-size:20px; opacity:0.8">Climate Activist 🌎🔥</h4>
+<div class="title-card">
+<h1 style="position:relative; left:-4px;">Cassandra Xia</h1>
+<div style="font-size:20px;">Climate Activist 🌎🔥</div>
 
-<h4 class="subtitle" style="opacity: 0.7; margin-top:8px">Ex-Google AI, MIT Media Lab '14, MIT CS '12</h4>
-<h4 class="subtitle" style="opacity: 0.7">cssndrx at gmail</h4>
+<div style="margin-top:8px">Ex-Google AI, MIT Media Lab '14, MIT CS '12</div>
+<div class="half">cssndrx at gmail</div>
+</div>
+
+
+
+<h2>Keep in touch</h2>
+<div class="follow-grid half" style="display: grid; grid-template-columns: 1fr 1fr; width: 200px">
+<img src="images/twitter.png">
+<img src="images/substack.png">
+<div>Twitter</div>
+<div>Newsletter</div>
+
+</div>
 
 <!--<a href="https://twitter.com/CassandraXia"><img src="images/twitter.png" style="height:24px; margin-top:8px"></a>-->
 
-<div class="blurb" style="width:600px">
+<!--<div class="blurb" style="width:600px">
 <p>
 "What are the most important problems of your day, and why aren't you working on them?"
 </p>
@@ -180,27 +186,27 @@ We will be posting updates about our climate adventures to our <a href="https://
 - Cass, July 2020
 </p>
 </div>
-
+-->
 
 <div id="app">
 
 
-<h3>Climate and activism</h3>
+<h2>Climate and activism</h2>
 <div>
 <project v-for="project in climateProjects" :project="project"></project>
 </div>
 
-<h3>Interactive stories</h3>
+<h2>Interactive stories</h2>
 <div>
 <project v-for="project in storyProjects" :project="project"></project>
 </div>
 
-<h3>Visualizations</h3>
+<h2>Visualizations</h2>
 <div>
 <project v-for="project in vizProjects" :project="project"></project>
 </div>
 
-<h3>Writing</h3>
+<h2>Writing</h2>
 <div>
 <project v-for="project in writingProjects" :project="project"></project>
 </div>
@@ -217,17 +223,19 @@ For updates, use <a href="https://twitter.com/CassandraXia">twitter</a> or <a hr
 </body>
 
 <script type="text/x-template" id="project-template">
-<a :href="project.link" target="_self">
+<a :href="project.link">
 	<div class="project" 
 	 style="position:relative; height:275px;">
 
-	<h4 class="black-link">{{project.name}}</h4>
+
+	<h3 class="black-link">{{project.name}}</h3>
+
+	<p class="tagline half">
+		{{project.tagline}}
+	</p>
 
 	<img :src="'images/'+project.image">
 
-	<p class="description">
-	{{project.tagline}}
-	</p>
 
 	</div>
 </a>
@@ -244,68 +252,67 @@ Vue.component('project', {
 
 const climateProjects = [
 {
-	name: 'Are you ready to... ?',
-	tagline: 'All hands on deck. We have 10 years. Join us in working on the biggest problem of our time.',
+	name: 'Join us in working on climate',
+	// tagline: 'All hands on deck. We have 10 years. Join us in working on the biggest problem of our time.',
+	tagline: 'Join the community',
 	image: 'woc.png',
 	link: 'https://workonclimate.org',
 },
 
+// {
+// 	name: 'My goodbye email',
+// 	tagline: 'Farewell Google',
+// 	image: 'lunch-bw.png',
+// 	link: 'writing/goodbye-google.html',
+// },
+
+{
+	name: 'Meme for America',
+	tagline: 'Too cool to text bank?',
+	image: 'eagle.jpg',
+	link: 'https://memeforamerica.org',
+},
+
+{
+	name: 'Climate Fellows',
+	tagline: 'Work part time for the planet',
+	image: 'landscape.jpeg',
+	link: 'https://climatefellows.org',
+},
+
+{
+	name: 'Climate CTO',
+	tagline: 'Leave FAANG for good',
+	image: 'desk.jpeg',
+	link: 'https://climatecto.com',
+},
+
 {
 	name: 'Wall Street is pitching in for the climate crisis',
-	tagline: 'Finally some good news on the climate change front. Wall Street has emerged as a suprising ally to help combat climate change.',
+	tagline: 'Divestment and engagement',
 	image: 'xom-vs-spy.png',
 	link: 'writing/divestment-vs-engagement.html',
 },
 
-{
-	name: 'Meme for America',
-	tagline: 'Too cool to text bank? Meme for your country instead.',
-	image: 'm4a.png',
-	link: 'https://memeforamerica.org',
-},
-
 ];
 
-
-const vizProjects = [
-{
-	name: 'Boston taxi data',
-	tagline: 'A 3D visualization submitted to the MIT Big Data Challenge.',
-	image: 'taxiviz.png',
-	link: 'projs/taxi-viz/'
-},
-{
-	name: 'Wellness visualizations for rural India',
-	tagline: 'A World Bank project for unconventional wellness visualizations used by low literacy and low numeracy women living in Tamil Nadu, India.',
-	image: 'flowers.png',
-	link: 'projs/worldbank14/index.html',
-},
-
-{
-	name: 'Nine years of chat convos visualized',
-	tagline: 'Nine years of gchat conversations converted into an explorable smear of ink.',
-	image: 'chat.png',
-	link: 'projs/im.html'
-},
-
-];
 
 const storyProjects = [
 {
 	name: 'The Wizard\'s Guide to Statistics',
-	tagline: 'Help a wizard and learn about probability, p-values, and Bayes Rule',
+	tagline: 'Statistics for life',
 	image: 'wizard-left.png',
 	link: 'wizard/',
 },
 {
 	name: 'Adventures in Cognitive Biases',
-	tagline: 'Train logical thinking and reduce your susceptibility to cognitive biases.',
+	tagline: 'Bayes Rule in life',
 	image: 'guru.png',
 	link: 'cogbiases/',
 },
 {
 	name: 'Little Red Riding Hood Does Science',
-	tagline: 'Craft the items needed to get Little Red Riding Hood out of a bind.',
+	tagline: 'Happy holidays with science',
 	image: 'lrrh.jpg',
 	link: 'projs/lrrh/',
 },
@@ -315,6 +322,30 @@ const storyProjects = [
 // 	image: 'raccoonprincess.png',
 // 	link: 'projs/raccoon/',
 // },
+];
+
+
+const vizProjects = [
+{
+	name: 'Boston taxi data',
+	tagline: '3D was questionable',
+	image: 'taxiviz.png',
+	link: 'projs/taxi-viz/'
+},
+{
+	name: 'Community wellbeing',
+	tagline: 'Pictures for discussion',
+	image: 'flowers.png',
+	link: 'projs/worldbank14/index.html',
+},
+
+{
+	name: 'Nine years of chat',
+	tagline: 'Desktop-only: read my dirt',
+	image: 'chat.png',
+	link: 'projs/im.html'
+},
+
 ];
 
 const writingProjects = [
@@ -328,28 +359,28 @@ const writingProjects = [
 // },
 {
 	name: 'The Design of Artifacts for Augmenting Intellect',
-	tagline: 'A design paper for creating tools that increase human productivity and wellness. Presented in conference at Augmented Human ‘13.',
+	tagline: 'Tools can make you smarter',
 	image: 'brain.png',
 	link: 'projs/designofiaartifacts.pdf',
 },
 
 {
 	name: 'USA: If you’re stopped by the police',
-	tagline: 'Donuts to remind you on how to assert your rights.',
+	tagline: 'Know your rights — protect yourself and others.',
 	image: 'donuts.png',
 	link: 'writing/police.html',
 },
 
 {
 	name: 'Don\'t spend your life making sheds',
-	tagline: 'I was stuck on a side project for 5 years. Here’s how I finished it.',
+	tagline: 'How I finished a 5 year project',
 	image: 'shed.jpg',
 	link: 'writing/shed.html',
 },
 
 {
 	name: 'How to make something people actually want',
-	tagline: 'A good tattoo. Valuable advice before you start building anything.',
+	tagline: 'Wisdom from Google UI/UX',
 	image: 'unicorn.png',
 	link: 'writing/how-to-make.html',
 },
@@ -368,13 +399,6 @@ const writingProjects = [
 // 	tagline: 'An augmented text editor that pulls in articles similar to the subject you are currently typing about.',
 // 	image: '',
 // 	year: 2013,
-// },
-
-// {
-// 	name: 'Emotion gloves',
-// 	tagline: 'An unsuccessful attempt to capture emotion in gloves.',
-// 	image: '',
-// 	year: 2012,
 // },
 
 // {
