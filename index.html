@@ -247,12 +247,9 @@ body, body *{
 
 <script type="text/x-template" id="project-template">
 <a :href="project.link" style="display:inline-block; text-decoration: none">
-	<div class="project" :style="computedStyle">
+	<div class="project" style="grid-template-rows: auto 1fr 150px">
 
-		<!-- :style="{'grid-template-rows': headerHeight + 'px 1fr 150px'}"-->
 	<h3>{{project.name}}</h3>
-
-<!--	{{computedStyle}} -->
 
 	<p class="tagline">
 		{{project.tagline}}
@@ -287,17 +284,17 @@ Vue.component('project', {
     project: {type: Object, required: true},
     headerHeight: {type: Number, default: 30},
   },
-  computed: {
-  	// isMobile(){
-  	// 	// https://stackoverflow.com/questions/3514784/what-is-the-best-way-to-detect-a-mobile-device
-  	// 	return /Mobi|Android/i.test(navigator.userAgent);
-  	// },
-  	computedStyle(){
-		return {'grid-template-rows': this.headerHeight + 'px 1fr 150px'}
-		//return {'grid-template-rows': 'auto 1fr 150px'}
+  // computed: {
+  // 	// isMobile(){
+  // 	// 	// https://stackoverflow.com/questions/3514784/what-is-the-best-way-to-detect-a-mobile-device
+  // 	// 	return /Mobi|Android/i.test(navigator.userAgent);
+  // 	// },
+  // 	computedStyle(){
+		// return {'grid-template-rows': this.headerHeight + 'px 1fr 150px'}
+		// //return {'grid-template-rows': 'auto 1fr 150px'}
 
-  	},
-  },
+  // 	},
+  // },
   template: '#project-template'
 });
 
