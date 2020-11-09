@@ -74,7 +74,7 @@ h3{
 	margin: 16px auto 16px auto;
 	max-width: 500px;
 	font-size: 14px;
-	color: #333;
+	color: #808080;
 }
 
 
@@ -178,6 +178,10 @@ body, body *{
 }
 
 @media (max-width: 400px){
+	.project{
+		width: 200px;
+		margin: 0 auto;
+	}
 }
 
 </style>
@@ -196,7 +200,7 @@ body, body *{
 <div style="margin-top:8px; color: #333">Ex-Google AI, MIT Media Lab '14, MIT CS '12</div>
 
 <div style="margin-top: 24px"><keep-in-touch style="margin: 0 auto; display: inline-block;"></keep-in-touch></div>
-<div class="half" style="font-size: 12px; margin-top:8px">cssndrx at gmail</div>
+<div class="half" style="font-size: 10px; margin-top:8px">cssndrx at gmail</div>
 </section> 
 
 
@@ -224,7 +228,7 @@ body, body *{
 <h2>Writing</h2>
 <p class="blurb">What's in my head!</p>
 <div class="project-grid">
-<project v-for="project in writingProjects" :project="project" :header-height="60" :mobile-header-height="50"></project>
+<project v-for="project in writingProjects" :project="project" :header-height="60"></project>
 </div>
 
 
@@ -284,24 +288,14 @@ Vue.component('project', {
   props: {
     project: {type: Object, required: true},
     headerHeight: {type: Number, default: 30},
-    mobileHeaderHeight: {type: Number, default: 30},
   },
-  async mounted() {
-  	await wait(200);
-      this.windowWidth = window.innerWidth;
-	  window.addEventListener('resize', () => {
-	    this.windowWidth = window.innerWidth;
-	  });
-	},
   computed: {
-  	isMobile(){
-  		// https://stackoverflow.com/questions/3514784/what-is-the-best-way-to-detect-a-mobile-device
-  		return /Mobi|Android/i.test(navigator.userAgent);
-  	},
+  	// isMobile(){
+  	// 	// https://stackoverflow.com/questions/3514784/what-is-the-best-way-to-detect-a-mobile-device
+  	// 	return /Mobi|Android/i.test(navigator.userAgent);
+  	// },
   	computedStyle(){
-  		console.log(this.windowWidth);
-  		const cssHeaderHeight = this.isMobile ? this.mobileHeaderHeight : this.headerHeight;
-		return {'grid-template-rows': cssHeaderHeight + 'px 1fr 150px'}
+		return {'grid-template-rows': this.headerHeight + 'px 1fr 150px'}
   	},
   },
   template: '#project-template'
