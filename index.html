@@ -132,8 +132,6 @@ img{
 	max-height: 100%;
 }
 
-.keep-in-touch, .keep-in-touch *{
-}
 
 .keep-in-touch a{
 	text-decoration: none;
@@ -295,7 +293,9 @@ Vue.component('project', {
   	// 	return /Mobi|Android/i.test(navigator.userAgent);
   	// },
   	computedStyle(){
-		return {'grid-template-rows': this.headerHeight + 'px 1fr 150px'}
+		// return {'grid-template-rows': this.headerHeight + 'px 1fr 150px'}
+		return {'grid-template-rows': 'auto 1fr 150px'}
+
   	},
   },
   template: '#project-template'
