@@ -27,6 +27,8 @@
 <title>Cassandra Xia</title>
 
 <script src="js/vue.min.js"></script>
+<script src="js/vue-comps.js"></script>
+
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -90,11 +92,9 @@ h3{
 	display: grid;
 	grid-gap: 32px;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-
-
 }
+
 .project{
-/*	max-width: 200px;*/
 	vertical-align: top;
 	display: grid;
 }
@@ -102,9 +102,15 @@ h3{
 .project img{
 	max-width: 100%;
 	max-height: 150px;
-
 	display: block;
-/*	margin: 0 auto;*/
+}
+
+.project h3{
+	margin: 4px 0;
+}
+
+.project .tagline{
+	margin: 0px 0 16px 0;
 }
 
 
@@ -178,7 +184,7 @@ body, body *{
 @media (max-width: 400px){
 	.project{
 		width: 200px;
-		margin: 0 auto;
+		margin: 16px auto;
 	}
 }
 
@@ -239,68 +245,15 @@ body, body *{
 </div>
 
 
-
-
-
-
 </body>
 
-<script type="text/x-template" id="project-template">
-<a :href="project.link" style="display:inline-block; text-decoration: none">
-	<div class="project" style="grid-template-rows: auto 1fr 150px">
-
-	<h3>{{project.name}}</h3>
-
-	<p class="tagline">
-		{{project.tagline}}
-	</p>
-
-	<div><img :src="'images/'+project.image" style="margin:0 auto"></div>
-
-
-	</div>
-</a>
-</script>
-
-<script type="text/x-template" id="keep-in-touch-template">
-<div class="keep-in-touch half">
-<div class="grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr; width: 160px">
-<a href="https://twitter.com/cassandraxia"><img src="images/twitter.png"></a>
-<a href="https://www.linkedin.com/in/cassandraxia/"><img style="margin-top: 4px" src="images/linkedin.png"></a>
-<a href="https://climatebuddies.substack.com/"><img src="images/substack.png"></a>
-<a href="https://twitter.com/cassandraxia" class="label half">Twitter</a>
-<a href="https://www.linkedin.com/in/cassandraxia/" class="label half">LinkedIn</a>
-<a href="https://climatebuddies.substack.com/" class="label half">Newsletter</a>
-</div> 
-</script>
 
 
 <script>
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-Vue.component('project', {
-  props: {
-    project: {type: Object, required: true},
-    headerHeight: {type: Number, default: 30},
-  },
-  // computed: {
-  // 	// isMobile(){
-  // 	// 	// https://stackoverflow.com/questions/3514784/what-is-the-best-way-to-detect-a-mobile-device
-  // 	// 	return /Mobi|Android/i.test(navigator.userAgent);
-  // 	// },
-  // 	computedStyle(){
-		// return {'grid-template-rows': this.headerHeight + 'px 1fr 150px'}
-		// //return {'grid-template-rows': 'auto 1fr 150px'}
 
-  // 	},
-  // },
-  template: '#project-template'
-});
-
-Vue.component('keep-in-touch', {
-  template: '#keep-in-touch-template'
-});
 
 const climateProjects = [
 {
