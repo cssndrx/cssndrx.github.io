@@ -5,7 +5,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link href="https://fonts.googleapis.com/css2?family=Raleway&family=Roboto+Slab:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
 
 <link rel="icon" type="image/x-icon" href="https://cassandraxia.com/favicon.ico">
 
@@ -45,7 +45,7 @@
 
 <style>
 *{
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Raleway', sans-serif;
 }
 
 h1{
@@ -61,8 +61,8 @@ h2{
 	font-size: 1.5em;
 	margin-top: 64px;
 	margin-bottom: 0px;
-	font-weight: 400;
-	text-align: center;
+/*	font-weight: 400;
+	*/text-align: center;
 }
 
 h3{
@@ -82,7 +82,7 @@ h3{
 
 
 .title-card *{
-	font-weight: 400;
+/*	font-weight: 400;*/
 	font-family: 'Raleway', sans-serif;
 	text-align: center;
 }
@@ -124,7 +124,7 @@ hr{
 
 .tagline{
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 12px;
 	color: #a7a7a7;
 }
 
@@ -257,11 +257,25 @@ const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const climateProjects = [
 {
-	name: 'The climate fight',
+	name: 'Road to 10 Gigatons',
+	tagline: 'A carbon removal game',
+	image: '10gt2.png',
+	link: 'https://roadto10gigatons.com',
+},
+
+{
+	name: 'workonclimate.org',
 	// tagline: 'All hands on deck. We have 10 years. Join us in working on the biggest problem of our time.',
-	tagline: 'Stay positive and take action',
+	tagline: 'Find people and opportunities to work on climate',
 	image: 'woc.png',
 	link: 'https://workonclimate.org',
+},
+
+{
+	name: 'Diamond List',
+	tagline: 'Investor-nominated climate companies',
+	image: 'glacier-with-humans.png',
+	link: 'https://diamondlist.co',
 },
 
 // {
@@ -272,39 +286,49 @@ const climateProjects = [
 // },
 
 {
-	name: 'Meme for America',
-	tagline: 'Too cool to text bank?',
-	image: 'eagle.png',
-	link: 'https://memeforamerica.org',
-},
-
-{
 	name: 'Climate Fellows',
-	tagline: 'Work part time for the planet',
+	tagline: 'Volunteer with climate nonprofits',
 	image: 'landscape.jpeg',
 	link: 'https://climatefellows.org',
 },
 
-{
-	name: 'What\'s going on with climate philanthropy?',
-	tagline: '😱 GiveWell, Stripe, and the Big Surprise',
-	image: 'lecture.png',
-	link: 'https://climatebuddies.substack.com/p/-whats-going-on-with-climate-philanthropy',
-},
+
 
 {
-	name: 'Wall Street is pitching in for the climate crisis',
-	tagline: 'Divestment and engagement',
-	image: 'xom-vs-spy.png',
-	link: 'writing/divestment-vs-engagement.html',
+	name: 'Meme for America',
+	tagline: 'Change politics via memes',
+	image: 'eagle.png',
+	link: 'https://memeforamerica.org',
 },
 
-{
-	name: 'Climate CTO',
-	tagline: 'Lead a climate startup',
-	image: 'desk.jpeg',
-	link: 'https://climatecto.com',
-},
+// {
+// 	name: 'Wall Street is pitching in for the climate crisis',
+// 	tagline: 'Divestment and engagement',
+// 	image: 'xom-vs-spy.png',
+// 	link: 'writing/divestment-vs-engagement.html',
+// },
+
+
+// {
+// 	name: 'What\'s going on with climate philanthropy?',
+// 	tagline: '😱 GiveWell, Stripe, and the Big Surprise',
+// 	image: 'lecture.png',
+// 	link: 'https://climatebuddies.substack.com/p/-whats-going-on-with-climate-philanthropy',
+// },
+
+// {
+// 	name: 'Wall Street is pitching in for the climate crisis',
+// 	tagline: 'Divestment and engagement',
+// 	image: 'xom-vs-spy.png',
+// 	link: 'writing/divestment-vs-engagement.html',
+// },
+
+// {
+// 	name: 'Climate CTO',
+// 	tagline: 'Lead a climate startup',
+// 	image: 'desk.jpeg',
+// 	link: 'https://climatecto.com',
+// },
 
 
 ];
