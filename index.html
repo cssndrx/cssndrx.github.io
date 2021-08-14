@@ -57,12 +57,11 @@ h1{
 
 
 h2{
-	font-family: 'Raleway', sans-serif;
 	font-size: 1.5em;
 	margin-top: 64px;
 	margin-bottom: 0px;
 /*	font-weight: 400;
-	*/text-align: center;
+	text-align: center;*/
 }
 
 h3{
@@ -71,10 +70,7 @@ h3{
 }
 
 .blurb{
-	font-family: 'Raleway', sans-serif;
-	text-align: center;
-	margin: 16px auto 16px auto;
-	max-width: 500px;
+	margin: 16px 0;
 	font-size: 14px;
 	color: #808080;
 }
@@ -210,7 +206,7 @@ body, body *{
 
 
 <h2>Climate and activism</h2>
-<p class="blurb">I left Google in July 2020 to work on climate action. Here are the projects that I have been involved in since then.</p>
+<p class="blurb">Projects I have been involved in since leaving Google!</p>
 
 <div class="project-grid">
 <project v-for="project in climateProjects" :project="project"></project>
@@ -230,7 +226,7 @@ body, body *{
 </div>-->
 
 <h2>Writing</h2>
-<p class="blurb">What's in my head!</p>
+<p class="blurb"></p>
 <div class="project-grid">
 <project v-for="project in writingProjects" :project="project" :header-height="60"></project>
 </div>
