@@ -1,6 +1,6 @@
-# Father's Day Puzzle
+# Father's Day Problem
 
-A little static website: Dad clicks each math puzzle, and every correct answer
+A little static website: Dad clicks each math problem, and every correct answer
 uncovers another piece of a secret picture. Solve them all → the whole picture
 is revealed.
 
@@ -13,7 +13,7 @@ Save your image **in this folder** and name it **`secret.png`**.
 (To use a different filename, change `secretImage` near the top of `config.js`.)
 
 ## Change the questions & answers — edit `config.js` only
-Open `config.js` in any text editor. You'll see each puzzle with its question
+Open `config.js` in any text editor. You'll see each problem with its question
 and an `answers` list. Change the text inside the quotes.
 
 ```js
@@ -26,8 +26,8 @@ answers: ["300", "300 m", "300 meters"] // any of these spellings count
   ```js
   numericValue: 2.4, tolerance: 0.05   // 2.35–2.45 all count as correct
   ```
-- A puzzle can ask more than one thing — see Puzzle 1 (it has two answer boxes).
-  Both must be right to reveal that puzzle's piece.
+- A problem can ask more than one thing — see Problem 1 (it has two answer boxes).
+  Both must be right to reveal that problem's piece.
 
 ### ⚠️ The answers are placeholders right now
 For testing, the answers are `ANSWER_1A`, `ANSWER_1B`, `ANSWER_2`, `ANSWER_3`,

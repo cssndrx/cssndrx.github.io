@@ -1,5 +1,5 @@
 /* ============================================================================
-   ✏️  EDIT ME — Father's Day puzzle configuration
+   ✏️  EDIT ME — Father's Day problem configuration
    ----------------------------------------------------------------------------
    This is the ONLY file you need to touch to change questions & answers.
    (You don't need to know how to code — just edit the text inside the quotes.)
@@ -31,11 +31,11 @@ Happy Father's Day! Love you!
 };
 
 /* ----------------------------------------------------------------------------
-   THE PUZZLES
-   Each item below is one puzzle card. Solving it uncovers a piece of the picture.
+   THE PROBLEMS
+   Each item below is one problem card. Solving it uncovers a piece of the picture.
 
-   A puzzle can ask MORE THAN ONE thing (see Puzzle 1 — it asks "how long?" AND
-   "how far?"). Every part must be correct to reveal that puzzle's piece.
+   A problem can ask MORE THAN ONE thing (see Problem 1 — it asks "how long?" AND
+   "how far?"). Every part must be correct to reveal that problem's piece.
 
    For each part you can set:
      prompt       – the label shown above the answer box

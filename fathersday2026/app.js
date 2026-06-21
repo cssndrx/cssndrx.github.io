@@ -1,5 +1,5 @@
 /* ============================================================================
-   Father's Day puzzle — app logic
+   Father's Day problem — app logic
    You normally never need to edit this file. Edit config.js instead.
    ============================================================================ */
 
@@ -31,7 +31,7 @@
   }
   var solved = loadSolved();
 
-  // ---- deterministic scatter so each puzzle always reveals the same tiles ----
+  // ---- deterministic scatter so each problem always reveals the same tiles ----
   function mulberry32(a) {
     return function () {
       a |= 0; a = (a + 0x6d2b79f5) | 0;
@@ -181,7 +181,7 @@
 
       var badge = document.createElement("span");
       badge.className = "badge";
-      badge.textContent = solved[p.id] ? "✓ Done" : "Puzzle " + (i + 1);
+      badge.textContent = solved[p.id] ? "✓ Done" : "Problem " + (i + 1);
 
       card.appendChild(emoji);
       card.appendChild(text);
