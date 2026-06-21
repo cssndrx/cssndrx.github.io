@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happy Father's Day!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="sky"></div>
+
+  <header class="hero">
+    <h1 id="title">Happy Father's Day!</h1>
+    <p class="subtitle">Solve each puzzle to uncover a secret picture.</p>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div id="progressFill"></div></div>
+      <div id="progressText" class="progress-text">0 solved</div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="cards-col">
+      <h2 class="col-head">The Puzzles</h2>
+      <div id="cards" class="cards"></div>
+    </section>
+
+    <section class="reveal-col">
+      <h2 class="col-head">The Secret Picture</h2>
+      <div id="reveal" class="reveal">
+        <img id="secretImg" alt="A secret picture, hidden until all puzzles are solved">
+        <div id="tiles" class="tiles"></div>
+        <div id="finishBanner" class="finish-banner"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <button id="resetBtn" class="reset-btn" title="Clear progress and start over">↺ start over</button>
+  </footer>
+
+  <!-- Puzzle modal -->
+  <div id="modalBackdrop" class="modal-backdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button id="modalClose" class="modal-close" aria-label="Close">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <div id="confetti" class="confetti-layer" aria-hidden="true"></div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
