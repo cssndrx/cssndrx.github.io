@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title | escape }} — {{ site.title | escape }}</title>
+  <meta name="description" content="{{ page.excerpt | strip_html | normalize_whitespace | escape }}">
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/writing/post.css' | relative_url }}">
+</head>
+<body>
+  <main class="post">
+    <nav><a href="{{ '/' | relative_url }}#writing">← Cassandra Xia / Writing</a></nav>
+    <article>
+      <header>
+        {% if page.path contains '_drafts/' %}<p class="draft-label">Draft preview</p>{% endif %}
+        <h1>{{ page.title | escape }}</h1>
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%B %-d, %Y' }}</time>
+      </header>
+      <div class="post-content">{{ content }}</div>
+    </article>
+    <footer><a href="{{ '/' | relative_url }}#writing">More writing and projects →</a></footer>
+  </main>
+</body>
+</html>

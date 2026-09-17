@@ -1,0 +1,21 @@
+title: Cassandra Xia
+url: "https://cassandraxia.com"
+baseurl: ""
+timezone: America/New_York
+
+markdown: kramdown
+permalink: /writing/:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - bin
+  - vendor

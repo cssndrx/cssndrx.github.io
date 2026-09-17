@@ -1,0 +1,19 @@
+#!/bin/sh
+set -eu
+cd "$(dirname "$0")/.."
+
+# Use the project-local Bundler when it has been installed on this computer.
+if [ -f vendor/gems/bin/bundle ]; then
+  export GEM_HOME="$PWD/vendor/gems"
+  export GEM_PATH="$GEM_HOME"
+  set -- ruby vendor/gems/bin/bundle exec jekyll serve "$@"
+else
+  set -- bundle exec jekyll serve "$@"
+fi
+
+# Production previews can opt out of drafts with JEKYLL_PREVIEW_DRAFTS=false.
+if [ "${JEKYLL_PREVIEW_DRAFTS:-true}" = true ]; then
+  set -- "$@" --drafts
+fi
+
+exec "$@"

@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
@@ -73,6 +76,36 @@ h3{
 	margin: 16px 0;
 	font-size: 14px;
 	color: #808080;
+}
+
+.writing-posts{
+	list-style: none;
+	padding: 0;
+	margin: 24px 0 40px;
+}
+.writing-posts li{
+	border-bottom: 1px solid #eee;
+	padding: 16px 0;
+}
+.writing-posts a{
+	color: #333;
+	font-size: 20px;
+	text-decoration: none;
+}
+.writing-posts a:hover{
+	text-decoration: underline;
+}
+.writing-posts time{
+	display: block;
+	color: #808080;
+	font-size: 12px;
+	margin-top: 6px;
+}
+.writing-posts p{
+	color: #666;
+	font-size: 14px;
+	line-height: 1.6;
+	margin: 10px 0 0;
 }
 
 
@@ -228,7 +261,18 @@ body, body *{
 <project v-for="project in vizProjects" :project="project"></project>
 </div>-->
 
-<h2>Writing</h2>
+<h2 id="writing">Writing</h2>
+{% if site.posts.size > 0 %}
+<ul class="writing-posts" v-pre>
+{% for post in site.posts %}
+  <li>
+    <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%B %-d, %Y' }}</time>
+    <p>{{ post.excerpt | strip_html | normalize_whitespace | escape }}</p>
+  </li>
+{% endfor %}
+</ul>
+{% endif %}
 <p class="blurb"></p>
 <div class="project-grid">
 <project v-for="project in writingProjects" :project="project" :header-height="60"></project>
