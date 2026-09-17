@@ -23,6 +23,7 @@
 }
 
 .newsletter-signup form { margin: 0; }
+.newsletter-signup .newsletter-honeypot { display: none; }
 .newsletter-signup label {
   display: block;
   margin-bottom: 6px;

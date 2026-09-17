@@ -2,7 +2,7 @@
 layout: null
 ---
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>{{ site.title | xml_escape }}</title>
     <link>{{ '/' | absolute_url | xml_escape }}</link>
@@ -23,6 +23,8 @@ layout: null
       {% capture preview_description %}<p>{{ preview_text | escape_once }}</p>{% endcapture %}
       <description>{{ preview_description | xml_escape }}</description>
       {% assign preview_image = post.image | default: '' | strip %}
+      {% capture email_preview %}{% if preview_image != '' %}<p><img src="{{ preview_image | absolute_url | escape }}" alt="{{ post.image_alt | default: '' | escape }}" style="max-width:100%;height:auto;"></p>{% endif %}{{ preview_description }}{% endcapture %}
+      <content:encoded>{{ email_preview | xml_escape }}</content:encoded>
       {% if preview_image != '' %}
       <media:content url="{{ preview_image | absolute_url | xml_escape }}" medium="image" />
       {% endif %}

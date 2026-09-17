@@ -4,8 +4,8 @@ url: "https://cassandraxia.com"
 baseurl: ""
 timezone: America/New_York
 
-# Public Buttondown newsletter username; the signup form stays hidden until set.
-buttondown_username: "xia"
+# Public Brevo signup form URL; this is not an API key. Leave blank to hide signup.
+brevo_form_url: "https://6d3f7d02.sibforms.com/serve/MUIFADaCJVeJ-y9h81NFYkV8kpCtn3fg4s22iDvsKAfYvlq_i_3U5FE93nHgSIzo53fxJ2JX0786XExTbZJtC6niRQ2pS-462qGMlDjwHcuNJ6ZjlkBZ6Hz4z_jZ3zcDfCn5d1YhibPcViEknkkyhb8Mahq2dyvTDgg0EXbRvgFyQVl5hXzgSk4caNOPC13cS0aLk6SZGPR__wAxig=="
 
 markdown: kramdown
 permalink: /writing/:title/

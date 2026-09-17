@@ -91,7 +91,7 @@ Watch [the repository's Actions page](https://github.com/cssndrx/cssndrx.github.
 
 For later edits, change the same Markdown file and publish it through your Git workflow again. Keep its filename to keep the same URL. Generated `_site/` files and installed dependencies are ignored by Git.
 
-Once Buttondown is connected (one-time setup below), new published posts can also be emailed automatically. The email uses the post's title, `description` (or opening paragraph), optional preview image, and a link back to the article. You do not need to write a separate newsletter. Keep the post's filename/URL stable when editing so it retains the same identity in the feed.
+Brevo checks the published feed daily at 9 a.m. Eastern and automatically emails new posts to confirmed subscribers (one-time setup below). The email uses the post's title, `description` (or opening paragraph), optional preview image, and a link back to the article. You do not need to write a separate newsletter. Keep the post's filename/URL stable when editing so it retains the same identity in the feed.
 
 ## Shortcut reference
 
@@ -147,27 +147,32 @@ GitHub Pages is configured to build the root of this repository's `master` branc
 
 Drafts are ignored by Git and excluded from public site builds. The shell shortcuts in `~/.zshrc` stay on your computer.
 
-### 4. Connect Buttondown
+### 4. Connect Brevo for email subscriptions
 
-**Site configured:** `buttondown_username` in `_config.yml` is set to `xia`, connecting the signup forms to <https://buttondown.com/xia>. No password or API key belongs in the repository. If you change the username, restart a running Jekyll preview after changing the config. The signup form is hidden when this value is empty.
+**Site configured:** `brevo_form_url` in `_config.yml` connects the footer signup to the Brevo form **Cassandra Xia - Blog signup** and its **Blog readers** list. This is a public form URL; no password or API key belongs in the repository. Restart a running Jekyll preview after changing the config. The signup form is hidden when this value is empty.
 
-The signup form appears at the bottom of each blog post, including the existing HTML articles, and is omitted from the homepage. Both the Markdown post template and existing articles use `_includes/subscribe.html`, so edits to the form apply everywhere.
+The signup appears at the bottom of each blog post, including the six existing HTML articles, and is omitted from the homepage. Both the Markdown post layout and existing articles use `_includes/subscribe.html`, so edits apply everywhere. The form uses Brevo's Simple HTML field names, a honeypot, and email confirmation. Readers enter an email address and confirm via their inbox; they do not need an RSS reader. Subscriber addresses stay in Brevo, outside this repository.
 
-Publish the site changes using your usual Git workflow. The feed will be at <https://cassandraxia.com/feed.xml>. It includes only published Markdown posts in `_posts/`; local drafts, future-dated posts, and `published: false` posts stay out, even in a draft preview. Existing hand-written HTML articles are not added to the feed. An empty feed is expected until the first Markdown post is published.
+Publish `_config.yml`, `_includes/subscribe.html`, `writing/subscribe.css`, and `feed.xml` through your usual Git workflow to put this switch on the live site. Keep this README, `AGENTS.md`, and `_drafts/` local and ignored. Do not force-add them.
 
-In Buttondown's RSS-to-email settings, add the public feed URL. This requires Buttondown's paid RSS feature. Choose the cadence **Every time a new item is published**. Start with **Create a draft email** to check one preview, then switch to **Send automatically** when ready. Enable **Skip old items** when connecting an existing feed to avoid emailing the archive.
+The feed at <https://cassandraxia.com/feed.xml> includes only published Markdown posts in `_posts/`. Drafts, future-dated posts, and `published: false` posts stay out even in a draft preview. Existing hand-written HTML articles are not added to the feed. An empty feed is expected until the first Markdown post is published.
 
-Use this email-body template for a short preview linking back to the site:
+In [Brevo's integrations](https://app.brevo.com/app-store/manage-integrations), **Cassandra Xia New Writing** is configured with:
 
-```html
-{% for item in items %}
-<h2>{{ item.title }}</h2>
-{% if item.enclosure %}<p><img src="{{ item.enclosure }}" alt="" style="max-width:100%;height:auto;"></p>{% endif %}
-{{ item.description|safe }}
-<p><a href="{{ item.url }}">Read the post →</a></p>
-{% endfor %}
-```
+- Feed: `https://cassandraxia.com/feed.xml`.
+- Recipients: **Blog readers**, populated by the signup form after double confirmation.
+- Schedule: every day at **09:00 America/New_York**, automatically send when new items appear.
+- Sender name and subject: **Cassandra Xia** / **New writing from Cassandra Xia**.
+- Email: title, date, optional preview image, short preview, and a **Read more** link for each new post, plus unsubscribe and Brevo's free-plan branding.
 
-Keep Buttondown's default subscription confirmation enabled. The website form posts directly to Buttondown; subscriber addresses are managed there, never stored in the repository. Test with your own email address, confirm the subscription, and review a test email before enabling automatic delivery. A local preview alone cannot activate emails; Buttondown must be connected to the published feed.
+Allow an hour between publishing a post and the daily check; later posts may wait until the next day's email. Brevo sends only when there are new items, with up to ten posts in one email. Keep post URLs stable when editing. Publishing remains the same Markdown + Git workflow; there is no separate newsletter to write.
 
-Official guides: [HTML signup forms](https://docs.buttondown.com/building-your-subscriber-base) and [RSS-to-email](https://docs.buttondown.com/rss-to-email).
+The selected sender is `cssndrx@gmail.com`. Brevo reports that it replaces the sending domain with `@brevosend.com` because Gmail cannot be authenticated as your own domain. A sender on an authenticated domain can be configured later if desired.
+
+Brevo's Free plan allows **300 email deliveries per day**, shared across campaigns and confirmation/test emails, and includes Brevo branding. One newsletter delivered to 100 people uses 100 sends. If a campaign exceeds the remaining daily allowance, it needs to be requeued on another day; unused daily sends do not roll over. Revisit this limit before the list approaches 300 subscribers.
+
+For a one-time delivery check, subscribe with your own address, click the confirmation link, and use the saved email template's **Preview & test**. This does not require publishing a dummy blog post. A browser preview verifies the design but cannot prove inbox delivery.
+
+The RSS email template repeats `params.items`, uses `item.TITLE`, `item.PUBDATE`, and `item.LINK`, and renders `item.CONTENT_ENCODED | safe` with `item.DESCRIPTION | safe` as a fallback. The feed supplies escaped preview HTML, including an image only when the post has one. Retain Brevo's unsubscribe link when editing the template.
+
+Official guides: [RSS campaign setup](https://help.brevo.com/hc/en-us/articles/360013130059-RSS-Campaign-integration-Automatically-share-your-blog-posts-with-your-subscribers), [signup forms](https://help.brevo.com/hc/en-us/articles/208771869-Create-a-sign-up-form-in-Brevo), and [Free plan limits](https://help.brevo.com/hc/en-us/articles/208580669-FAQs-What-are-the-limits-of-the-Free-plan).
