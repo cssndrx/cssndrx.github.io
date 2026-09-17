@@ -91,6 +91,8 @@ Watch [the repository's Actions page](https://github.com/cssndrx/cssndrx.github.
 
 For later edits, change the same Markdown file and publish it through your Git workflow again. Keep its filename to keep the same URL. Generated `_site/` files and installed dependencies are ignored by Git.
 
+Once Buttondown is connected (one-time setup below), new published posts can also be emailed automatically. The email uses the post's title, `description` (or opening paragraph), optional preview image, and a link back to the article. You do not need to write a separate newsletter. Keep the post's filename/URL stable when editing so it retains the same identity in the feed.
+
 ## Shortcut reference
 
 | Shortcut | What it does |
@@ -144,3 +146,28 @@ source ~/.zshrc
 GitHub Pages is configured to build the root of this repository's `master` branch and serve it at <https://cassandraxia.com/>.
 
 Drafts are ignored by Git and excluded from public site builds. The shell shortcuts in `~/.zshrc` stay on your computer.
+
+### 4. Connect Buttondown
+
+**Site configured:** `buttondown_username` in `_config.yml` is set to `xia`, connecting the signup forms to <https://buttondown.com/xia>. No password or API key belongs in the repository. If you change the username, restart a running Jekyll preview after changing the config. The signup form is hidden when this value is empty.
+
+The signup form appears at the bottom of each blog post, including the existing HTML articles, and is omitted from the homepage. Both the Markdown post template and existing articles use `_includes/subscribe.html`, so edits to the form apply everywhere.
+
+Publish the site changes using your usual Git workflow. The feed will be at <https://cassandraxia.com/feed.xml>. It includes only published Markdown posts in `_posts/`; local drafts, future-dated posts, and `published: false` posts stay out, even in a draft preview. Existing hand-written HTML articles are not added to the feed. An empty feed is expected until the first Markdown post is published.
+
+In Buttondown's RSS-to-email settings, add the public feed URL. This requires Buttondown's paid RSS feature. Choose the cadence **Every time a new item is published**. Start with **Create a draft email** to check one preview, then switch to **Send automatically** when ready. Enable **Skip old items** when connecting an existing feed to avoid emailing the archive.
+
+Use this email-body template for a short preview linking back to the site:
+
+```html
+{% for item in items %}
+<h2>{{ item.title }}</h2>
+{% if item.enclosure %}<p><img src="{{ item.enclosure }}" alt="" style="max-width:100%;height:auto;"></p>{% endif %}
+{{ item.description|safe }}
+<p><a href="{{ item.url }}">Read the post →</a></p>
+{% endfor %}
+```
+
+Keep Buttondown's default subscription confirmation enabled. The website form posts directly to Buttondown; subscriber addresses are managed there, never stored in the repository. Test with your own email address, confirm the subscription, and review a test email before enabling automatic delivery. A local preview alone cannot activate emails; Buttondown must be connected to the published feed.
+
+Official guides: [HTML signup forms](https://docs.buttondown.com/building-your-subscriber-base) and [RSS-to-email](https://docs.buttondown.com/rss-to-email).

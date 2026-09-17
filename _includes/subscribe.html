@@ -1,0 +1,16 @@
+{% assign newsletter_username = site.buttondown_username | default: '' | strip %}
+{% if newsletter_username != '' %}
+<section class="newsletter-signup" aria-labelledby="newsletter-heading" v-pre>
+  <h3 id="newsletter-heading">New writing, by email</h3>
+  <p class="newsletter-intro">Get a note when I publish a new post.</p>
+  <form action="https://buttondown.com/api/emails/embed-subscribe/{{ newsletter_username | uri_escape | escape }}" method="post" target="_self">
+    <label for="newsletter-email">Email address</label>
+    <div class="newsletter-fields">
+      <input id="newsletter-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" inputmode="email" aria-describedby="newsletter-details" required>
+      <input type="hidden" name="embed" value="1">
+      <button type="submit">Subscribe</button>
+    </div>
+    <p class="newsletter-details" id="newsletter-details">Confirm by email. Unsubscribe anytime. <a href="{{ '/feed.xml' | relative_url }}">Prefer RSS?</a></p>
+  </form>
+</section>
+{% endif %}

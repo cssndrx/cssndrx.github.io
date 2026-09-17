@@ -1,7 +1,11 @@
 title: Cassandra Xia
+description: "New writing by Cassandra Xia."
 url: "https://cassandraxia.com"
 baseurl: ""
 timezone: America/New_York
+
+# Public Buttondown newsletter username; the signup form stays hidden until set.
+buttondown_username: "xia"
 
 markdown: kramdown
 permalink: /writing/:title/

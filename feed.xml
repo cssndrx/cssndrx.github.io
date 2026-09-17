@@ -1,0 +1,35 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>{{ site.title | xml_escape }}</title>
+    <link>{{ '/' | absolute_url | xml_escape }}</link>
+    <description>{{ site.description | xml_escape }}</description>
+    <language>en</language>
+    <atom:link href="{{ '/feed.xml' | absolute_url | xml_escape }}" rel="self" type="application/rss+xml" />
+    {% comment %}Only published posts belong in the feed, even when previewing with --drafts or --future.{% endcomment %}
+    {% for post in site.posts %}
+    {% if post.path contains '_posts/' %}
+    {% unless post.published == false %}
+    {% if post.date <= site.time %}
+    <item>
+      <title>{{ post.title | xml_escape }}</title>
+      <link>{{ post.url | absolute_url | xml_escape }}</link>
+      <guid isPermaLink="true">{{ post.url | absolute_url | xml_escape }}</guid>
+      <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
+      {% assign preview_text = post.description | default: post.excerpt | strip_html | normalize_whitespace %}
+      {% capture preview_description %}<p>{{ preview_text | escape_once }}</p>{% endcapture %}
+      <description>{{ preview_description | xml_escape }}</description>
+      {% assign preview_image = post.image | default: '' | strip %}
+      {% if preview_image != '' %}
+      <media:content url="{{ preview_image | absolute_url | xml_escape }}" medium="image" />
+      {% endif %}
+    </item>
+    {% endif %}
+    {% endunless %}
+    {% endif %}
+    {% endfor %}
+  </channel>
+</rss>

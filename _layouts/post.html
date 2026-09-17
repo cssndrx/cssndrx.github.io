@@ -7,6 +7,8 @@
   <meta name="description" content="{{ page.description | default: page.excerpt | strip_html | normalize_whitespace | escape }}">
   <link rel="icon" href="{{ '/favicon.ico' | relative_url }}">
   <link rel="stylesheet" href="{{ '/writing/post.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/writing/subscribe.css' | relative_url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }} — New writing" href="{{ '/feed.xml' | relative_url }}">
 </head>
 <body>
   <main class="post">
@@ -19,6 +21,7 @@
       </header>
       <div class="post-content">{{ content }}</div>
     </article>
+    {% include subscribe.html %}
     <footer><a href="{{ '/' | relative_url }}#writing">More writing and projects →</a></footer>
   </main>
 </body>
