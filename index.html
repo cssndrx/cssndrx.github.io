@@ -82,30 +82,49 @@ h3{
 	list-style: none;
 	padding: 0;
 	margin: 24px 0 40px;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+	gap: 32px;
 }
-.writing-posts li{
+.writing-post--text{
+	grid-column: 1 / -1;
 	border-bottom: 1px solid #eee;
 	padding: 16px 0;
 }
-.writing-posts a{
+.writing-post--text > a{
 	color: #333;
 	font-size: 20px;
 	text-decoration: none;
 }
-.writing-posts a:hover{
+.writing-post--text > a:hover{
 	text-decoration: underline;
 }
-.writing-posts time{
+.writing-post--text time{
 	display: block;
 	color: #808080;
 	font-size: 12px;
 	margin-top: 6px;
 }
-.writing-posts p{
+.writing-post--text p{
 	color: #666;
 	font-size: 14px;
 	line-height: 1.6;
 	margin: 10px 0 0;
+}
+.writing-card-link{
+	display: block;
+	height: 100%;
+	text-decoration: none;
+}
+.writing-card-link:hover h3{
+	text-decoration: underline;
+}
+.writing-card{
+	height: 100%;
+	grid-template-rows: auto 1fr 150px;
+}
+.writing-card img{
+	margin: 0 auto;
 }
 
 
@@ -265,11 +284,25 @@ body, body *{
 {% if site.posts.size > 0 %}
 <ul class="writing-posts" v-pre>
 {% for post in site.posts %}
-  <li>
+  {% assign preview_image = post.image | default: '' | strip %}
+  {% assign preview_text = post.description | default: post.excerpt | strip_html | normalize_whitespace %}
+  {% if preview_image != '' %}
+  <li class="writing-post--card">
+    <a class="writing-card-link" href="{{ post.url | relative_url }}">
+      <div class="project writing-card">
+        <h3>{{ post.title | escape }}</h3>
+        <p class="tagline">{{ preview_text | escape }}</p>
+        <div><img src="{{ preview_image | relative_url | escape }}" alt="{{ post.image_alt | default: '' | escape }}" loading="lazy"></div>
+      </div>
+    </a>
+  </li>
+  {% else %}
+  <li class="writing-post--text">
     <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
     <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%B %-d, %Y' }}</time>
-    <p>{{ post.excerpt | strip_html | normalize_whitespace | escape }}</p>
+    <p>{{ preview_text | escape }}</p>
   </li>
+  {% endif %}
 {% endfor %}
 </ul>
 {% endif %}
@@ -369,7 +402,7 @@ const climateProjects = [
 
 // {
 // 	name: 'What\'s going on with climate philanthropy?',
-// 	tagline: '😱 GiveWell, Stripe, and the Big Surprise',
+// 	tagline: 'GiveWell, Stripe, and the Big Surprise',
 // 	image: 'lecture.png',
 // 	link: 'https://climatebuddies.substack.com/p/-whats-going-on-with-climate-philanthropy',
 // },
@@ -489,7 +522,7 @@ const writingProjects = [
 
 {
 	name: 'What\'s going on with climate philanthropy?',
-	tagline: '😱 GiveWell, Stripe, and the Big Surprise',
+	tagline: 'GiveWell, Stripe, and the Big Surprise',
 	image: 'lecture.png',
 	link: 'https://climatebuddies.substack.com/p/-whats-going-on-with-climate-philanthropy',
 },

@@ -17,5 +17,6 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+  - AGENTS.md
   - bin
   - vendor

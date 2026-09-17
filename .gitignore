@@ -1,6 +1,8 @@
 .DS_Store
 the plan
 /_drafts/
+/README.md
+/AGENTS.md
 _site/
 .jekyll-cache/
 .jekyll-metadata

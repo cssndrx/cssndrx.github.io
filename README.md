@@ -19,6 +19,10 @@ Use lowercase letters, numbers, and single hyphens in the slug. The template sta
 ```markdown
 ---
 title: "My new piece"
+# Optional homepage preview:
+# description: "A short preview of this post."
+# image: "/images/landscape.jpeg"
+# image_alt: "Northern lights above mountains and a lake"
 ---
 
 Start writing here. The opening paragraph also becomes the homepage excerpt.
@@ -31,6 +35,19 @@ A paragraph with **bold**, *italic*, and [a link](https://example.com).
 ```
 
 Only the title is required above the text. Add pictures to `images/` and reference them as `/images/filename.jpg`. Use filenames without spaces. Images automatically fit the article width, including on phones.
+
+For a homepage card like the older writing previews, uncomment the optional fields (remove the leading `#`) and fill them in:
+
+```yaml
+---
+title: "My new piece"
+description: "A short preview that makes someone want to read more."
+image: "/images/landscape.jpeg"
+image_alt: "Northern lights above mountains and a lake"
+---
+```
+
+An `image` enables the card with a title, preview text, and image. Without it, the post keeps the simple text preview. `description` is optional in either format; when omitted, the opening paragraph supplies the preview text. `image_alt` describes the preview image for screen readers. The preview image appears on the homepage; include an image in the Markdown body if you also want it in the article.
 
 Git ignores `_drafts/`, so regular add, commit, and push commands leave drafts out of GitHub. Jekyll can still preview them locally. Drafts have no Git history or backup on GitHub until you move them into `_posts/` and commit them. The ignore rule covers `_drafts/`; add new files in `images/` when you are ready to publish them.
 
@@ -122,7 +139,7 @@ source ~/.zshrc
 
 ### 3. Publish the Jekyll setup once
 
-**Do this once before publishing your first Markdown post.** Use your usual Git workflow to commit and publish the Jekyll setup: `.gitignore`, `_config.yml`, `Gemfile`, `Gemfile.lock`, this README, `_layouts/`, `_posts/.gitkeep`, `bin/`, `writing/post.css`, and `index.html`.
+**Do this once before publishing your first Markdown post.** Use your usual Git workflow to commit and publish the Jekyll setup: `.gitignore`, `_config.yml`, `Gemfile`, `Gemfile.lock`, `_layouts/`, `_posts/.gitkeep`, `bin/`, `writing/post.css`, and `index.html`.
 
 GitHub Pages is configured to build the root of this repository's `master` branch and serve it at <https://cassandraxia.com/>.
 

@@ -23,6 +23,10 @@ def main():
     draft = root / relative_path
     content = f'''---
 title: {json.dumps(title, ensure_ascii=False)}
+# Optional homepage preview:
+# description: "A short preview of this post."
+# image: "/images/landscape.jpeg"
+# image_alt: "Northern lights above mountains and a lake"
 ---
 
 Start writing here. The opening paragraph also becomes the homepage excerpt.
