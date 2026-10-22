@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page.title | escape }} — {{ site.title | escape }}</title>
   <meta name="description" content="{{ page.description | default: page.excerpt | strip_html | normalize_whitespace | escape }}">
-  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=sparrow">
+  <link rel="icon" type="image/png" sizes="256x256" href="{{ '/favicon-sparrow.png' | relative_url }}">
+<link rel="apple-touch-icon" href="{{ '/favicon-sparrow.png' | relative_url }}">
   <link rel="stylesheet" href="{{ '/writing/post.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/writing/subscribe.css' | relative_url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }} — New writing" href="{{ '/feed.xml' | relative_url }}">
