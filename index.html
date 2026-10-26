@@ -80,6 +80,29 @@ h3{
 	color: #808080;
 }
 
+.project-grid.recent-projects{
+	grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+}
+.recent-project-link{
+	display: block;
+	color: inherit;
+	text-decoration: none;
+}
+.recent-project-link:hover h3{
+	text-decoration: underline;
+}
+.recent-project-link:focus-visible{
+	outline: 2px solid #31594b;
+	outline-offset: 8px;
+}
+.recent-project{
+	height: 100%;
+	grid-template-rows: auto 1fr 150px;
+}
+.recent-project img{
+	margin: 0 auto;
+}
+
 .writing-posts{
 	list-style: none;
 	padding: 0;
@@ -261,6 +284,21 @@ body, body *{
 </section> 
 
 
+
+<section aria-labelledby="recent-projects-heading">
+<h2 id="recent-projects-heading">Recent projects</h2>
+<p class="blurb">Small experiments in making everyday life a little better.</p>
+
+<div class="project-grid recent-projects">
+  <a class="recent-project-link" href="https://ataraxxia.com/">
+    <div class="project recent-project">
+      <h3>Ataraxxia</h3>
+      <p class="tagline">A little space to settle, with guided sessions and gentle visual movement.</p>
+      <div><img src="{{ '/images/ataraxxia.png' | relative_url }}" alt="Ataraxxia: tranquility; a little peace of mind." width="1200" height="630" loading="lazy" style="width:100%;height:auto"></div>
+    </div>
+  </a>
+</div>
+</section>
 
 <h2>Climate and activism</h2>
 <p class="blurb">Projects I have been involved in since leaving Google!</p>
