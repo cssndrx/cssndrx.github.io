@@ -11,8 +11,8 @@ const center=n=>{const {c,r}=G.xy(n);return {x:100+c*100,y:204+r*88};};
 function text(parent,x,y,copy,attrs={}){const el=svg('text',{x,y,fill:'#c9bdd6','font-family':'monospace','font-size':12,...attrs},parent);el.textContent=copy;return el;}
 const furniture=$('furniture');
 // House zones and furniture are scenery; interior walls block movement.
-const zones=[{x:50,y:160,w:500,h:264,color:'#668c80',label:'KITCHEN'},{x:650,y:160,w:300,h:176,color:'#788aa5',label:'LAUNDRY'},{x:50,y:512,w:300,h:176,color:'#9b866c',label:'HOME OFFICE'},{x:450,y:512,w:200,h:176,color:'#698f73',label:'PLANT CORNER'}];
-for(const z of zones){svg('rect',{x:z.x,y:z.y,width:z.w,height:z.h,fill:z.color,opacity:.24,rx:8},furniture);text(furniture,z.x+12,z.y+20,z.label,{'font-size':11,'letter-spacing':1.5,fill:'#eee8d9'});}
+const zones=[{x:40,y:143,w:510,h:281,color:'#668c80',label:'KITCHEN',labelX:162,labelY:180},{x:650,y:143,w:310,h:193,color:'#788aa5',label:'LAUNDRY',labelY:180},{x:40,y:512,w:310,h:185,color:'#9b866c',label:'HOME OFFICE',labelX:62},{x:450,y:512,w:200,h:185,color:'#698f73',label:'PLANT CORNER'}];
+for(const z of zones){svg('rect',{x:z.x,y:z.y,width:z.w,height:z.h,fill:z.color,opacity:.24,rx:8},furniture);text(furniture,z.labelX??z.x+12,z.labelY??z.y+20,z.label,{'font-size':14,'letter-spacing':1.5,fill:'#eee8d9'});}
 // One-by-two-square counter, tucked against the kitchen's top wall.
 const counter=svg('g',{transform:'translate(250 146)','aria-label':'Two-square kitchen counter with stove and sink'},furniture);
 svg('rect',{x:0,y:0,width:200,height:88,rx:4,fill:'#729185',stroke:'#b8c6ad','stroke-width':3},counter);
@@ -22,15 +22,13 @@ svg('rect',{x:14,y:12,width:70,height:44,rx:4,fill:'#3b414b'},counter);
 for(const x of [32,65])for(const y of [25,43])svg('circle',{cx:x,cy:y,r:6,fill:'none',stroke:'#c1b9ac','stroke-width':2},counter);
 svg('rect',{x:116,y:17,width:66,height:39,rx:8,fill:'#879d9e',stroke:'#abbcba','stroke-width':3},counter);
 svg('path',{d:'M147 28V12q0-7 10-7h5',fill:'none',stroke:'#f1f0e5','stroke-width':4,'stroke-linecap':'round'},counter);
-// Reading chair beside the expanded kitchen.
-svg('rect',{x:160,y:427,width:80,height:77,rx:18,fill:'#8d9a8a',stroke:'#bdc7a6','stroke-width':3},furniture);svg('rect',{x:174,y:445,width:52,height:44,rx:9,fill:'#b2b99b'},furniture);
 // Washer and dryer in the utility room.
 for(const x of [658,756]){svg('rect',{x,y:255,width:87,height:72,rx:7,fill:'#c4ced0',stroke:'#e2e6df','stroke-width':3},furniture);svg('circle',{cx:x+43,cy:294,r:23,fill:'#617986',stroke:'#f1eee0','stroke-width':5},furniture);svg('path',{d:'M'+(x+14)+' 267h22',stroke:'#697f86','stroke-width':4},furniture);}
 // Dad's office reaches the house's right and bottom walls.
 const office=svg('g',{'aria-label':"Dad’s office"},furniture);
 svg('rect',{x:650,y:512,width:310,height:185,fill:'#736a8b',opacity:.5},office);
 
-text(office,667,537,'DAD’S OFFICE',{'font-size':12,'letter-spacing':1.5,fill:'#eee3ef'});
+text(office,662,532,'DAD’S OFFICE',{'font-size':14,'letter-spacing':1.5,fill:'#eee3ef'});
 // Dad shares Mom's proportions, dancing pose and halo, with short hair and glasses.
 const dadSpot=center(G.DAD),dad=svg('g',{transform:`translate(${dadSpot.x} ${dadSpot.y-9})`,'aria-label':'Dad'},office);
 const dadBeacon=svg('circle',{cx:0,cy:0,r:36,fill:'#b9e4ce',class:'target-halo'},dad);
@@ -47,7 +45,7 @@ const laptop=svg('g',{transform:'translate(200 556)'},furniture);svg('rect',{x:-
 // Walls follow square boundaries, with gaps for doorways.
 const walls=svg('g',{'aria-label':'Interior walls with open doorways'},furniture);
 for(const [a,b] of G.WALLS){const p=center(a),q=center(b),vertical=p.y===q.y,x=(p.x+q.x)/2,y=(p.y+q.y)/2;
-const d=vertical?`M${x} ${y-44}V${y+44}`:`M${x-50} ${y}H${x+50}`;
+const d=vertical?`M${x} ${y===204?143:y-44}V${y===644?697:y+44}`:`M${x===100?40:x-50} ${y}H${x===900?960:x+50}`;
 svg('path',{d,fill:'none',stroke:'#292733','stroke-width':16,'stroke-linecap':'square'},walls);
 svg('path',{d,fill:'none',stroke:'#c9b9cf','stroke-width':9,'stroke-linecap':'square'},walls);
 svg('path',{d,fill:'none',stroke:'#eee0e5','stroke-width':2,opacity:.6},walls);
