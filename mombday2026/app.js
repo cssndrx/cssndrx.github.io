@@ -13,6 +13,24 @@ const furniture=$('furniture');
 // House zones are decorative; solid furnishings match the blocked tiles.
 const zones=[{x:50,y:160,w:500,h:264,color:'#668c80',label:'KITCHEN'},{x:650,y:160,w:300,h:176,color:'#788aa5',label:'LAUNDRY'},{x:50,y:512,w:300,h:176,color:'#9b866c',label:'HOME OFFICE'},{x:450,y:512,w:200,h:176,color:'#698f73',label:'PLANT CORNER'}];
 for(const z of zones){svg('rect',{x:z.x,y:z.y,width:z.w,height:z.h,fill:z.color,opacity:.24,rx:8},furniture);text(furniture,z.x+12,z.y+20,z.label,{'font-size':11,'letter-spacing':1.5,fill:'#eee8d9'});}
+// Kitchen worktop stays inside the kitchen and blocks tiles 19–21.
+const counter=svg('g',{'aria-label':'Kitchen counter with stove and sink'},furniture);
+svg('rect',{x:158,y:340,width:284,height:76,rx:5,fill:'#729185',stroke:'#b8c6ad','stroke-width':3},counter);
+svg('rect',{x:158,y:340,width:284,height:53,rx:5,fill:'#e4dbc6'},counter);
+svg('path',{d:'M253 395v19m95-19v19M180 405h48m48 0h48m47 0h48',stroke:'#4e6d63','stroke-width':3},counter);
+svg('rect',{x:170,y:348,width:68,height:37,rx:4,fill:'#3b414b'},counter);
+for(const x of [187,220])for(const y of [358,375])svg('circle',{cx:x,cy:y,r:6,fill:'none',stroke:'#c1b9ac','stroke-width':2},counter);
+svg('rect',{x:270,y:349,width:60,height:35,rx:8,fill:'#879d9e',stroke:'#abbcba','stroke-width':3},counter);
+svg('path',{d:'M300 357v-14q0-8 10-8h5',fill:'none',stroke:'#e3e6dc','stroke-width':4,'stroke-linecap':'round'},counter);
+svg('rect',{x:364,y:351,width:58,height:30,rx:5,fill:'#bb956c'},counter);
+svg('path',{d:'M377 363l24 9',stroke:'#e9aa68','stroke-width':7,'stroke-linecap':'round'},counter);
+svg('path',{d:'M400 371l8-6m-8 6l9 1',stroke:'#73915e','stroke-width':3,'stroke-linecap':'round'},counter);
+// Two-seat sofa: back, cushions and arms make its footprint readable.
+const sofa=svg('g',{'aria-label':'Two-seat sofa'},furniture);
+svg('rect',{x:357,y:429,width:186,height:73,rx:12,fill:'#827693',stroke:'#b7a5c7','stroke-width':3},sofa);
+svg('rect',{x:370,y:434,width:160,height:23,rx:8,fill:'#a696b4'},sofa);
+for(const x of [372,452])svg('rect',{x,y:460,width:76,height:31,rx:7,fill:'#c2afce',stroke:'#93829f','stroke-width':2},sofa);
+for(const x of [359,531])svg('rect',{x,y:448,width:10,height:46,rx:5,fill:'#a696b4'},sofa);
 // Reading chair beside the expanded kitchen.
 svg('rect',{x:160,y:427,width:80,height:77,rx:18,fill:'#8d9a8a',stroke:'#bdc7a6','stroke-width':3},furniture);svg('rect',{x:174,y:445,width:52,height:44,rx:9,fill:'#b2b99b'},furniture);
 // Washer and dryer: blocked cells in the utility room.
@@ -65,7 +83,7 @@ function drawRecords(){const layer=$('record-layer');layer.replaceChildren();G.T
 function drawRoute(to){const layer=$('route-layer');layer.replaceChildren();if(to===null||state.phase!=='choose'||busy)return;const route=G.route(state.position,to,state.budget);if(!route.length)return;svg('polyline',{points:route.map(n=>{const p=center(n);return `${p.x},${p.y}`;}).join(' '),stroke:'#d9ef83','stroke-width':3,fill:'none',class:'route-line'},layer);const p=center(to);svg('circle',{cx:p.x,cy:p.y,r:32,fill:'none',stroke:'#d9ef83','stroke-width':2,'stroke-dasharray':'4 5'},layer);const chase=G.route(state.enemy,to).slice(0,3);svg('polyline',{points:chase.map(n=>{const p=center(n);return `${p.x},${p.y}`;}).join(' '),stroke:'#efa785','stroke-width':4,fill:'none','stroke-dasharray':'3 7'},layer);}
 function render(){const choosing=state.phase==='choose',acting=state.phase==='action',won=state.phase==='won';$('instruction').textContent=choosing?`Up to ${state.budget} ${state.budget===1?'step':'steps'}.`:'';$('instruction').hidden=!choosing;document.querySelector('.brand-sub').hidden=won;document.querySelector('.legend').hidden=won;$('turn-label').textContent=won?'♥':`TURN ${state.turn+1}`;$('roll').hidden=choosing||acting;$('replay-finale').hidden=!won;$('dice').hidden=won;$('toggle-light').hidden=won;$('dad-status').hidden=won;$('roll').disabled=busy;$('roll').classList.toggle('action-ready',state.phase==='roll'&&!busy);dadBeacon.setAttribute('visibility',state.dadVisited||won?'hidden':'visible');laptop.classList.toggle('goal-ready',state.cds.length===3&&state.phase!=='won');$('dice').disabled=busy||state.phase!=='roll';$('roll').textContent=won?'Open your note →':'Roll dice';$('move').hidden=!choosing;$('resume').hidden=!acting;$('resume').disabled=busy;$('move').disabled=selected===null||busy;$('destination').hidden=!choosing||selected===null;
 if(choosing&&selected!==null){const steps=G.reachable(state.position,state.budget).distance.get(selected),danger=G.dangerCells(state).has(selected)||G.route(state.position,selected,state.budget).includes(state.enemy);$('move').textContent=`Move ${steps} →`;$('destination-name').textContent=G.CDS.includes(selected)?G.tileName(selected):`${steps} ${steps===1?'step':'steps'}`;$('destination-risk').textContent=danger?(state.shield?'Dad’s shield can save you here.':'He can catch you here.'):'Out of reach.';$('destination').classList.toggle('danger',danger);}else $('move').textContent='Choose a square';
-$('turn-note').textContent=state.last;$('turn-note').hidden=won||!state.last;$('dad-status').textContent=state.shield?'♥ Dad’s got you · shield ready':state.dadVisited?'♥ Thanks, Dad · shield used':'☕ Visit Dad for a one-use shield';$('record-count').textContent=`${state.cds.length} / 3 done`;
+$('turn-note').textContent=state.last;$('turn-note').hidden=won||!state.last;$('dad-status').textContent=state.shield?'💗 Dad’s got you · shield ready':state.dadVisited?'💗 Thanks, Dad · shield used':'💗 Visit Dad for a one-use shield';$('record-count').textContent=`${state.cds.length} / 3 done`;
 const reachable=choosing?G.reachable(state.position,state.budget).distance:new Map(),danger=G.dangerCells(state);tiles.forEach((b,n)=>{const can=choosing&&reachable.has(n)&&n!==state.position&&!busy,steps=reachable.get(n);b.disabled=!can;b.className='tile'+(G.BLOCKED.has(n)?' obstacle':'')+(can?' reachable':'')+(n===selected?' selected':'');b.querySelector('.cost').textContent=steps??'';b.setAttribute('aria-pressed',String(n===selected));b.setAttribute('aria-label',`${G.BLOCKED.has(n)?'Furniture':G.tileName(n)}${can?`, ${steps} ${steps===1?'step':'steps'}, ${danger.has(n)?'danger':'out of reach'}`:''}`);});
 const p=center(state.position);shieldHeart.setAttribute('visibility',state.shield?'visible':'hidden');avatar.setAttribute('transform',`translate(${p.x} ${p.y-9})`);drawBeams();drawInspector();drawRecords();drawRoute(selected);if(won)drawFinale(false);else clearFinale();
 }
