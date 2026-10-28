@@ -1,6 +1,6 @@
 (function(root){
 'use strict';
-const COLS=9,ROWS=6,HOME=37,START_ENEMY=4,CDS=[0,17,50],CHASE_STEPS=2,DAD=44;
+const COLS=9,ROWS=6,HOME=46,START_ENEMY=4,CDS=[0,17,50],CHASE_STEPS=2,DAD=44;
 const TASKS=[{tile:0,icon:"🍳",name:"Lunch",action:"Cook lunch",done:"Lunch is ready.",quote:"A proper lunch deserves a proper soundtrack."},{tile:17,icon:"👕",name:"Laundry",action:"Start the laundry",done:"Laundry is spinning.",quote:"The spin cycle can wait. This chorus can’t."},{tile:50,icon:"🪴",name:"Plants",action:"Water the plants",done:"Plants are watered.",quote:"You’re allowed to grow at your own pace."}];
 // Walls separate neighboring squares; furniture is scenery.
 const BLOCKED=new Set();
