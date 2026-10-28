@@ -10,10 +10,10 @@ const svg=(tag,attrs,parent)=>{const el=document.createElementNS(NS,tag);Object.
 const center=n=>{const {c,r}=G.xy(n);return {x:100+c*100,y:204+r*88};};
 function text(parent,x,y,copy,attrs={}){const el=svg('text',{x,y,fill:'#c9bdd6','font-family':'monospace','font-size':12,...attrs},parent);el.textContent=copy;return el;}
 const furniture=$('furniture');
-// House zones are decorative; solid furnishings match the blocked tiles.
+// House zones and furniture are scenery; interior walls block movement.
 const zones=[{x:50,y:160,w:500,h:264,color:'#668c80',label:'KITCHEN'},{x:650,y:160,w:300,h:176,color:'#788aa5',label:'LAUNDRY'},{x:50,y:512,w:300,h:176,color:'#9b866c',label:'HOME OFFICE'},{x:450,y:512,w:200,h:176,color:'#698f73',label:'PLANT CORNER'}];
 for(const z of zones){svg('rect',{x:z.x,y:z.y,width:z.w,height:z.h,fill:z.color,opacity:.24,rx:8},furniture);text(furniture,z.x+12,z.y+20,z.label,{'font-size':11,'letter-spacing':1.5,fill:'#eee8d9'});}
-// Kitchen worktop stays inside the kitchen and blocks tiles 19–21.
+// Kitchen worktop inside the kitchen.
 const counter=svg('g',{'aria-label':'Kitchen counter with stove and sink'},furniture);
 svg('rect',{x:158,y:340,width:284,height:76,rx:5,fill:'#729185',stroke:'#b8c6ad','stroke-width':3},counter);
 svg('rect',{x:158,y:340,width:284,height:53,rx:5,fill:'#e4dbc6'},counter);
@@ -33,12 +33,12 @@ for(const x of [372,452])svg('rect',{x,y:460,width:76,height:31,rx:7,fill:'#c2af
 for(const x of [359,531])svg('rect',{x,y:448,width:10,height:46,rx:5,fill:'#a696b4'},sofa);
 // Reading chair beside the expanded kitchen.
 svg('rect',{x:160,y:427,width:80,height:77,rx:18,fill:'#8d9a8a',stroke:'#bdc7a6','stroke-width':3},furniture);svg('rect',{x:174,y:445,width:52,height:44,rx:9,fill:'#b2b99b'},furniture);
-// Washer and dryer: blocked cells in the utility room.
+// Washer and dryer in the utility room.
 for(const x of [658,756]){svg('rect',{x,y:255,width:87,height:72,rx:7,fill:'#c4ced0',stroke:'#e2e6df','stroke-width':3},furniture);svg('circle',{cx:x+43,cy:294,r:23,fill:'#617986',stroke:'#f1eee0','stroke-width':5},furniture);svg('path',{d:'M'+(x+14)+' 267h22',stroke:'#697f86','stroke-width':4},furniture);}
-// Dad's office reaches the house's right and bottom walls. The desk matches blocked cells.
+// Dad's office reaches the house's right and bottom walls.
 const office=svg('g',{'aria-label':"Dad’s office"},furniture);
 svg('rect',{x:650,y:492,width:310,height:205,fill:'#736a8b',opacity:.5},office);
-svg('path',{d:'M650 697V492H960',fill:'none',stroke:'#bcacc8','stroke-width':3,opacity:.8},office);
+
 text(office,667,514,'DAD’S OFFICE',{'font-size':12,'letter-spacing':1.5,fill:'#eee3ef'});
 svg('rect',{x:658,y:532,width:184,height:147,rx:6,fill:'#ab9279',stroke:'#d0b99a','stroke-width':3},office);
 svg('rect',{x:683,y:543,width:119,height:65,rx:4,fill:'#292d40',stroke:'#c0b6ca','stroke-width':3},office);
@@ -59,6 +59,14 @@ svg('path',{d:'M-8 -31h6v5h-6Zm10 0h6v5h-6Zm-4 2h4',fill:'none',stroke:'#393442'
 text(dad,0,48,'DAD',{'text-anchor':'middle','font-size':12,fill:'#dfefcf','font-weight':700});
 // Laptop at the start and finish tile.
 const laptop=svg('g',{transform:'translate(200 556)'},furniture);svg('rect',{x:-36,y:-18,width:72,height:44,rx:4,fill:'#292d40',stroke:'#c4bfd1','stroke-width':3},laptop);svg('rect',{x:-29,y:-11,width:58,height:29,rx:2,fill:'#8fbac1'},laptop);svg('path',{d:'M-36 28h72l12 10h-96Z',fill:'#d0c9d7'},laptop);text(furniture,200,630,'LAPTOP',{'text-anchor':'middle','font-size':10,fill:'#e3edb4'});
+// Walls follow square boundaries, with gaps for doorways.
+const walls=svg('g',{'aria-label':'Interior walls with open doorways'},furniture);
+for(const [a,b] of G.WALLS){const p=center(a),q=center(b),vertical=p.y===q.y,x=(p.x+q.x)/2,y=(p.y+q.y)/2;
+const d=vertical?`M${x} ${y-44}V${y+44}`:`M${x-50} ${y}H${x+50}`;
+svg('path',{d,fill:'none',stroke:'#292733','stroke-width':16,'stroke-linecap':'square'},walls);
+svg('path',{d,fill:'none',stroke:'#c9b9cf','stroke-width':9,'stroke-linecap':'square'},walls);
+svg('path',{d,fill:'none',stroke:'#eee0e5','stroke-width':2,opacity:.6},walls);
+}
 // Fixed player silhouette.
 const avatar=$('player-layer');
 const shieldHeart=svg('path',{d:'M0 38C-76 -6 -48 -70 0 -39C48 -70 76 -6 0 38Z',fill:'#f5a0c1','fill-opacity':.12,stroke:'#ff9bc7','stroke-width':4,class:'dad-heart-glow',visibility:'hidden'},avatar);
@@ -84,7 +92,7 @@ function drawRoute(to){const layer=$('route-layer');layer.replaceChildren();if(t
 function render(){const choosing=state.phase==='choose',acting=state.phase==='action',won=state.phase==='won';$('instruction').textContent=choosing?`Up to ${state.budget} ${state.budget===1?'step':'steps'}.`:'';$('instruction').hidden=!choosing;document.querySelector('.brand-sub').hidden=won;document.querySelector('.legend').hidden=won;$('turn-label').textContent=won?'♥':`TURN ${state.turn+1}`;$('roll').hidden=choosing||acting;$('replay-finale').hidden=!won;$('dice').hidden=won;$('toggle-light').hidden=won;$('dad-status').hidden=won;$('roll').disabled=busy;$('roll').classList.toggle('action-ready',state.phase==='roll'&&!busy);dadBeacon.setAttribute('visibility',state.dadVisited||won?'hidden':'visible');laptop.classList.toggle('goal-ready',state.cds.length===3&&state.phase!=='won');$('dice').disabled=busy||state.phase!=='roll';$('roll').textContent=won?'Open your note →':'Roll dice';$('move').hidden=!choosing;$('resume').hidden=!acting;$('resume').disabled=busy;$('move').disabled=selected===null||busy;$('destination').hidden=!choosing||selected===null;
 if(choosing&&selected!==null){const steps=G.reachable(state.position,state.budget).distance.get(selected),danger=G.dangerCells(state).has(selected)||G.route(state.position,selected,state.budget).includes(state.enemy);$('move').textContent=`Move ${steps} →`;$('destination-name').textContent=G.CDS.includes(selected)?G.tileName(selected):`${steps} ${steps===1?'step':'steps'}`;$('destination-risk').textContent=danger?(state.shield?'Dad’s shield can save you here.':'He can catch you here.'):'Out of reach.';$('destination').classList.toggle('danger',danger);}else $('move').textContent='Choose a square';
 $('turn-note').textContent=state.last;$('turn-note').hidden=won||!state.last;$('dad-status').textContent=state.shield?'💗 Dad’s got you · shield ready':state.dadVisited?'💗 Thanks, Dad · shield used':'💗 Visit Dad for a one-use shield';$('record-count').textContent=`${state.cds.length} / 3 done`;
-const reachable=choosing?G.reachable(state.position,state.budget).distance:new Map(),danger=G.dangerCells(state);tiles.forEach((b,n)=>{const can=choosing&&reachable.has(n)&&n!==state.position&&!busy,steps=reachable.get(n);b.disabled=!can;b.className='tile'+(G.BLOCKED.has(n)?' obstacle':'')+(can?' reachable':'')+(n===selected?' selected':'');b.querySelector('.cost').textContent=can?String(steps):'';b.title=G.BLOCKED.has(n)?'Furniture — blocks your path':can?`Move here · ${steps} ${steps===1?'step':'steps'}`:choosing?(n===state.position?'You are here':'Too far for this roll'):'Roll dice to see where you can move';b.setAttribute('aria-pressed',String(n===selected));b.setAttribute('aria-label',`${G.BLOCKED.has(n)?'Furniture — blocks your path':G.tileName(n)}${can?`, ${steps} ${steps===1?'step':'steps'}, ${danger.has(n)?'danger':'out of reach'}`:''}`);});
+const reachable=choosing?G.reachable(state.position,state.budget).distance:new Map(),danger=G.dangerCells(state);tiles.forEach((b,n)=>{const can=choosing&&reachable.has(n)&&n!==state.position&&!busy,steps=reachable.get(n);b.disabled=!can;b.className='tile'+(G.BLOCKED.has(n)?' obstacle':'')+(can?' reachable':'')+(n===selected?' selected':'');b.querySelector('.cost').textContent=can?String(steps):'';b.title=G.BLOCKED.has(n)?'Wall — blocks your path':can?`Move here · ${steps} ${steps===1?'step':'steps'}`:choosing?(n===state.position?'You are here':'Not reachable on this roll'):'Roll dice to see where you can move';b.setAttribute('aria-pressed',String(n===selected));b.setAttribute('aria-label',`${G.BLOCKED.has(n)?'Wall — blocks your path':G.tileName(n)}${can?`, ${steps} ${steps===1?'step':'steps'}, ${danger.has(n)?'danger':'out of reach'}`:''}`);});
 const p=center(state.position);shieldHeart.setAttribute('visibility',state.shield?'visible':'hidden');avatar.setAttribute('transform',`translate(${p.x} ${p.y-9})`);drawBeams();drawInspector();drawRecords();drawRoute(selected);if(won)drawFinale(false);else clearFinale();
 }
 function choose(n){if(state.phase!=='choose'||busy||n===state.position||!G.reachable(state.position,state.budget).distance.has(n))return;selected=n;render();}

@@ -50,3 +50,5 @@ header{max-width:940px;gap:22px;padding:18px 24px;align-items:center}.brand{alig
 
 /* Movement affordances: only valid destinations show a step badge. */
 .tile:not(.reachable) .cost{display:none}.tile.obstacle:disabled{cursor:not-allowed}.tile.obstacle:hover{background:#f2a7b51a;outline:2px dashed #efb4c2;outline-offset:-3px}.tile:not(.reachable):not(.obstacle){cursor:default}
+
+.legend .key-cover{width:13px;height:4px;border-radius:0;background:#c9b9cf;border:1px solid #eee0e5}
