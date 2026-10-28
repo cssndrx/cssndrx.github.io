@@ -13,39 +13,24 @@ const furniture=$('furniture');
 // House zones and furniture are scenery; interior walls block movement.
 const zones=[{x:50,y:160,w:500,h:264,color:'#668c80',label:'KITCHEN'},{x:650,y:160,w:300,h:176,color:'#788aa5',label:'LAUNDRY'},{x:50,y:512,w:300,h:176,color:'#9b866c',label:'HOME OFFICE'},{x:450,y:512,w:200,h:176,color:'#698f73',label:'PLANT CORNER'}];
 for(const z of zones){svg('rect',{x:z.x,y:z.y,width:z.w,height:z.h,fill:z.color,opacity:.24,rx:8},furniture);text(furniture,z.x+12,z.y+20,z.label,{'font-size':11,'letter-spacing':1.5,fill:'#eee8d9'});}
-// Kitchen worktop inside the kitchen.
-const counter=svg('g',{'aria-label':'Kitchen counter with stove and sink'},furniture);
-svg('rect',{x:158,y:340,width:284,height:76,rx:5,fill:'#729185',stroke:'#b8c6ad','stroke-width':3},counter);
-svg('rect',{x:158,y:340,width:284,height:53,rx:5,fill:'#e4dbc6'},counter);
-svg('path',{d:'M253 395v19m95-19v19M180 405h48m48 0h48m47 0h48',stroke:'#4e6d63','stroke-width':3},counter);
-svg('rect',{x:170,y:348,width:68,height:37,rx:4,fill:'#3b414b'},counter);
-for(const x of [187,220])for(const y of [358,375])svg('circle',{cx:x,cy:y,r:6,fill:'none',stroke:'#c1b9ac','stroke-width':2},counter);
-svg('rect',{x:270,y:349,width:60,height:35,rx:8,fill:'#879d9e',stroke:'#abbcba','stroke-width':3},counter);
-svg('path',{d:'M300 357v-14q0-8 10-8h5',fill:'none',stroke:'#e3e6dc','stroke-width':4,'stroke-linecap':'round'},counter);
-svg('rect',{x:364,y:351,width:58,height:30,rx:5,fill:'#bb956c'},counter);
-svg('path',{d:'M377 363l24 9',stroke:'#e9aa68','stroke-width':7,'stroke-linecap':'round'},counter);
-svg('path',{d:'M400 371l8-6m-8 6l9 1',stroke:'#73915e','stroke-width':3,'stroke-linecap':'round'},counter);
-// Two-seat sofa: back, cushions and arms make its footprint readable.
-const sofa=svg('g',{'aria-label':'Two-seat sofa'},furniture);
-svg('rect',{x:357,y:429,width:186,height:73,rx:12,fill:'#827693',stroke:'#b7a5c7','stroke-width':3},sofa);
-svg('rect',{x:370,y:434,width:160,height:23,rx:8,fill:'#a696b4'},sofa);
-for(const x of [372,452])svg('rect',{x,y:460,width:76,height:31,rx:7,fill:'#c2afce',stroke:'#93829f','stroke-width':2},sofa);
-for(const x of [359,531])svg('rect',{x,y:448,width:10,height:46,rx:5,fill:'#a696b4'},sofa);
+// One-by-two-square counter, tucked against the kitchen's top wall.
+const counter=svg('g',{transform:'translate(250 146)','aria-label':'Two-square kitchen counter with stove and sink'},furniture);
+svg('rect',{x:0,y:0,width:200,height:88,rx:4,fill:'#729185',stroke:'#b8c6ad','stroke-width':3},counter);
+svg('rect',{x:0,y:0,width:200,height:66,rx:4,fill:'#e4dbc6'},counter);
+svg('path',{d:'M100 68v18m-80-9h60m40 0h60',stroke:'#4e6d63','stroke-width':3},counter);
+svg('rect',{x:14,y:12,width:70,height:44,rx:4,fill:'#3b414b'},counter);
+for(const x of [32,65])for(const y of [25,43])svg('circle',{cx:x,cy:y,r:6,fill:'none',stroke:'#c1b9ac','stroke-width':2},counter);
+svg('rect',{x:116,y:17,width:66,height:39,rx:8,fill:'#879d9e',stroke:'#abbcba','stroke-width':3},counter);
+svg('path',{d:'M147 28V12q0-7 10-7h5',fill:'none',stroke:'#f1f0e5','stroke-width':4,'stroke-linecap':'round'},counter);
 // Reading chair beside the expanded kitchen.
 svg('rect',{x:160,y:427,width:80,height:77,rx:18,fill:'#8d9a8a',stroke:'#bdc7a6','stroke-width':3},furniture);svg('rect',{x:174,y:445,width:52,height:44,rx:9,fill:'#b2b99b'},furniture);
 // Washer and dryer in the utility room.
 for(const x of [658,756]){svg('rect',{x,y:255,width:87,height:72,rx:7,fill:'#c4ced0',stroke:'#e2e6df','stroke-width':3},furniture);svg('circle',{cx:x+43,cy:294,r:23,fill:'#617986',stroke:'#f1eee0','stroke-width':5},furniture);svg('path',{d:'M'+(x+14)+' 267h22',stroke:'#697f86','stroke-width':4},furniture);}
 // Dad's office reaches the house's right and bottom walls.
 const office=svg('g',{'aria-label':"Dad’s office"},furniture);
-svg('rect',{x:650,y:492,width:310,height:205,fill:'#736a8b',opacity:.5},office);
+svg('rect',{x:650,y:512,width:310,height:185,fill:'#736a8b',opacity:.5},office);
 
-text(office,667,514,'DAD’S OFFICE',{'font-size':12,'letter-spacing':1.5,fill:'#eee3ef'});
-svg('rect',{x:658,y:532,width:184,height:147,rx:6,fill:'#ab9279',stroke:'#d0b99a','stroke-width':3},office);
-svg('rect',{x:683,y:543,width:119,height:65,rx:4,fill:'#292d40',stroke:'#c0b6ca','stroke-width':3},office);
-svg('rect',{x:690,y:550,width:105,height:48,rx:2,fill:'#7eabae'},office);
-svg('path',{d:'M742 610v10m-18 0h36',stroke:'#4e485b','stroke-width':5},office);
-svg('rect',{x:686,y:636,width:113,height:25,rx:3,fill:'#ded2bd'},office);
-svg('path',{d:'M695 645h94m-94 8h94',stroke:'#a5978b','stroke-width':2},office);
+text(office,667,537,'DAD’S OFFICE',{'font-size':12,'letter-spacing':1.5,fill:'#eee3ef'});
 // Dad shares Mom's proportions, dancing pose and halo, with short hair and glasses.
 const dadSpot=center(G.DAD),dad=svg('g',{transform:`translate(${dadSpot.x} ${dadSpot.y-9})`,'aria-label':'Dad'},office);
 const dadBeacon=svg('circle',{cx:0,cy:0,r:36,fill:'#b9e4ce',class:'target-halo'},dad);
