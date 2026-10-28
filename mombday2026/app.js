@@ -3,7 +3,7 @@
 const G=window.SecretDance,C=window.BIRTHDAY,$=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
 const key='wfh-dancing-v2',reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let state=G.makeState(),selected=null,busy=false,showBeam=true,policeMoving=false;
-try{const saved=JSON.parse(localStorage.getItem(key));if(saved&&saved.phase==='won'&&saved.position===37)saved.position=G.HOME;if(saved&&saved.phase==='dance')saved.phase='action';if(saved&&G.validState({...G.makeState(),...saved}))state={...G.makeState(),...saved};}catch{}
+try{const saved=JSON.parse(localStorage.getItem(key));if(saved&&saved.position===37&&(saved.phase==='won'||saved.turn===0&&Array.isArray(saved.cds)&&saved.cds.length===0&&!saved.dadVisited))saved.position=G.HOME;if(saved&&saved.phase==='dance')saved.phase='action';if(saved&&G.validState({...G.makeState(),...saved}))state={...G.makeState(),...saved};}catch{}
 const save=()=>{try{localStorage.setItem(key,JSON.stringify(state));}catch{}};
 const sleep=ms=>new Promise(r=>setTimeout(r,reduced?0:ms));
 const svg=(tag,attrs,parent)=>{const el=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));parent.append(el);return el;};
