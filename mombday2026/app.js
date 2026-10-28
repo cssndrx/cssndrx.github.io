@@ -18,7 +18,7 @@ const office=svg('g',{'aria-label':"Dad’s office"},furniture);
 svg('rect',{x:650,y:512,width:310,height:185,fill:'#736a8b',opacity:.5},office);
 
 text(office,662,532,'DAD’S OFFICE',{'font-size':14,'letter-spacing':1.5,fill:'#eee3ef'});
-// Dad shares Mom's proportions, dancing pose and halo, with short hair and glasses.
+// Dad shares Mom's proportions, dancing pose and halo, with short black hair and glasses.
 const dadSpot=center(G.DAD),dad=svg('g',{transform:`translate(${dadSpot.x} ${dadSpot.y-9})`,'aria-label':'Dad'},office);
 const dadBeacon=svg('circle',{cx:0,cy:0,r:36,fill:'#b9e4ce',class:'target-halo'},dad);
 svg('ellipse',{cx:0,cy:20,rx:20,ry:7,fill:'#151622',opacity:.4},dad);
@@ -26,7 +26,7 @@ svg('path',{d:'M-6 3l-10 17m20 -15l13 12',stroke:'#a9d5c4','stroke-width':7,'str
 svg('path',{d:'M-11 -13l-10 -9m32 10l12 -6',stroke:'#a9d5c4','stroke-width':6,'stroke-linecap':'round'},dad);
 svg('rect',{x:-11,y:-19,width:22,height:28,rx:8,fill:'#a9d5c4'},dad);
 svg('circle',{cx:0,cy:-30,r:10,fill:'#d9b7a5'},dad);
-svg('path',{d:'M-10 -30q-3 -15 10 -15q14 0 10 15l-5 -8h-10Z',fill:'#77717a'},dad);
+svg('path',{d:'M-10 -30q-3 -15 10 -15q14 0 10 15l-5 -8h-10Z',fill:'#2b2434'},dad);
 svg('path',{d:'M-8 -31h6v5h-6Zm10 0h6v5h-6Zm-4 2h4',fill:'none',stroke:'#393442','stroke-width':1.5},dad);
 text(dad,0,48,'DAD',{'text-anchor':'middle','font-size':12,fill:'#dfefcf','font-weight':700});
 // Laptop at the start and finish tile.
@@ -105,7 +105,7 @@ function drawAction(kind){
 const stage=$('action-scene');stage.replaceChildren();stage.setAttribute('class','action-scene scene-'+kind);
 stage.setAttribute('aria-label',{lunch:'Mom stirring a pan on the stove',laundry:'Mom putting clothes into a spinning washing machine',plants:'Mom watering a plant',dad:'Mom and Dad sharing a hug with pink hearts'}[kind]);
 svg('rect',{x:0,y:0,width:400,height:245,rx:20,fill:'#333546'},stage);svg('ellipse',{cx:200,cy:213,rx:155,ry:13,fill:'#242633'},stage);
-function person(x,y,color,isDad=false){const person=svg('g',{transform:`translate(${x} ${y})`},stage),body=svg('g',{class:isDad?'scene-dad':'scene-mom'},person);svg('path',{d:'M-10 16l-12 43m31 -43l14 43',stroke:color,'stroke-width':13,'stroke-linecap':'round'},body);svg('rect',{x:-21,y:-33,width:42,height:57,rx:16,fill:color},body);svg('circle',{cx:0,cy:-54,r:20,fill:'#d9b7a5'},body);svg('path',{d:'M-20 -55q-5 -31 20 -31q28 0 20 31l-10 -16h-20Z',fill:isDad?'#77717a':'#2b2434'},body);for(const x of [-6,6])svg('circle',{cx:x,cy:-52,r:1.8,fill:'#45353c'},body);svg('path',{d:'M-5 -43q5 5 10 0',stroke:'#9f6e6b','stroke-width':2,fill:'none','stroke-linecap':'round'},body);if(!isDad)svg('circle',{cx:18,cy:-80,r:10,fill:'#2b2434'},body);svg('path',{d:'M-15 -57h11v9h-11Zm19 0h11v9H4Zm-8 4h8',fill:'none',stroke:'#393442','stroke-width':2,class:isDad?'dad-glasses':'mom-glasses'},body);return body;}
+function person(x,y,color,isDad=false){const person=svg('g',{transform:`translate(${x} ${y})`},stage),body=svg('g',{class:isDad?'scene-dad':'scene-mom'},person);svg('path',{d:'M-10 16l-12 43m31 -43l14 43',stroke:color,'stroke-width':13,'stroke-linecap':'round'},body);svg('rect',{x:-21,y:-33,width:42,height:57,rx:16,fill:color},body);svg('circle',{cx:0,cy:-54,r:20,fill:'#d9b7a5'},body);svg('path',{d:'M-20 -55q-5 -31 20 -31q28 0 20 31l-10 -16h-20Z',fill:'#2b2434'},body);for(const x of [-6,6])svg('circle',{cx:x,cy:-52,r:1.8,fill:'#45353c'},body);svg('path',{d:'M-5 -43q5 5 10 0',stroke:'#9f6e6b','stroke-width':2,fill:'none','stroke-linecap':'round'},body);if(!isDad)svg('circle',{cx:18,cy:-80,r:10,fill:'#2b2434'},body);svg('path',{d:'M-15 -57h11v9h-11Zm19 0h11v9H4Zm-8 4h8',fill:'none',stroke:'#393442','stroke-width':2,class:isDad?'dad-glasses':'mom-glasses'},body);return body;}
 if(kind==='lunch'){
 const mom=person(145,151,'#d9ef83');svg('path',{d:'M17 -16l62 -3',stroke:'#d9ef83','stroke-width':12,'stroke-linecap':'round',class:'stir-arm'},mom);
 svg('rect',{x:205,y:139,width:126,height:69,rx:9,fill:'#9c98b0'},stage);svg('ellipse',{cx:265,cy:140,rx:37,ry:10,fill:'#e5aa78'},stage);svg('path',{d:'M225 122q2 39 77 0Z',fill:'#454454',stroke:'#bcb8c5','stroke-width':3},stage);svg('path',{d:'M300 124h30',stroke:'#454454','stroke-width':8,'stroke-linecap':'round'},stage);
