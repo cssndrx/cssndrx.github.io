@@ -11,15 +11,10 @@ const center=n=>{const {c,r}=G.xy(n);return {x:100+c*100,y:204+r*88};};
 function text(parent,x,y,copy,attrs={}){const el=svg('text',{x,y,fill:'#c9bdd6','font-family':'monospace','font-size':12,...attrs},parent);el.textContent=copy;return el;}
 const furniture=$('furniture');
 // House zones are decorative; solid furnishings match the blocked tiles.
-const zones=[{x:50,y:160,w:300,h:176,color:'#668c80',label:'KITCHEN'},{x:650,y:160,w:300,h:176,color:'#788aa5',label:'LAUNDRY'},{x:50,y:512,w:300,h:176,color:'#9b866c',label:'HOME OFFICE'},{x:450,y:512,w:200,h:176,color:'#698f73',label:'PLANT CORNER'}];
+const zones=[{x:50,y:160,w:500,h:264,color:'#668c80',label:'KITCHEN'},{x:650,y:160,w:300,h:176,color:'#788aa5',label:'LAUNDRY'},{x:50,y:512,w:300,h:176,color:'#9b866c',label:'HOME OFFICE'},{x:450,y:512,w:200,h:176,color:'#698f73',label:'PLANT CORNER'}];
 for(const z of zones){svg('rect',{x:z.x,y:z.y,width:z.w,height:z.h,fill:z.color,opacity:.24,rx:8},furniture);text(furniture,z.x+12,z.y+20,z.label,{'font-size':11,'letter-spacing':1.5,fill:'#eee8d9'});}
-// Kitchen island, formerly the central bedroom furniture.
-svg('rect',{x:255,y:337,width:190,height:173,rx:14,fill:'#c3ac8c',stroke:'#e3cfaf','stroke-width':4},furniture);
-svg('rect',{x:267,y:350,width:166,height:145,rx:8,fill:'#e2d4b8'},furniture);
-svg('rect',{x:280,y:370,width:66,height:83,rx:5,fill:'#777f83'},furniture);svg('rect',{x:287,y:378,width:52,height:63,rx:14,fill:'#b4c8c7'},furniture);svg('path',{d:'M308 373v-16h18v13',stroke:'#eff0de','stroke-width':5,fill:'none'},furniture);
-svg('circle',{cx:393,cy:400,r:25,fill:'#bb9a71'},furniture);svg('path',{d:'M380 399l23 -10m-20 18l23 -10',stroke:'#78976e','stroke-width':7,'stroke-linecap':'round'},furniture);text(furniture,350,478,'TAKE YOUR TIME',{'text-anchor':'middle','font-size':10,fill:'#6f6354'});
-// A reading chair and ottoman occupy the remaining central obstacles.
-svg('rect',{x:160,y:427,width:80,height:77,rx:18,fill:'#8d9a8a',stroke:'#bdc7a6','stroke-width':3},furniture);svg('rect',{x:174,y:445,width:52,height:44,rx:9,fill:'#b2b99b'},furniture);svg('rect',{x:455,y:431,width:88,height:69,rx:14,fill:'#ba8792',stroke:'#dfb5b1','stroke-width':3},furniture);
+// Reading chair beside the expanded kitchen.
+svg('rect',{x:160,y:427,width:80,height:77,rx:18,fill:'#8d9a8a',stroke:'#bdc7a6','stroke-width':3},furniture);svg('rect',{x:174,y:445,width:52,height:44,rx:9,fill:'#b2b99b'},furniture);
 // Washer and dryer: blocked cells in the utility room.
 for(const x of [658,756]){svg('rect',{x,y:255,width:87,height:72,rx:7,fill:'#c4ced0',stroke:'#e2e6df','stroke-width':3},furniture);svg('circle',{cx:x+43,cy:294,r:23,fill:'#617986',stroke:'#f1eee0','stroke-width':5},furniture);svg('path',{d:'M'+(x+14)+' 267h22',stroke:'#697f86','stroke-width':4},furniture);}
 // Dad's office reaches the house's right and bottom walls. The desk matches blocked cells.

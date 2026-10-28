@@ -2,7 +2,7 @@
 'use strict';
 const COLS=9,ROWS=6,HOME=37,START_ENEMY=4,CDS=[0,17,50],CHASE_STEPS=2,DAD=44;
 const TASKS=[{tile:0,icon:"🍳",name:"Lunch",action:"Cook lunch",done:"Lunch is ready.",quote:"A proper lunch deserves a proper soundtrack."},{tile:17,icon:"👕",name:"Laundry",action:"Start the laundry",done:"Laundry is spinning.",quote:"The spin cycle can wait. This chorus can’t."},{tile:50,icon:"🪴",name:"Plants",action:"Water the plants",done:"Plants are watered.",quote:"You’re allowed to grow at your own pace."}];
-const BLOCKED=new Set([15,16,20,21,28,29,30,42,43,51,52]);
+const BLOCKED=new Set([15,16,28,42,43,51,52]);
 const validTile=n=>Number.isInteger(n)&&n>=0&&n<COLS*ROWS&&!BLOCKED.has(n);
 const xy=n=>({c:n%COLS,r:Math.floor(n/COLS)});
 function neighbors(n){const {c,r}=xy(n);return [[c-1,r],[c+1,r],[c,r-1],[c,r+1]].filter(([x,y])=>x>=0&&x<COLS&&y>=0&&y<ROWS).map(([x,y])=>y*COLS+x).filter(validTile);}
